@@ -1,0 +1,14 @@
+- langs = current_group.languages.sort
+- default_lang = langs.delete(current_group.language) || current_group.language
+
+.field
+  %h3= t('widgets.settings.content')
+  = label "settings[content[#{default_lang}]]", language_desc(default_lang), :class => "label"
+  = text_area_tag "settings[content[#{default_lang}]]", widget.settings["content"][default_lang], :class => "text_field"
+  .lang-fields
+    -langs.each do |lang|
+      %div{:id => "content-#{lang}"}
+        = label "settings[content[#{lang}]]", language_desc(lang), class: 'label'
+        =text_area_tag "settings[content[#{lang}]]", widget.settings["content"][lang], :class => "text_field"
+
+= render :partial => "shared/external_widget_settings", :locals => {:widget => widget}

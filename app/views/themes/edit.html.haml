@@ -1,0 +1,48 @@
+%h1
+  = t("themes.edit.title")
+%p.description
+  = t("themes.form.title")
+
+= form_for @theme, :html => {:multipart => true} do |form|
+  = render "form", :form => form
+
+
+.javascript-code-editor{style: "display: none"}
+  = form_for @theme do |form|
+    - if @theme.has_js
+      = form.text_area :javascript, :value => @theme.javascript.get.read, :class => "code", :data => {:lang => "htmlmixed"}
+    - else
+      = form.text_area :javascript, :value => '', :class => "code", :data => {:lang => "htmlmixed"}
+    .form-options
+      .buttons
+        = form.submit :value => I18n.t('themes.form.submit_update') , :class => "save"
+
+.questions_index_html-code-editor{style: "display: none"}
+  = form_for @theme do |form|
+    - if @theme.has_questions_index_html?
+      = form.text_area :questions_index_html, :value => @theme.questions_index_html.get.read, :class => "code", :data => {:lang => "htmlmixed"}
+    - else
+      = form.text_area :questions_index_html, :value => '', :class => "code", :data => {:lang => "htmlmixed"}
+    .form-options
+      .buttons
+        = form.submit :value => I18n.t('themes.form.submit_update') , :class => "save"
+
+.questions_show_html-code-editor{style: "display: none"}
+  = form_for @theme do |form|
+    - if @theme.has_questions_show_html?
+      = form.text_area :questions_show_html, :value => @theme.questions_show_html.get.read, :class => "code", :data => {:lang => "htmlmixed"}
+    - else
+      = form.text_area :questions_show_html, :value => '', :class => "code", :data => {:lang => "htmlmixed"}
+    .form-options
+      .buttons
+        = form.submit :value => I18n.t('themes.form.submit_update') , :class => "save"
+
+.layout_html-code-editor{style: "display: none"}
+  = form_for @theme do |form|
+    - if @theme.has_layout_html?
+      = form.text_area :layout_html, :value => @theme.layout_html.get.read, :class => "code", :data => {:lang => "htmlmixed"}
+    - else
+      = form.text_area :layout_html, :value => '', :class => "code", :data => {:lang => "htmlmixed"}
+    .form-options
+      .buttons
+        = form.submit :value => I18n.t('themes.form.submit_update') , :class => "save"
