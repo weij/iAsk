@@ -2,7 +2,17 @@
 
 Capistrano::Configuration.instance.load do
   set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
-
+  set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids log system) unless exists?(:shared_dirs)
+    
+  namespace :app do
+    task :setup, :roles => :app do
+      commands = shared_dirs.map do |path|
+        "if [ ! -d '#{path}' ]; then mkdir -p #{path}; fi;"
+      end
+      run "cd #{shared_path}; #{commands.join(' ')}"
+    end
+  end
+  
 =begin  
   
   # User settings

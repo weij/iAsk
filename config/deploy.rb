@@ -2,14 +2,23 @@ set :application, "iask"
 set :asset_packager, "jammit"
 set :deploy_to, "/opt/var/deploy/iask"
 
+set :user, "expedia"
+set :password, "expedia"
+set :use_sudo, false
+
+set :default_environment, {
+  'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.3-p194',
+  'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p194:/usr/local/rvm/gems/ruby-1.9.3-p194@global',
+  'PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p194/bin:/usr/local/rvm/gems/ruby-1.9.3-p194@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p194/bin:/usr/local/rvm/bin:$PATH',
+  'RUBY_VERSION' => 'ruby-1.9.3-p194'
+}
+
 task :production do |t|
-  set :repository, "git://github.com/ricodigo/shapado.git"
+  set :repository, "git@github.com:birdnest/iAsk.git"
   set :branch, "master"
   set :rails_env, :production
-  set :unicorn_workers, 1
-  
-  set :user, "expedia"
-  set :use_sudo, false
+  set :unicorn_workers, 1  
+
   set :scm, :git
   
   role :web, "172.18.6.88"
@@ -26,7 +35,7 @@ namespace :deploy do
     assets.package
 
     #magent.restart
-    bluepill.restart
+#    bluepill.restart
 
     run "rm -rf #{current_path}/tmp/cache/*"
   end
