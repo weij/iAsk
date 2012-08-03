@@ -6,7 +6,7 @@
 coverage
 public/stylesheets/compiled/
 config/shapado.yml
-config/payments.yml
+#config/payments.yml
 data/*.dat
 config/mongoid.yml
 config/database.yml
