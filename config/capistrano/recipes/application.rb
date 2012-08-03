@@ -4,6 +4,14 @@ Capistrano::Configuration.instance.load do
   set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
   set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids log system) unless exists?(:shared_dirs)
     
+  set :web_server, :nginx         unless exists?(:web_server)
+  set :app_server, :unicorn       unless exists?(:app_server)
+  set :database, :mongodb unless exists?(:database)
+  set :rails_env, 'production' unless exists?(:rails_env)
+  
+  set(:pids_path) { File.join(shared_path, "pids") } unless exists?(:pids_path)
+    
+    
   namespace :app do
     task :setup, :roles => :app do
       commands = shared_dirs.map do |path|

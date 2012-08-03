@@ -6,6 +6,8 @@ set :user, "expedia"
 set :password, "expedia"
 set :use_sudo, false
 
+set :group, "admin"
+
 set :default_environment, {
   'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.3-p194',
   'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p194:/usr/local/rvm/gems/ruby-1.9.3-p194@global',

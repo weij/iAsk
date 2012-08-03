@@ -68,9 +68,12 @@ Capistrano::Configuration.instance.load do
     EOF
     task :setup, :roles => :app , :except => { :no_release => true } do
       # TODO: refactor this to a more generic setup task once we have more socket tasks.
-      sudo "mkdir -p #{sockets_path}"
-      sudo "chown #{user}:#{group} #{sockets_path}"
-      sudo "chmod +rw #{sockets_path}"
+      run "mkdir -p #{sockets_path}"
+      run "chown #{user}:#{group} #{sockets_path}"
+      run "chmod +rw #{sockets_path}"
+#      sudo "mkdir -p #{sockets_path}"
+#      sudo "chown #{user}:#{group} #{sockets_path}"
+#      sudo "chmod +rw #{sockets_path}"
 
       generate_config(unicorn_local_config,unicorn_remote_config)
     end
