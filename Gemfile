@@ -93,8 +93,8 @@ gem 'jquery-rails'
 
 
 group :deploy do
-  gem 'jammit'
   gem 'tunnlr'
+  gem 'jammit'
   gem 'capistrano', '2.9.0', :require => false
 #  gem 'ricodigo-capistrano-recipes', '~> 0.1.3', :require => false
   gem 'unicorn', '4.1.1', :require => false

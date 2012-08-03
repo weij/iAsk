@@ -447,6 +447,9 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    tunnlr (0.1.1)
+      highline (>= 1.5.0)
+      net-ssh (>= 2.0.15)
     twitter (1.7.2)
       faraday (~> 0.7.4)
       faraday_middleware (~> 0.7.0)
@@ -562,6 +565,7 @@ DEPENDENCIES
   state_machine (= 1.1.2)
   stripe
   therubyracer
+  tunnlr
   tunnlr_connector!
   twitter (= 1.7.2)
   twitter-text (= 1.1.8)
