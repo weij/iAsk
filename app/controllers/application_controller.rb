@@ -169,7 +169,7 @@ class ApplicationController < ActionController::Base
 
   def set_layout
     if !user_signed_in? && request.host == AppConfig.domain && request.path == '/'
-      'shapadocom'
+      'application'
     elsif env && env['HTTP_X_PJAX'].present? && !params[:_refresh]
       nil
     elsif devise_controller? || (action_name == "new" && controller_name == "users")
