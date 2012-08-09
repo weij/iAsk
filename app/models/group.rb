@@ -69,7 +69,7 @@ class Group
   field :sso_url, :type => String
   field :layout, :type => String, :default => 'application'
 
-  field :track_users, :type => Boolean, :default => true
+  field :track_users, :type => Boolean, :default => false
 
   # can be:
   # * 'all': email, openid, oauth
