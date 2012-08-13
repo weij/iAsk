@@ -1,0 +1,6 @@
+require "rubygems"
+require "xapit"
+
+Xapit.load_config('<%= deploy_to %>/shared/config/xapit.yml', "production")
+
+run Xapit::Server::App.new

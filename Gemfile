@@ -81,6 +81,7 @@ gem 'state_machine', '1.1.2'
 
 gem 'xapian-ruby', '1.2.7.1'
 gem 'xapit', :git => 'git://github.com/kuadrosx/xapit.git'
+
 group :assets do
   gem 'compass-rails'
   gem 'compass'

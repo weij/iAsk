@@ -2,11 +2,14 @@ set :application, "iask"
 set :asset_packager, "jammit"
 set :deploy_to, "/opt/var/deploy/iask"
 
-set :user, "expedia"
-set :password, "expedia"
+set :user, "james"
+set :password, "my@830507"
 set :use_sudo, false
 
-set :group, "admin"
+#sudo: no tty present and no askpass program specified
+default_run_options[:pty] = true
+
+set :group, "james"
 
 set :default_environment, {
   'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.3-p194',
@@ -23,9 +26,9 @@ task :production do |t|
 
   set :scm, :git
   
-  role :web, "172.18.6.88"
-  role :app, "172.18.6.88"
-  role :db,  "172.18.6.88", :primary => true
+  role :web, "10.211.55.9"
+  role :app, "10.211.55.9"
+  role :db,  "10.211.55.9", :primary => true
 end
 
 namespace :deploy do

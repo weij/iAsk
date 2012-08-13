@@ -2,7 +2,7 @@ rails_root = '<%= "#{deploy_to}/current/" %>'
 rails_env  = '<%= environment %>'
 pid_file   = '<%= unicorn_pid %>'
 socket_file= '<%= unicorn_socket %>'
-log_file   = '<%= deploy_to %>/shared/log/unicorn.log'
+log_file   = '<%= deploy_to %>/shared/logs/unicorn.log'
 username   = '<%= unicorn_user %>'
 group      = '<%= unicorn_group %>'
 old_pid    = pid_file + '.oldbin'
@@ -16,6 +16,7 @@ worker_processes <%= unicorn_workers %>
 
 # Listen on a Unix data socket
 listen socket_file, :backlog => 1024
+listen 8888, :backlog => 1024
 pid pid_file
 
 stderr_path log_file

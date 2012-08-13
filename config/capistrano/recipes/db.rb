@@ -1,8 +1,40 @@
 require 'erb'
 
 Capistrano::Configuration.instance.load do
+  
+  set(:redis_local_config) { "#{templates_path}/redis.conf.erb" } unless exists?(:redis_local_config)
+  set(:redis_remote_config) { "#{shared_path}/config/redis.conf" } unless exists?(:redis_remote_config)
+  
+  
+  def redis_start_cmd
+    "redis-server #{redis_remote_config} &"
+  end
+  
+  def mongodb_start_cmd
+    "mongod --logpath=#{shared_path}/logs/mongo.log --dbpath=#{shared_path}/db/mongo/ --fork"
+  end
+    
+    
   namespace :db do
+    
+    namespace :redis do
+      desc "|capistrano-recipes| start the redis"
+      task :start, :roles => :db, :only => { :primary => true } do
+        run redis_start_cmd do |ch, stream, out|
+          puts out
+        end
+      end
+    end
     namespace :mongodb do
+      
+      desc "|capistrano-recipes| start the mongodb"
+      task :start, :roles => :db, :only => { :primary => true } do
+        run mongodb_start_cmd do |ch, stream, out|
+          puts out
+        end
+      end
+      
+      
       desc <<-EOF
       |capistrano-recipes| Performs a compressed database dump. \
       WARNING: This locks your tables for the duration of the mongodump.
@@ -98,6 +130,8 @@ production:
       EOF
 
       put db_config.result(binding), "#{shared_path}/config/mongoid.yml"
+      
+      generate_config(redis_local_config, redis_remote_config)       
     end
   end
 

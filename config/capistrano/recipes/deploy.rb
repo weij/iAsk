@@ -1,5 +1,5 @@
 Capistrano::Configuration.instance.load do
-  set :shared_children, %w(system log pids config)
+  set :shared_children, %w(system logs pids config)
 
   namespace :deploy do
     desc "|capistrano-recipes| Deploy it, github-style."

@@ -2,10 +2,15 @@
 
 Capistrano::Configuration.instance.load do
   set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
-  set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids log system) unless exists?(:shared_dirs)
+  set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids logs db db/mongo db/redis system) unless exists?(:shared_dirs)
     
   set :web_server, :nginx         unless exists?(:web_server)
   set :app_server, :unicorn       unless exists?(:app_server)
+  set :application_port, 80       unless exists?(:application_port)
+  
+  set :application_uses_ssl, false unless exists?(:application_uses_ssl)
+#  set :application_port_ssl, 443  unless exists?(:application_port_ssl)
+  
   set :database, :mongodb unless exists?(:database)
   set :rails_env, 'production' unless exists?(:rails_env)
   
