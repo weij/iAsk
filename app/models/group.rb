@@ -32,7 +32,7 @@ class Group
   field :analytics_vendor, :type => String
   field :has_custom_analytics, :type => Boolean, :default => true
 
-  field :auth_providers, :type => Array, :default => %w[Google Twitter Facebook]
+  field :auth_providers, :type => Array, :default => []
   field :allow_any_openid, :type => Boolean, :default => true
 
   field :language, :type => String
