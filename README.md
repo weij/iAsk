@@ -10,7 +10,7 @@ apt-get install libssl-dev openssl
 apt-get install libgd2-xpm libgd2-xpm-dev php5-gd
 apt-get install geoip-database geoip-bin libgeoip-dev
 wget http://labs.frickle.com/files/ngx_cache_purge-1.6.tar.gz
-~~~{.shell}
+~~~
 
 
 ###install nginx
