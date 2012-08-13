@@ -39,19 +39,23 @@ wget http://labs.frickle.com/files/ngx_cache_purge-1.6.tar.gz
 
 
 2. Prepare for deploy
+
     cap production deploy:setup
     cap production deploy:update
 
 3. Do the following in server side if you never do this before.
+
     rake bootstrap RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
 
 4. Prepare the dependency server
+
     cap production db:mongodb:start
     cap production db:redis:start
     cap production xapit:start    
 
 5. Start the server
+
     cap production unicorn:start
     cap production nginx:start
 
