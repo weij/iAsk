@@ -94,6 +94,7 @@ gem 'jquery-rails'
 
 
 group :deploy do
+  gem 'thin'
   gem 'tunnlr'
   gem 'jammit'
   gem 'capistrano', '2.9.0', :require => false
@@ -132,6 +133,3 @@ group :development do
   gem 'tunnlr_connector', :git => 'git://github.com/dcu/tunnlr_connector.git', :branch => 'patch-1', :require => 'tunnlr'
 end
 
-group :production do
-  gem 'thin'
-end
