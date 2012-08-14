@@ -45,16 +45,17 @@
     cap production deploy:setup  
     cap production deploy:update
 
-3. Do the following in server side if you never do this before.
+3. Prepare the dependency server
+
+    cap production db:mongodb:start    
+    cap production db:redis:start    
+    cap production xapit:start
+
+4. Do the following in server side if you never do this before.
 
     rake bootstrap RAILS_ENV=production     
     rake assets:precompile RAILS_ENV=production
 
-4. Prepare the dependency server
-
-    cap production db:mongodb:start    
-    cap production db:redis:start    
-    cap production xapit:start        
 
 5. Start the server
 

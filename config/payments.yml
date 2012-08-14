@@ -2,6 +2,7 @@ development:
   login: pppro_1311897350_biz_api1.gmail.com
   password: 1311897398
   signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AkVR38nJvZuGc0OuEi6OkJSsyu3H
+  secret: vtUQeOtUnYr7PGCLQ96Ul4zqpDUO4sOE
 test:
   login: pppro_1311897350_biz_api1.gmail.com
   password: 1311897398
