@@ -106,15 +106,17 @@ module UsersHelper
         options[:size] = size_for_string(size)
       end
       # TODO: convert size's name to pixels
-      gravatar_url(user.email.to_s, options)+"&d=#{default_avatar_url(size)}"
+
+      default_avatar_url(size)
+  #TODO    path = gravatar_url(user.email.to_s, options)+"&d=#{default_avatar_url(size)}"
     else
       options[:class] ||= "gravatar"
       if !size.is_a? Integer
         size = size_for_string(size)
       end
       options[:style] = "height: #{size_for_string(size)}px"
-      avatar_user_path(user, size)
-    end
+      avatar_user_path(user, size)      
+    end   
   end
 
   def default_avatar_url(size='small')
