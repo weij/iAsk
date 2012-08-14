@@ -1,4 +1,5 @@
 *~
+db/xapit/
 config/deploy.rb
 .DS_Store
 *.swp
@@ -24,6 +25,7 @@ public/javascripts/jsMath/fonts/
 public/javascripts/packaged/
 public/stylesheets/packaged/
 public/packages/
+public/assets/
 .sass-cache
 *.kdev4
 .redcar
