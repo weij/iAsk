@@ -1,7 +1,7 @@
 user	<%= user %>; 
-worker_processes	2; 
+worker_processes	6; 
 error_log	<%= shared_path %>/logs/nginx_error.log;
-pid	<%= shared_path %>/pids/nginx.pid;
+pid	<%= nginx_pid %>;
 
 events {
 	worker_connections  1024;

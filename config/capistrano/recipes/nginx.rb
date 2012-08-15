@@ -13,6 +13,9 @@ Capistrano::Configuration.instance.load do
   set(:nginx_local_etc) { "#{templates_path}/nginx.etc.erb" } unless exists?(:nginx_local_etc)
   set(:nginx_remote_etc) { "#{nginx_path_prefix}/nginx.conf" } unless exists?(:nginx_remote_etc)
 
+  set(:nginx_daemon) { "/usr/local/sbin/nginx" } unless exists?(:nginx_daemon)
+  set(:nginx_pid) { "#{shared_path}/pids/nginx.pid" } unless exists?(:nginx_pid)
+
   # Nginx tasks are not *nix agnostic, they assume you're using Debian/Ubuntu.
   # Override them as needed.
   namespace :nginx do
@@ -31,18 +34,21 @@ Capistrano::Configuration.instance.load do
 
     desc "|capistrano-recipes| Restart nginx"
     task :restart, :roles => :app , :except => { :no_release => true } do
-#      sudo "service nginx restart"
-      sudo "/usr/local/sbin/nginx -s reload -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
+      sudo "start-stop-daemon --stop --signal HUP --quiet --pidfile #{nginx_pid} --exec #{nginx_daemon}"
+#      sudo "/usr/local/sbin/nginx -s reload -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
     end
 
     desc "|capistrano-recipes| Stop nginx"
     task :stop, :roles => :app , :except => { :no_release => true } do
-      sudo "/usr/local/sbin/nginx -s quit -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
+      sudo "start-stop-daemon --stop --quiet --pidfile #{nginx_pid} --exec #{nginx_daemon}"
+#      sudo "/usr/local/sbin/nginx -s quit -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
     end
 
     desc "|capistrano-recipes| Start nginx"
     task :start, :roles => :app , :except => { :no_release => true } do
-      sudo "/usr/local/sbin/nginx -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
+      sudo "start-stop-daemon --start --quiet --pidfile #{nginx_pid} --exec "\
+      "#{nginx_daemon} -- -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
+#      sudo "/usr/local/sbin/nginx -p #{shared_path}/tmp/ -c #{nginx_remote_etc}"
     end
 
     desc "|capistrano-recipes| Show nginx status"

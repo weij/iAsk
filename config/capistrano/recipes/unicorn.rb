@@ -36,11 +36,11 @@ Capistrano::Configuration.instance.load do
   end
 
   def unicorn_stop_cmd
-    "kill -QUIT {{PID}}"
+    "kill -QUIT `cat #{unicorn_pid}`"
   end
 
   def unicorn_restart_cmd
-    "kill -USR2 {{PID}}"
+    "kill -USR2 `cat #{unicorn_pid}`"
   end
 
   # Unicorn

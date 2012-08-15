@@ -2,16 +2,40 @@ require 'erb'
 
 Capistrano::Configuration.instance.load do
   
+  # Defines where the db pid will live.
+  set(:mongo_pid) { File.join(pids_path, "mongo.pid") } unless exists?(:mongo_pid)
+  set(:redis_pid) { File.join(pids_path, "redis.pid") } unless exists?(:redis_pid)
+  
+  set(:mongo_daemon) { "/usr/bin/mongod" } unless exists?(:mongo_daemon)  
+  set(:redis_daemon) { "/usr/bin/redis-server" } unless exists?(:redis_daemon)
+  
+  set(:mongo_local_config) { "#{templates_path}/mongodb.conf.erb" } unless exists?(:mongo_local_config)
+  set(:mongo_remote_config) { "#{shared_path}/config/mongodb.conf" } unless exists?(:mongo_remote_config)  
   set(:redis_local_config) { "#{templates_path}/redis.conf.erb" } unless exists?(:redis_local_config)
   set(:redis_remote_config) { "#{shared_path}/config/redis.conf" } unless exists?(:redis_remote_config)
   
+  set(:mongo_dbpath) { "#{shared_path}/db/mongo/" } unless exists?(:mongo_dbpath)  
+  set(:mongo_logpath) { "#{shared_path}/logs/mongo.log" } unless exists?(:mongo_logpath)  
   
   def redis_start_cmd
-    "redis-server #{redis_remote_config} &"
+    "start-stop-daemon --start --quiet --umask 007 --pidfile #{redis_pid} --chuid #{user}:#{group} "\
+    "--exec #{redis_daemon} -- #{redis_remote_config}"
+#    "redis-server #{redis_remote_config} &"
+  end
+  
+  def redis_stop_cmd
+    "start-stop-daemon --stop --retry 10 --quiet --oknodo --pidfile #{redis_pid} --exec #{redis_daemon}"
   end
   
   def mongodb_start_cmd
-    "mongod --logpath=#{shared_path}/logs/mongo.log --dbpath=#{shared_path}/db/mongo/ --fork"
+    "start-stop-daemon --background --start --quiet --pidfile #{mongo_pid} --make-pidfile "\
+    "--chuid #{user}:#{group} --exec #{mongo_daemon} -- --dbpath #{mongo_dbpath} "\
+    "--logpath #{mongo_logpath} --config #{mongo_remote_config} run"
+#    "mongod --logpath=#{shared_path}/logs/mongo.log --dbpath=#{shared_path}/db/mongo/ --fork"
+  end
+  
+  def mongodb_stop_cmd
+    "start-stop-daemon --stop --quiet --pidfile #{mongo_pid} --user #{user} --exec #{mongo_daemon}"
   end
     
     
@@ -24,7 +48,19 @@ Capistrano::Configuration.instance.load do
           puts out
         end
       end
+      desc "|capistrano-recipes| stop the redis"
+      task :stop, :roles => :db, :only => { :primary => true } do
+        run redis_stop_cmd do |ch, stream, out|
+          puts out
+        end
+      end
+      desc "|capistrano-recipes| restart the redis"
+      task :restart, :roles => :db, :only => { :primary => true } do
+        redis.stop
+        redis.start
+      end
     end
+    
     namespace :mongodb do
       
       desc "|capistrano-recipes| start the mongodb"
@@ -32,8 +68,20 @@ Capistrano::Configuration.instance.load do
         run mongodb_start_cmd do |ch, stream, out|
           puts out
         end
+      end      
+      
+      desc "|capistrano-recipes| stop the mongodb"
+      task :stop, :roles => :db, :only => { :primary => true } do
+        run mongodb_stop_cmd do |ch, stream, out|
+          puts out
+        end
       end
       
+      desc "|capistrano-recipes| stop the mongodb"
+      task :restart, :roles => :db, :only => { :primary => true } do
+        mongodb.stop
+        mongodb.start
+      end
       
       desc <<-EOF
       |capistrano-recipes| Performs a compressed database dump. \
@@ -131,6 +179,7 @@ production:
 
       put db_config.result(binding), "#{shared_path}/config/mongoid.yml"
       
+      generate_config(mongo_local_config, mongo_remote_config)   
       generate_config(redis_local_config, redis_remote_config)       
     end
   end

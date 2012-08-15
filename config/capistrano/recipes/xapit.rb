@@ -12,7 +12,7 @@ Capistrano::Configuration.instance.load do
   
   def xapit_start_cmd
 #    "rackup -E #{rails_env} -P #{xapit_pid} -D #{xapit_remote_config}"
-      "rackup --env=#{rails_env} --pid=#{xapit_pid} --daemonize --warn --debug #{xapit_remote_config}"
+    "rackup --env=#{rails_env} --pid=#{xapit_pid} --daemonize --warn --debug #{xapit_remote_config}"
   end
 
   def xapit_stop_cmd
