@@ -20,7 +20,7 @@
     -if @questions.empty?
       %article.question
         %li.highlight
-        	= t(".empty")
+          = t(".empty")
     -@questions.each do |question|
       = render "questions/question", :question => question
 
