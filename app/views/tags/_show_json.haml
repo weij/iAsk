@@ -8,7 +8,7 @@
     = follow_tag_link(tag)
   .tooltip-description
     - if !tag.description.blank?
-      = tag.description
+      = truncate(tag.description, :length => 50)
     - else
       - if logged_in? && current_user.mod_of?(current_group)
         = link_to t('tags.show_json.edit_it'), edit_tag_path(tag)
