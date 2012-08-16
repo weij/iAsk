@@ -26,7 +26,8 @@ Shapado::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_store,  {:expires_in => 2.hours}
+#TODO  
+  config.cache_store = :redis_store,  {:expires_in => 1.minutes}
   #config.cache_store = :redis_store, {:expires_in => 2.hours}
 
   #config.cache_store = [:file_store, "#{Rails.root}/tmp/cache"]
