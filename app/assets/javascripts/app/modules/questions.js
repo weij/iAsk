@@ -129,11 +129,14 @@ Questions = function() {
 
 
     $('form#ask_question').submit(function(){
-      var accepted = true;
-      if($('ul.chzn-choices > li').size() < 2){
-        accepted = window.confirm("Are you should not use a tag for your question?");
+			if($('input#question_title', $(this)).val().length < 5){
+				alert("Your question title is too short");
+				return false;
+			}
+      if($('ul.chzn-choices > li', $(this)).size() < 2){
+        return window.confirm("Are you should not use a tag for your question?");
       }
-      return accepted;
+      return true;
     });
 		
 
