@@ -127,6 +127,16 @@ Questions = function() {
       }
     });
 
+
+    $('form#ask_question').submit(function(){
+      var accepted = true;
+      if($('ul.chzn-choices > li').size() < 2){
+        accepted = window.confirm("Are you should not use a tag for your question?");
+      }
+      return accepted;
+    });
+		
+
     var fields = $("#attachments #fields");
     var template = fields.find(".template");
     template.find("input").attr("name", "question[attachments[id]]");
