@@ -128,7 +128,7 @@ Questions = function() {
     });
 
 
-    $('new form#ask_question').submit(function(){
+    $('body.new form#ask_question').submit(function(){
 			if($('input#question_title', $(this)).val().length < 5){
 				alert("Your question title is too short");
 				return false;
