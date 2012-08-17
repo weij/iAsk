@@ -128,7 +128,7 @@ Questions = function() {
     });
 
 
-    $('form#ask_question').submit(function(){
+    $('new form#ask_question').submit(function(){
 			if($('input#question_title', $(this)).val().length < 5){
 				alert("Your question title is too short");
 				return false;
@@ -138,7 +138,7 @@ Questions = function() {
       }
       return true;
     });
-		
+
 
     var fields = $("#attachments #fields");
     var template = fields.find(".template");
