@@ -46,7 +46,7 @@ en:
       title: Recent users
       description: "This widget displays newly registered members."
     tag_cloud:
-      title: Tag cloud
+      title: Tags
       description: "This widget displays a tag cloud."
     pages:
       title: Wiki pages

@@ -109,7 +109,7 @@ module ApplicationHelper
     return '' if tags.size <= 2 #tags.count return all tags instead of using .limit
 
     tag_class = options.delete(:tag_class) || "tag"
-    if style == "tag_cloud"
+    if style != "tag_cloud"
       # Sizes: xxs xs s l xl xxl
       css = {1 => "xxs", 2 => "xs", 3 => "s", 4 => "l", 5 => "xl" }
       max_size = 5

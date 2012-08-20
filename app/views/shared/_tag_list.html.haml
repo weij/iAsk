@@ -3,8 +3,13 @@
     -tags.each do |tag|
       -unless current_tags.include? tag["name"]
         -url = tag_url(:id => (current_tags + [tag["name"]]).join("+"))
-        %li{:class => tag_class,}
-          %a{ :href => url, :rel => "tag",:title => t("questions.tags.tooltip")}
-            = tag["name"]
-            %span.count
-              = tag["count"].to_i
+        %li{ :class => tag_class }
+          %table
+            %tr
+              %td
+                %a{ :href => url, :rel => "tag",:title => t("questions.tags.tooltip")}
+                  = tag["name"]
+              %td
+                %span.count 
+                  x
+                  = tag.count.to_i
