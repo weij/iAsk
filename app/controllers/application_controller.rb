@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   include Shapado::Controllers::Routes
   include Shapado::Controllers::Locale
   include Shapado::Controllers::Utils
+  before_filter :mailer_set_url_options
 
   if !AppConfig.recaptcha['activate']
     def recaptcha_valid?
@@ -265,4 +266,9 @@ class ApplicationController < ActionController::Base
   def close
 
   end
+
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
 end

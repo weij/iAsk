@@ -14,7 +14,7 @@ Shapado::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.active_support.deprecation = :log
 
@@ -30,4 +30,18 @@ Shapado::Application.configure do
   config.after_initialize do |app|
     app.assets.logger = Logger.new('/dev/null')
   end 
+
+  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "gmail.com",
+    :user_name => "ferolichy",
+    :password => "47554965",
+    :authentication => "plain",
+    :enable_starttle_auto => true
+}
 end
