@@ -43,7 +43,7 @@ en:
       title: Top 5 users
       description: "This widget displays the top five users."
     users:
-      title: Recent users
+      title: Contributors
       description: "This widget displays newly registered members."
     tag_cloud:
       title: Tags

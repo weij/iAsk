@@ -107,7 +107,6 @@ module ApplicationHelper
     end
 
     return '' if tags.size <= 2 #tags.count return all tags instead of using .limit
-
     tag_class = options.delete(:tag_class) || "tag"
     if style != "tag_cloud"
       # Sizes: xxs xs s l xl xxl
