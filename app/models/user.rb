@@ -103,6 +103,10 @@ class User
   validates_presence_of     :email,    :if => lambda { |e| !e.openid_login? && !e.twitter_login? }
   validates_uniqueness_of   :email,    :if => lambda { |e| e.anonymous || (!e.openid_login? && !e.twitter_login?) }
   validates_length_of       :email,    :in => 6..100, :allow_nil => true, :if => lambda { |e| !e.email.blank? }
+  if AppConfig.email_validation
+    email_regex = /\A[\w+\-.]+@vanceinfo.com\z/i
+    validates_format_of       :email,    :with => email_regex,  :message => "is invalid. You can only register with your vanceinfo email."
+  end
 
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
