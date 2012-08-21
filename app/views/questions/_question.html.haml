@@ -9,14 +9,14 @@
   - else
     - @updated = false
 
-  %article{:class => class_for_question(question), :id => question.id}
+  %article{:class => class_for_question(question), :id => question.id, :style => "padding:15px 10px 0 10px;"}
     .item-left
       %h2
         -if question.wiki
           = pjax_link_to t('.wiki_title', :title => title), "question", question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
         -else
           = pjax_link_to title, "question", question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
-      %ul.tag-list.clearfix{:style => "padding: 0; margin: 0"}
+      %ul.tag-list.clearfix
         - question.tags.each do |tag|
           %li
             = tag_link(tag)
@@ -53,6 +53,7 @@
       .user-data{:style => "text-align:right; margin-top:10px;"}
         %time{:pubdate => "pubdate", :datetime => last_target_date.iso8601}
           = pjax_link_to t("time.ago", :time => time_ago_in_words(last_target_date)), "question", question_path(question, :anchor => last_target_id)
+          by
         -if owner
           =render :partial => "users/user_data", :locals => {:user => owner}
         -else

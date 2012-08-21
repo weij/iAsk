@@ -54,7 +54,7 @@ server {
         rewrite (.*) $1.html break;
       }
 
-	  if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)\?[0-9]+$") {
+      if ($request_uri ~* "\.(ico|css|js|gif|jpe?g|png)\?[0-9]+$") {
         expires max;
         break;
       }

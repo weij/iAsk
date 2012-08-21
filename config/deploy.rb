@@ -22,7 +22,7 @@ task :production do |t|
   set :repository, "git@github.com:birdnest/iAsk.git"
   set :branch, "master"
   set :rails_env, :production
-  set :unicorn_workers, 1  
+  set :unicorn_workers, 6 
 
   set :scm, :git
   

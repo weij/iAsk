@@ -39,26 +39,30 @@
     ~~~
 
 
-2. Prepare for deploy  
+2. Prepare for deploy      
     cap production deploy:setup  
     cap production deploy:update
 
-3. Prepare the dependency data server  
+3. Prepare the dependency data server    
     cap production db:mongodb:start    
     cap production db:redis:start    
     
-4. Start the index engine server  
+4. Start the index engine server     
     cap production xapit:start
 
-5. Start the server   
+5. Start the server      
     cap production unicorn:start    
     cap production nginx:start
     
     
-## Quickly Redeploy  
-
+## Quickly Redeploy     
     cap production deploy:update
-    cap production unicorn:restart
+    cap production unicorn:restart   
+    
+Or (if you want to deal with the cache issues.)   
+    cap production deploy:update
+    cap production unicorn:stop
+    cap production unicorn:start
 
 
 
