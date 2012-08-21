@@ -4,8 +4,8 @@ Capistrano::Configuration.instance.load do
   set :assets_role, [:web]
   set :assets_prefix, "assets"
   
-  after 'deploy:update_code', 'assets:symlink'
-  after 'deploy:update_code', 'assets:precompile'
+  after 'deploy:update', 'assets:symlink'
+  after 'deploy:update', 'assets:precompile'
   
   namespace :assets do
     desc "Compile Assets with compass"
