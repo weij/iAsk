@@ -25,8 +25,7 @@
 
 ##Deploy
 
-1. Edit deploy file if you need fix it
-
+1. Edit deploy file if you need fix it  
     ~~~{.ruby}
     set :deploy_to, "/opt/var/deploy/iask"
     set :user, "expedia"
@@ -40,27 +39,27 @@
     ~~~
 
 
-2. Prepare for deploy
-
+2. Prepare for deploy  
     cap production deploy:setup  
     cap production deploy:update
 
-3. Prepare the dependency server
-
+3. Prepare the dependency data server  
     cap production db:mongodb:start    
     cap production db:redis:start    
+    
+4. Start the index engine server  
     cap production xapit:start
 
-4. Do the following in server side if you never do this before.
-
-    rake bootstrap RAILS_ENV=production     
-    rake assets:precompile RAILS_ENV=production
-
-
-5. Start the server
-
+5. Start the server   
     cap production unicorn:start    
     cap production nginx:start
+    
+    
+## Quickly Redeploy  
+
+    cap production deploy:update
+    cap production unicorn:restart
+
 
 
 
