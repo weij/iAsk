@@ -1,5 +1,5 @@
 .tag-list
-  padding-left: 10px
+  padding-left: 0px
   margin: 0px
   width: 100%
   .retag-form
@@ -11,15 +11,20 @@
     .field
       margin: 0
   li, span.tag
+    margin: 0 3px 3px 0
     float: left
     display: inline
-    height: 25px
-    a.tag, a.retag-link
-      background: image-url("tag-back-lt.png") left 0 no-repeat
-      font-size: 11px
-      padding: 3px 4px 4px 18px
-      &:hover
-        background: image-url("tag-back-lt-hover.png") left 0 no-repeat
+    padding: 3px 10px 3px 10px
+    border: solid 1px #cfcfcf
+    border-radius: 1px
+    background: #cfcfcf
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#ecefef))
+    background: -moz-linear-gradient(top,  #fcfcfc,  #ecefef)
+    filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20')"
+    a.tag, a.retag-link     
+      font-size: 11px 
+//      &:hover
+//        background: image-url("tag-back-lt-hover.png") left 0 no-repeat
     &.title
       font-weight: bolder
       font-size: 12px
@@ -35,6 +40,7 @@
 ul.tag-list
   li
     margin-left: 5px
+
 
 table.tag-list
   margin: 5px
