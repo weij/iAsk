@@ -27,7 +27,11 @@
 
   /Users
   %ul.items#users
-    -@memberships.each do |membership|
-      = render :partial => "membership", :object => membership
+    %table
+      -@memberships.each_slice(4) do |tr_memberships|
+        %tr
+          -tr_memberships.each do |membership|
+            %td  
+              = render :partial => "membership", :object => membership
 
   = paginate @memberships
