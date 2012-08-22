@@ -2,10 +2,11 @@
   = tag_table.each_slice(4) do |tags|
     %tr
       - tags.each do |tag|
-        %td{:style => "line-height: 14px"}
-          %span.tag{:class => "tag_#{tag}"}
+        %td{:style => "line-height:15px;"}
+          %div.tag{:class => "tag_#{tag.name}", style: "float:left"}
             = tag_link(tag)
-            %span.count
-              = tag.count.to_i
+          %div.tag-number{style: "margin-left:5px;"}
+            x
+            = tag.count.to_i
 #additional_info
   = paginate @tags
