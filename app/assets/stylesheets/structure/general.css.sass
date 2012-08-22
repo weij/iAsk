@@ -78,14 +78,22 @@ ul.content-tabs
       background-image: image-url('ans-icon-medium.png')
     &.unanswered a
       background-image: image-url('noans-icon-medium.png')
-    &.activities a
-      background-image: image-url('activity-iacon.png')
-    &.badges a
-      background-image: image-url('ribbon-medium.png')
-    &.users a
-      background-image: image-url('user-medium.png')
-    &.tags a
-      background-image: image-url('tags-medium.png')
+    &.activities 
+      float: right
+      a
+        background-image: image-url('activity-iacon.png')
+    &.badges 
+      float: right
+      a
+        background-image: image-url('ribbon-medium.png')
+    &.users 
+      float: right
+      a
+        background-image: image-url('user-medium.png')
+    &.tags 
+      float: right
+      a
+        background-image: image-url('tags-medium.png')
 
 // FILTERS
 .filters

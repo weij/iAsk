@@ -1,10 +1,10 @@
-%li.question_count{style:"float:left; font-size:20px; font-weight:thin; color:#6996CF; padding:6px 0 0 10px; width:320px;"}
+%li.question_count{style:"float:left; font-size:22px; font-weight:thin; color:#6996CF; padding:6px 0 0 10px; width:264px;"}
   = @questions.count 
   questions
-%li
+%li{style:"width:60px;"}
   %label
     = t('global.sort_by')
-%li
+%li{style:"width:92px;"}
   -case @active_subtab.to_s
     -when "activity"
       = link_to "#{t("questions.index.active")} ▾", "#"
@@ -25,7 +25,21 @@
     %li.followers
       = pjax_link_to t("users.show.followers"), "index", url_for(params.merge(questions_link).merge(:sort=>"followers")), :title =>  t("questions.index.followers_tooltip"), :rel => "nofollow"
 
+%li{style:"width:82px;"}
+  %label
+    = t('shared.view_mode')
 %li
+  -if params[:answers] == "1"
+    = link_to "#{t('activerecord.models.answers')} ▾", "#"
+  -else
+    = link_to "#{t('activerecord.models.questions')} ▾", "#"
+  %ul.drop-menu
+    %li
+      = pjax_link_to t('layouts.application.questions'), "index", url_for(questions_link)
+    %li
+      = pjax_link_to t('activerecord.models.answers'), "index", url_for(questions_link.merge(:answers => 1)), :rel => 'nofollow'
+
+%li{style:"width:38px;"}
   %label= t("shared.filter")
 %li
   - if session[:filter]
@@ -45,19 +59,7 @@
         = tab_entry "li", t('layouts.application.contributed'), filtered_questions_path(filter: 'contributed'), :selected => "active", :link_opts => {:"class" => "pjax", :"data-layout" => "index"}
         = tab_entry "li", t('layouts.application.collaborate'), filtered_questions_path(filter: 'expertise'), :selected => "active", :link_opts => {:"class" => "pjax", :"data-layout" => "index"}
 
-%li
-  %label
-    = t('shared.view_mode')
-%li
-  -if params[:answers] == "1"
-    = link_to "#{t('activerecord.models.answers')} ▾", "#"
-  -else
-    = link_to "#{t('activerecord.models.questions')} ▾", "#"
-  %ul.drop-menu
-    %li
-      = pjax_link_to t('layouts.application.questions'), "index", url_for(questions_link)
-    %li
-      = pjax_link_to t('activerecord.models.answers'), "index", url_for(questions_link.merge(:answers => 1)), :rel => 'nofollow'
+
 -if current_group.languages.count > 1
   %li
     %label#lang-select-toggle{"data-language"=>change_language_filter_path}

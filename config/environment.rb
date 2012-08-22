@@ -2,7 +2,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 Shapado::Application.initialize!
-
-puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
