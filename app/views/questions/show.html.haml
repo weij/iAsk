@@ -82,11 +82,10 @@
           =find_and_preserve(shapado_auto_link(@question.close_reason.comment))
   - if !@answers.empty? || @question.accepted
     -cache_for(:question_answers, @question.id) do
-      %h2
-        = t("questions.question.has_answers", count: @question.answers_count)
-
-      .filters.clearfix
-        %ul.menubar{class: @active_subtab.to_s}
+      .filters.clearfix{style: "background-color:#efefff; border-radius:5px; border:none; margin-bottom:20px"}
+        .answer-count{style: "float:left; font-size:20px; font-weight:bolder; color:#6996CF; padding:3px 0 0 3px;"}
+          = t("questions.question.has_answers", count: @question.answers_count)
+        %ul.menubar{class: @active_subtab.to_s, style: "float:right"}
           %li
             %label=t('global.sort_by')
           %li.newest-active

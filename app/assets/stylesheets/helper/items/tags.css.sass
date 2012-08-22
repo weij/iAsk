@@ -10,17 +10,21 @@
     overflow: hidden
     .field
       margin: 0
-  li, span.tag
-    margin: 0 3px 3px 0
+  .tag-number 
+    color: #5D5D5D
     float: left
-    display: inline
+    font-size: 16px
+    font-weight: normal
+    padding-top: 6px
+  li, div.tag
+    color: #5d5d5d
+    margin: 0 3px 3px 0
     padding: 3px 10px 3px 10px
-    border: solid 1px #cfcfcf
+    -moz-box-shadow: 0 0 5px #D3D6D7
+    -webkit-box-shadow: 0 0 5px #D3D6D7
+    box-shadow: 0 0 5px #D3D6D7
+    border: solid 1px #D3D6D7
     border-radius: 1px
-    background: #cfcfcf
-    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#ecefef))
-    background: -moz-linear-gradient(top,  #fcfcfc,  #ecefef)
-    filter: "progid: DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20')"
     a.tag, a.retag-link     
       font-size: 11px 
 //      &:hover
@@ -37,9 +41,12 @@
       padding: 2px
       background-color: #E1E1E1
       border-top: 1px solid #aaa
+      
 ul.tag-list
   li
     margin-left: 5px
+    float: left
+    display: inline
 
 
 table.tag-list

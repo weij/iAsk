@@ -14,6 +14,7 @@ Questions = function() {
   }
 
   function initializeOnIndex($body) {
+		$(".questions article:even").css("background-color", "#f6f6ff");
     Ui.navigateShortcuts($(".questions-index"), ".Question");
     $(".Question .toolbar").shapadoToolbar();
     Votes.initializeOnQuestions();
@@ -61,6 +62,7 @@ Questions = function() {
   }
 
   function initializeOnShow($body) {
+		$(".answers-list article:odd").css("background-color", "#f6f6f6");
     $(".main-question .toolbar").shapadoToolbar({formContainer: "#panel-forms"});
     $("article.answer .toolbar").shapadoToolbar({formContainer: ".article-forms", afterFetchForm : function(link, form) {
       Editor.setup(form.find(".markdown_editor, .wysiwyg_editor"));
@@ -128,17 +130,18 @@ Questions = function() {
     });
 
 
-    $('body.new form#ask_question').submit(function(){
-			if($('input#question_title', $(this)).val().length < 5){
-				alert("Your question title is too short");
-				return false;
-			}
-      if($('ul.chzn-choices > li', $(this)).size() < 2){
-        return window.confirm("Are you should not use a tag for your question?");
+    $('form#ask_question').submit(function(){
+			if($body.hasClass("new") || $body.hasClass("edit")){
+				if($('input#question_title', $(this)).val().length < 5){
+					alert("Your question title is too short");
+					return false;
+				}
+				if($('ul.chzn-choices > li', $(this)).size() < 2){
+				  	return window.confirm("Are you should not use a tag for your question?");
+				}
       }
       return true;
     });
-
 
     var fields = $("#attachments #fields");
     var template = fields.find(".template");
