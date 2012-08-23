@@ -1,5 +1,5 @@
 class UsersWidget < Widget
-  field :settings, :type => Hash, :default => { 'limit' => 3, :on_mainlist => true  }
+  field :settings, :type => Hash, :default => { 'limit' => 5, :on_mainlist => true  }
   before_save :limit_to_int
 
   def recent_users(group)
