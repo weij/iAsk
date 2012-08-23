@@ -523,6 +523,7 @@ Time.zone.now ? 1 : 0)
     else
       self.badges.where(opts.merge(group_id: group.id)).order_by(:created_at.desc)
     end
+
   end
 
   def find_badge_on(group, token, opts = {})

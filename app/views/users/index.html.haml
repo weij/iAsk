@@ -9,7 +9,7 @@
           = text_field_tag "q", params[:q], :class => "text_field filter_field", placeholder: t(".filter")
           = submit_tag(t('layouts.application.search'), :class => "filter_input")
 
-  .filters.clearfix
+  .filters.clearfix{ style: "background-color:#efefff;border:none;"}
     %ul.menubar.clearfix
       %li
         %label
@@ -27,7 +27,11 @@
 
   /Users
   %ul.items#users
-    -@memberships.each do |membership|
-      = render :partial => "membership", :object => membership
+    %table
+      -@memberships.each_slice(6) do |tr_memberships|
+        %tr
+          -tr_memberships.each do |membership|
+            %td  
+              = render :partial => "membership", :object => membership
 
   = paginate @memberships
