@@ -99,6 +99,8 @@ ul.content-tabs {
         color: $fg_light_brand_color; } } } }
 
 .questions-controller ul.content-tabs li.questions a,
+.questions-controller ul.content-tabs li.all a,
+.questions-controller ul.content-tabs li.unanswered a,
 .badges-controller ul.content-tabs li.badges a,
 .users-controller ul.content-tabs li.users a,
 .tags-controller ul.content-tabs li.tags a,

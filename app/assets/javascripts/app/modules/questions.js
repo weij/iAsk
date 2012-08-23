@@ -15,6 +15,13 @@ Questions = function() {
 
   function initializeOnIndex($body) {
 		$(".questions article:even").css("background-color", "#f6f6ff");
+		
+		if(window.location.search.indexOf("unanswered") == -1){
+			$('ul.content-tabs li.unanswered a').css("background-color", "#ffffff");			
+		}else{
+			$('ul.content-tabs li.questions a').css("background-color", "#ffffff");			
+		}
+		
     Ui.navigateShortcuts($(".questions-index"), ".Question");
     $(".Question .toolbar").shapadoToolbar();
     Votes.initializeOnQuestions();
