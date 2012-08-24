@@ -1,13 +1,26 @@
-%h1
-  = t('.join_group', :group => current_group.name)
-%p.description
-  = t('.description')
+.user_new
+	%h1
+		= t('.join_group', :group => current_group.name)
+	%p.description
+		= t('.description')
 
-- @user.password = @user.password_confirmation = nil
-= error_messages_for :user
-= form_for @user, :url => users_path, :html => {:class => "form"} do |f|
-  = hidden_field_tag 'invitation_id', params[:invitation_id]
-  =render :partial => "form", :locals => {:f => f}
+	- @user.password = @user.password_confirmation = nil
+	/= error_messages_for :user
 
-  .buttons
-    = submit_tag t('.submit'), :class => "save"
+	-if @user.errors.any?
+		#error_explanation
+			.alert-error
+				The form contains
+				=pluralize(@user.errors.count, "error")
+			%ul
+				-@user.errors.full_messages.each do |msg|
+					%li
+						*
+						=msg
+	.user_form
+		= form_for @user, :url => users_path, :html => {:class => "form"} do |f|
+			= hidden_field_tag 'invitation_id', params[:invitation_id]
+			=render :partial => "form", :locals => {:f => f}
+
+		.buttons
+			= submit_tag t('.submit'), :class => "save"
