@@ -78,7 +78,7 @@
           = tab_entry "li", t('global.following'), follows_user_path(@user), {:selected => "active"}, {:class => "follow"}
           = tab_entry "li", t(:activity, :scope => "activerecord.models"), activity_user_path(@user), {:selected => "active"}, {:class => "activity"}
       %section.clearfix.filters.clearfix{:class => @active_subtab }
-        %ul
+        %ul{ style: "margin:0;" }
           = render "users/show/user_#{params[:action]}_filters"
 
       = render "users/show/user_#{params[:action]}_content"
