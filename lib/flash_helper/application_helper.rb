@@ -78,7 +78,7 @@
       #    </ul>
       #  </div>
       def show_flash_messages(options={})
-        options = { :keys => [:warning, :notice, :message, :error],
+        options = { :keys => [ :alert, :warning, :notice, :message, :error],
                     :id => 'messages',
                     :textilize => false,
                     :markdown => false}.merge(options)
@@ -94,12 +94,21 @@
               text = textilize(msg)
             end
             flash_text = content_tag('p', text, nil, false)
-            messages << content_tag('li', flash_text, {:class => key}, false)
+            if flash[key] == flash[:alert]
+              messages << content_tag('li', flash_text, {:class => :notice}, false)
+            else
+              messages << content_tag('li', flash_text, {:class => key}, false)
+            end
           end
 
           if !messages.empty?
-            out << content_tag('ul', messages.join("\n"),
+            if flash[key] == flash[:alert]
+              out << content_tag('ul', messages.join("\n"),
+                               {:class => "message "+"notice"}, false)
+            else
+              out << content_tag('ul', messages.join("\n"),
                                {:class => "message "+key.to_s}, false)
+            end
           end
         end
 
