@@ -14,8 +14,6 @@ Questions = function() {
   }
 
   function initializeOnIndex($body) {
-		$(".questions article:even").css("background-color", "#f6f6ff");
-		
 		if(window.location.search.indexOf("unanswered") == -1){
 			$('ul.content-tabs li.unanswered a').css("background-color", "#ffffff");			
 		}else{
@@ -69,7 +67,6 @@ Questions = function() {
   }
 
   function initializeOnShow($body) {
-		$(".answers-list article:odd").css("background-color", "#f6f6f6");
     $(".main-question .toolbar").shapadoToolbar({formContainer: "#panel-forms"});
     $("article.answer .toolbar").shapadoToolbar({formContainer: ".article-forms", afterFetchForm : function(link, form) {
       Editor.setup(form.find(".markdown_editor, .wysiwyg_editor"));
