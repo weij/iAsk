@@ -18,7 +18,7 @@ en:
     index:
       title: All users
       empty: "This group does not have any members. Participate by joining this group."
-      filter: "Search for users"
+      filter: "Search for people"
       reputation: Reputation
       newest: Newest
       oldest: Oldest
