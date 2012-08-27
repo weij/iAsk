@@ -52,10 +52,10 @@
                 = pjax_tab_entry "li", t('layouts.manage.widgets'), "manage-widgets", widgets_path, :selected => "active", :link_opts => {'data-page-layout' => "manage-layout"}
           .widget-links.module
             %h3
-              /= t("layouts.manage.close_group")
+              = t("layouts.manage.close_group")
             %nav
               %ul
-                /= pjax_tab_entry "li", t('layouts.manage.close_group'), "manage", manage_close_group_path, :selected => "active", :link_opts => {'data-page-layout' => "manage-layout"}
+                = pjax_tab_entry "li", t('layouts.manage.close_group'), "manage", manage_close_group_path, :selected => "active", :link_opts => {'data-page-layout' => "manage-layout"}
         %section#column2.content-panel.nosidebar
           #main-content-wrap{:class => @active_tab}
             = yield
