@@ -35,7 +35,6 @@ class VotesController < ApplicationController
           end
         end
       end
-
       flash[:notice] = generate_notice(state)
     end
 
@@ -55,7 +54,6 @@ class VotesController < ApplicationController
     when :updated
       average+= value *2
     end
-
 
     if state != :error
       if @voteable.class == Question

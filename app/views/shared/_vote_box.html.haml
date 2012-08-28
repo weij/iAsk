@@ -1,5 +1,7 @@
 - if !voteable.is_a?(Comment)
-  .answer_vote_box
+  - vote_box_cls = voteable.is_a?(Question) ? 'question_vote_box' : 'answer_vote_box'
+  -# .answer_vote_box
+  %div{class: vote_box_cls}
     - if !closed && (user_signed_in? && (voteable.user != current_user)) || !user_signed_in?
       - vote = logged_in? ? current_user.vote_on(voteable) : nil
       %form{:action=> url, :method=>'post', :class=>'vote_form'}

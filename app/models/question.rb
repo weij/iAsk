@@ -230,7 +230,12 @@ class Question
     on_activity(false)
   end
 
-  def on_remove_vote(v, voter)
+  def on_remove_vote(v, voter_id)
+    if voter_id.is_a? User
+      voter = voter_id
+    else
+      voter = User.find(voter_id)
+    end
     if v > 0
       self.user.update_reputation(:question_undo_up_vote, self.group)
       voter.on_activity(:undo_vote_up_question, self.group)

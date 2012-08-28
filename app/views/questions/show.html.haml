@@ -11,10 +11,13 @@
 -cache_for(:question, @question.id, @question.user == current_user ? "owner" : "" ) do
   %section{class: "main-question #{@question.id}", id: "question-#{@question.id}", item_scope: '', itemtype: "http://schema.org/Article"}
 
+    = vote_box(@question, question_path(@question), @question.closed)
+
     %h1{itemprop: "name"}
       = @question.title
       - if @question.closed
         =" [#{t("closed", scope: "activerecord.attributes.question").upcase}]"
+
     .author
       %small
         %span

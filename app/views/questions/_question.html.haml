@@ -23,6 +23,14 @@
             
     .item-right
       .item-actions
+        .votes.action
+          -if question.votes_count.to_i > 0
+            .count
+              = question.votes_count
+          -else
+            .count.zero
+              = question.votes_count          
+          .title votes
         .answers.action
           -if question.answers_count.to_i > 0
             .count
@@ -32,15 +40,6 @@
               = question.answers_count
           .title
             = t('questions.question.has_answers', :count => "")
-        .followers.action
-          -if question.followers_count.to_i > 0
-            .count
-              = question.followers_count
-          -else
-            .count.zero
-              = question.followers_count          
-          .title
-            = t('questions.index.has_followers', :count => "")
         .viewers.action
           -if question.views_count.to_i > 0
             .count
