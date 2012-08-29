@@ -638,6 +638,9 @@ class Group
   end
 
   def set_shapado_version
+    if ShapadoVersion.where(:token => 'free')
+      ShapadoVersion.new(token: "free", price: 0).save!
+    end
     self.shapado_version_id = ShapadoVersion.where(:token => 'free').first.id
   end
 

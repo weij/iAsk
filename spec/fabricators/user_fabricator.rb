@@ -6,4 +6,5 @@ Fabricator(:user) do
   position {{"lat" => 0, "long" => 0}}
   avatar {StringIO.new("MOCK")}
   notification_opts { Fabricate.build(:notification_config ) }
+  confirmed_at {Time.now}
 end
