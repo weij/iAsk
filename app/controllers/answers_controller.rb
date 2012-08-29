@@ -116,6 +116,11 @@ class AnswersController < ApplicationController
 
         @question.answer_added!
         sweep_question(@question) # TODO move to magent
+
+        if question_id = @answer.question_id
+          Question.update_last_target(question_id, @answer)
+        end
+
         html = ""
         if params[:facebook]
           html = render_to_string(:partial => "facebook/answer",
