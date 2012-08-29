@@ -17,6 +17,7 @@ en:
       active:  Active
       votes:   Votes
       newest:  Newest
+      answers: Answers
       oldest:  Oldest
       ask_question: Ask question
       empty: "No one has asked any questions yet. Be the first!"
@@ -25,7 +26,9 @@ en:
       hot_tooltip: Questions with the most activity over the last 5 days
       active_tooltip: Questions that have been updated recently
       followers_tooltip:  Questions with the most followers
+      votes_tooltip:  Questions with the most votes
       newest_tooltip: The most recently asked questions
+      answers_tooltip: Questions with the most answers
       has_followers:
         one: "%{count} follower"
         other: "%{count} followers"

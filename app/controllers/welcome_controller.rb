@@ -8,7 +8,6 @@ class WelcomeController < ApplicationController
 
   def index
     @active_subtab = params.fetch(:tab, "activity")
-
     conditions = scoped_conditions({:banned => false})
 
     order = [:activity_at, :desc]
