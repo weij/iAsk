@@ -52,7 +52,8 @@
                   = t('global.edited_by')
                   = render "users/user_mini", user: @question.last_target_user
                   %time{datetime: @question.last_target_date.iso8601, itemprop: "dateModified"}
-                    = t("time.ago", time: time_ago_in_words(@question.last_target_date))
+                    = link_to t("time.ago", time: time_ago_in_words(@question.last_target_date)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
+                    
           = question_body    
                     
         = render "reward_info"
@@ -63,7 +64,7 @@
         %meta{itemprop: "interactionCount", content: "UserComments:#{@question.answers_count}"}
         %meta{itemprop: "interactionCount", content: "UserPageVisits:#{@question.views_count}"}  
         
-        %div{style: "float:right; clear:both; margin:10px 0; padding:0"}   
+        %div{style: "float:right; clear:both; margin:6px 0 0 0; padding:0"}   
           = render "toolbar"
         .clear{style: "clear:both"}        
         
