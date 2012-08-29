@@ -17,9 +17,9 @@ Comments = function() {
 
     $.each($("a.toggle_comments"), function() {
       var l = $(this);
-      var n = l.nextAll("article.read");
+      var n = l.nextAll("article");
       var s = n.length;
-      if(s < 5) {
+      if(s <= 3) {
         l.hide();
       } else {
         l.show();

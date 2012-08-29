@@ -8,17 +8,32 @@ article.Question.accepted
 // Main Question
 .main-question
   width: 100%
-  .question_vote_box
-    width: 25px
+  .main-sidebar-left
     float: left
-    margin: 0 10px 0 10px
-  
-  h1
-    font-size: 25px
-    margin: 0px 15px 0px 15px
-    &:first-letter
-      text-transform: uppercase
+    .question_vote_box
+      margin: 0 10px 0 10px
       
+  .main-content
+    float: left
+    padding: 0
+    width: 90%
+    h1
+      font-size: 25px
+      margin: 0px 15px 0px 15px
+      &:first-letter
+        text-transform: uppercase
+      
+    .description
+      margin: 0px 15px 5px 15px
+      .activity-info
+        float: right
+        width: 230px
+        padding: 6px 0
+        margin: 0
+        magin: 0
+        border-radius: 5px
+        background-color: #efefef
+        clear: right
   
 
   .author
@@ -26,8 +41,7 @@ article.Question.accepted
     p
       margin: 0px
 
-  .description
-    margin: 0px 15px 5px 15px
+
 
   .toolbar
     margin: 0 15px 10px 15px

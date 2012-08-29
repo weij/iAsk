@@ -11,64 +11,92 @@
 -cache_for(:question, @question.id, @question.user == current_user ? "owner" : "" ) do
   %section{class: "main-question #{@question.id}", id: "question-#{@question.id}", item_scope: '', itemtype: "http://schema.org/Article"}
 
-    = vote_box(@question, question_path(@question), @question.closed)
+    .main-sidebar-left
+      = vote_box(@question, question_path(@question), @question.closed)
+    
+    .main-content
+      %h1{itemprop: "name"}
+        = @question.title
+        - if @question.closed
+          =" [#{t("closed", scope: "activerecord.attributes.question").upcase}]"    
+    
+      %ul.tag-list.clearfix{style: "margin-left:10px; padding:0"}
+        - @question.tags.each do |tag|
+          %li
+            = tag_link(tag)
+        - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
+          %li.retag
+            = link_to t('.retag'), retag_question_path(@question), class: 'retag-link'
+            
+      .clear{style: "clear:both; border-top:1px solid #efefef; margin-left:15px;"}
 
-    %h1{itemprop: "name"}
-      = @question.title
-      - if @question.closed
-        =" [#{t("closed", scope: "activerecord.attributes.question").upcase}]"
+      .description.markdown.clearfix
+        %div{itemprop: "articleBody"}
+          .activity-info        
+            .author
+              %small
+                %span
+                  = t('activerecord.attributes.question.asked_by')
+                = render "users/user_mini", user: @question.user, author: true
+                %time{datetime: @question.created_at.iso8601, itemprop: "datePublished"}
+                  = t("time.ago", time: time_ago_in_words(@question.created_at))
+                - if @question.updated_by
+                  <br />
+                  = t('global.updated_by')
+                  = render "users/user_mini", user: @question.updated_by
 
-    .author
-      %small
-        %span
-          = t('activerecord.attributes.question.asked_by')
-        = render "users/user_mini", user: @question.user, author: true
-        %time{datetime: @question.created_at.iso8601, itemprop: "datePublished"}
-          = t("time.ago", time: time_ago_in_words(@question.created_at))
-        - if @question.updated_by
-          ,
-          = t('global.edited_by')
-          = render "users/user_mini", user: @question.updated_by
+                  %time{datetime: @question.updated_at.iso8601, itemprop: "dateModified"}
+                    = link_to t("time.ago", time: time_ago_in_words(@question.updated_at)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
+                - if @question.last_target_user
+                  <br />
+                  = t('global.edited_by')
+                  = render "users/user_mini", user: @question.last_target_user
+                  %time{datetime: @question.last_target_date.iso8601, itemprop: "dateModified"}
+                    = t("time.ago", time: time_ago_in_words(@question.last_target_date))
+          = question_body    
+                    
+        = render "reward_info"
+        = render "attachments", question: @question, attachments: @question.attachments, editing: false
+        
+        %meta{itemprop: "keywords", content: @question.tags.join(",")}
+        %meta{itemprop: "inLanguage", content: @question.language}
+        %meta{itemprop: "interactionCount", content: "UserComments:#{@question.answers_count}"}
+        %meta{itemprop: "interactionCount", content: "UserPageVisits:#{@question.views_count}"}  
+        
+        %div{style: "float:right; clear:both; margin:10px 0; padding:0"}   
+          = render "toolbar"
+        .clear{style: "clear:both"}        
+        
+        .comments      
+          = link_to "#{content_tag(:span, "NN", class: "counter")} comments".html_safe, "#", class: "toggle_comments"    
+          - @question.comments.each do |comment|
+            - read = (@last_read_at && @last_read_at > comment.created_at && comment.votes_average < 2)
+            = render "comments/comment", comment: comment, source: question_path(@question), mini: true, read: read
+        
+        .panel-comments
+          = form_for [@question, @comment ||= Comment.new], remote: true, html: {class: "question_comment_form", data: {commentable: @question.id, editor: current_group.wysiwyg_editor ? 'wysiwyg_editor' : 'markdown_editor', "login-required" => true}} do |f|
+            %fieldset
+              = render "comments/form", f: f, commentable: @question, source: question_url(@question)
+              .buttons
+                = f.submit t("comments.shared.comment_submit"), data: {"disable-with" => "Saving..."}
+                = t("global.or")
+                = link_to t('scaffold.cancel'), '', :class => 'cancel cancel_comment'
+        
+    .clear{style: "clear:both"}
 
-          %time{datetime: @question.updated_at.iso8601, itemprop: "dateModified"}
-            = link_to t("time.ago", time: time_ago_in_words(@question.updated_at)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
-
-    .description.markdown.clearfix
-      %div{itemprop: "articleBody"}
-        = question_body
-      = render "reward_info"
-      = render "attachments", question: @question, attachments: @question.attachments, editing: false
 
 
-    %ul.tag-list.clearfix
-      - @question.tags.each do |tag|
-        %li
-          = tag_link(tag)
-      - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
-        %li.retag
-          = link_to t('.retag'), retag_question_path(@question), class: 'retag-link'
 
-    %meta{itemprop: "keywords", content: @question.tags.join(",")}
-    %meta{itemprop: "inLanguage", content: @question.language}
-    %meta{itemprop: "interactionCount", content: "UserComments:#{@question.answers_count}"}
-    %meta{itemprop: "interactionCount", content: "UserPageVisits:#{@question.views_count}"}
 
-    = render "toolbar"
 
-    .comments
-      =link_to "#{content_tag(:span, "NN", class: "counter")} comments".html_safe, "#", class: "toggle_comments"
-      -@question.comments.each do |comment|
-        -read = (@last_read_at && @last_read_at > comment.created_at && comment.votes_average < 2)
-        = render "comments/comment", comment: comment, source: question_path(@question), mini: true, read: read
 
-    .panel-comments
-      = form_for [@question, @comment ||= Comment.new], remote: true, html: {class: "question_comment_form", data: {commentable: @question.id, editor: current_group.wysiwyg_editor ? 'wysiwyg_editor' : 'markdown_editor', "login-required" => true}} do |f|
-        %fieldset
-          = render "comments/form", f: f, commentable: @question, source: question_url(@question)
-          .buttons
-            = f.submit t("comments.shared.comment_submit"), data: {"disable-with" => "Saving..."}
-            = t("global.or")
-            = link_to t('scaffold.cancel'), '', :class => 'cancel cancel_comment'
+
+
+
+
+
+
+
 
 #answers-content-wrap
   .error
