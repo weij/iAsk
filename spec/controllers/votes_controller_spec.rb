@@ -4,8 +4,9 @@ describe VotesController do
   include Devise::TestHelpers
 
   before (:each) do
-    stub_group
-    @group = Fabricate(:group)
+    #stub_group
+    #@group = Fabricate(:group)
+    @group = stub_group
     @user = Fabricate(:user)
     @user.join!(@group)
     @user.update_reputation(120, @group)
