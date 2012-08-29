@@ -104,7 +104,6 @@ class ApplicationController < ActionController::Base
       @active_tab = "answers"
     end
     @active_subtab ||= params[:sort] || "newest"
-    puts "=================#{ @active_subtab }=================="
     @questions = Question.minimal.where(conditions.merge(extra_conditions)).order_by(current_order)
 
     extra_scope.keys.each do |key|
