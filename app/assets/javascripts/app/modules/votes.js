@@ -32,7 +32,7 @@ Votes = function() {
   }
 
   function initializeOnQuestion() {
-    $(".answer").delegate("form.vote_form button", "click", function(event) {
+    $(".main-question,.answer").delegate("form.vote_form button", "click", function(event) {
       if(Ui.offline()){
         Auth.startLoginDialog();
       } else {
