@@ -7,11 +7,11 @@
       %form{:action=> url, :method=>'post', :class=>'vote_form'}
         = token_tag(nil)
         .vote_box.vote
-          %button.positive{:type=>"submit", :name=>"vote_up", :value=>"1", :class => (vote && vote > 0) ? "vote-up-on checked" : "vote-up-off" }
+          %button.positive{:type=>"button", :name=>"vote_up", :value=>"1", :class => (vote && vote > 0) ? "vote-up-on checked" : "vote-up-off" }
           .votes_average.vote-count-post
             = calculate_votes_average(voteable)
           = hidden_field_tag "source", source, :id => "source_#{class_name}_#{voteable.id}"
-          %button.negative{:type=>"submit", :name=>"vote_down", :value=>"-1", :class => (vote && vote < 0) ? "vote-down-on checked" : "vote-down-off"}
+          %button.negative{:type=>"button", :name=>"vote_down", :value=>"-1", :class => (vote && vote < 0) ? "vote-down-on checked" : "vote-down-off"}
     - else
       .vote_box.vote
         .votes_average.vote-count-post
