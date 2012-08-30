@@ -62,7 +62,7 @@ gem 'pdfkit' # apt-get install wkhtmltopdf
 gem 'geoip'
 gem 'rubyzip', '0.9.4', :require => 'zip/zip'
 
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 # authentication
 gem 'omniauth', '~> 0.3.0'
