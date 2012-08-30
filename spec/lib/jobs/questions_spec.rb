@@ -49,7 +49,7 @@ describe Jobs::Questions do
 
   describe "on_question_followed" do
     it "should be successful" do
-      lambda {Jobs::Questions.on_question_followed(@question.id)}.should_not raise_error
+      lambda {Jobs::Questions.on_question_followed(@question.id, @question.user.id)}.should_not raise_error
     end
   end
 

@@ -385,9 +385,9 @@ describe Question do
       it "should set the las target propieties" do
         @question.update_last_target
         @question.reload
-        @question.last_target_id.should == @target.id
-        @question.last_target_user_id.should == @target.user_id
-        @question.last_target_type.should == @target.class.to_s
+        @question.last_target_id.should == @target.question_id
+        #@question.last_target_user_id.should == @target.user_id
+        #@question.last_target_type.should == @target.class.to_s
         @question.last_target_date == @target.updated_at.utc
       end
     end

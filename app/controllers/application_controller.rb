@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     elsif params[:answers]
       @active_tab = "answers"
     end
-    @active_subtab ||= params[:sort] || "newest"
+    @active_subtab ||= params[:sort] || "votes"
     @questions = Question.minimal.where(conditions.merge(extra_conditions)).order_by(current_order)
 
     extra_scope.keys.each do |key|

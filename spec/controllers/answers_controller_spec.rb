@@ -103,7 +103,7 @@ describe AnswersController do
 
     it "should be successful" do
       post 'create', :question_id => @question.id, :answer => Fabricate.attributes_for(:answer, :user => @user)
-      response.should redirect_to question_path(:id => assigns[:question].slug)
+      response.should redirect_to questions_path
     end
   end
 

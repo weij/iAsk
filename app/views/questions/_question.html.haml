@@ -50,14 +50,21 @@
           .title views
           
       .user-data{:style => "text-align:right; margin-top:10px;"}
-        %time{:pubdate => "pubdate", :datetime => last_target_date.iso8601}
-          = pjax_link_to t("time.ago", :time => time_ago_in_words(last_target_date)), "question", question_path(question, :anchor => last_target_id)
-          by
-        -if owner
-          =render :partial => "users/user_data", :locals => {:user => owner}
+        -if @active_subtab=="newest"
+          %time{:pubdate => "pubdate", :datetime => last_target_date.iso8601}
+            = pjax_link_to t("time.ago", :time => time_ago_in_words(question.created_at)), "question", question_path(question, :anchor => last_target_id)
+            by
+          -if owner
+            =render :partial => "users/user_data", :locals => {:user => owner}
+          -else
+            = I18n.t('shared.by_anon')
         -else
-          = I18n.t('shared.by_anon')
-
+          %time{:pubdate => "pubdate", :datetime => last_target_date.iso8601} 
+            = pjax_link_to t("time.ago", :time => time_ago_in_words(question.activity_at)), "question", question_path(question, :anchor => last_target_id)
+          -if owner
+            =render :partial => "users/user_data", :locals => {:user => owner}
+          -else
+            = I18n.t('shared.by_anon')
     .clear{:style => "clear:both"}
 
 -else
