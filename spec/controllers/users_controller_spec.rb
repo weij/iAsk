@@ -55,7 +55,7 @@ describe UsersController do
 
     it "should be successful" do
       post 'create', :user => Fabricate.attributes_for(:user)
-      response.should redirect_to "http://test.host/"
+      response.should redirect_to "http://test.host/users/login"
     end
   end
 

@@ -32,7 +32,7 @@ describe Jobs::Activities do
       @answer.stub!(:group).and_return(@question.group)
 
       @answer.stub!(:updated_by).and_return(@answer.user)
-      @twitter.should_receive(:update).twice.with(anything)
+      @twitter.should_receive(:update).with(anything)
       lambda {Jobs::Activities.on_update_answer(@answer.id)}.should_not raise_error
     end
   end
@@ -63,7 +63,7 @@ describe Jobs::Activities do
     end
 
     it "should be successful" do
-      @twitter.should_receive(:update).with(anything)
+      @twitter.should_receive(:update).twice.with(anything)
 
       Jobs::Activities.on_comment(@answer.id, @answer.class.to_s, @comment.id, "a_link")
       lambda {Jobs::Activities.on_comment(@answer.id, @answer.class.to_s, @comment.id, "a_link")}.should_not raise_error

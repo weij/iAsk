@@ -103,7 +103,7 @@ describe ThemesController do
       it "redirects to the theme" do
         theme = Theme.create! valid_attributes
         put :update, :id => theme.id, :theme => valid_attributes
-        response.should redirect_to(theme)
+        response.should redirect_to(edit_theme_url(theme))
       end
     end
 
