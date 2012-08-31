@@ -14,8 +14,10 @@
           %button.negative{:type=>"button", :name=>"vote_down", :value=>"-1", :class => (vote && vote < 0) ? "vote-down-on checked" : "vote-down-off"}
     - else
       .vote_box.vote
+        %button.positive.disabled{:type=>"button", :disabled => 'disabled' }
         .votes_average.vote-count-post
           = calculate_votes_average(voteable)
+        %button.negative.disabled{:type=>"button", :disabled => 'disabled' }
 - else
   %form.comment-form{:action=> url, :method=>'post', :class => ''}
     = token_tag(nil)

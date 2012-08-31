@@ -139,22 +139,6 @@ form.history {
     form {
       background-color: $light_brand_color; } } }
       
-      
-      
-.main-question {      
-  .question_vote_box {
-    .vote_box button {
-      &.negative {
-        background-color: lighten($view_bg_color, 10%);
-        &:hover, &.checked {
-          background-color: #cc0000 !important; } }
-      &.positive {
-        background-color: lighten($view_bg_color, 10%);
-        &:hover, &.checked {
-          background-color: #a2c538 !important} } } } }
-          
-          
-          
 
 #answers-content-wrap {
   h2 {
@@ -216,9 +200,32 @@ form.history {
     .answer_vote_box {
       .vote_box button {
         &.negative {
-          background-color: #fafafa; }
+          background-color: #f0f0f0; }
         &.positive {
-          background-color: #fafafa; } } } } }
+          background-color: #f0f0f0; } } } } }
+          
+          
+.main-question {      
+  .question_vote_box {
+    .vote_box button {
+      &.negative {
+        background-color: #f0f0f0;
+        &:hover, &.checked {
+          background-color: #cc0000 !important; } }
+      &.positive {
+        background-color: #f0f0f0;
+        &:hover, &.checked {
+          background-color: #a2c538 !important; } } } } }
+          
+          
+          
+.main-question .main-sidebar-left > .question_vote_box, #answers-content-wrap > .answers-list > article.answer > .answer_vote_box {
+  .vote_box.vote > button.disabled {
+    &.disabled {
+      background-color: #f0f0f0; 
+      &:hover {
+        background-color: #f0f0f0 !important } } } }
+          
 
 // Members
 //------------------------------------------------------------------------------
