@@ -138,6 +138,23 @@ form.history {
   #panel-forms {
     form {
       background-color: $light_brand_color; } } }
+      
+      
+      
+.main-question {      
+  .question_vote_box {
+    .vote_box button {
+      &.negative {
+        background-color: lighten($view_bg_color, 10%);
+        &:hover, &.checked {
+          background-color: #cc0000 !important; } }
+      &.positive {
+        background-color: lighten($view_bg_color, 10%);
+        &:hover, &.checked {
+          background-color: #a2c538 !important} } } } }
+          
+          
+          
 
 #answers-content-wrap {
   h2 {

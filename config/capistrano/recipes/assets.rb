@@ -48,6 +48,10 @@ Capistrano::Configuration.instance.load do
     task :precompile, :roles => assets_role, :except => { :no_release => true } do
       run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile"
     end
+    
+    task :reload_theme, :roles => assets_role, :except => { :no_release => true } do
+      run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} setup:default_theme"
+    end
 
     desc <<-DESC
       Run the asset clean rake task. Use with caution, this will delete \
