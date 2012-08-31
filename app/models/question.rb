@@ -435,7 +435,8 @@ class Question
       target_id = self.last_target_id || self.id
       date = self.last_target_date || self.updated_at
       owner = self.last_target_user || self.user
-
+    #  owner = User.find(last_target_user_id) || self.user
+    
       [target_id, date, owner]
     end
   end
