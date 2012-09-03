@@ -5,7 +5,7 @@
       -# TODO: refactor this
       -lang = logged_in? ? current_user.main_language : nil
       -lang = current_group.language ? current_group.language : lang
-      =f.text_field :title, :class => "search_text text_area", :id => "question_title", :autocomplete => 'off', :placeholder => raw(current_group.question_prompt) || t(".quick_question")
+      =f.text_field :title, :class => "search_box text_area", :id => "question_title", :autocomplete => 'off', :placeholder => raw(current_group.question_prompt) || t(".quick_question")
       -#.buttons-quickq
         -#=f.submit t("questions.index.ask_question", :default => :"layouts.application.ask_question"), :class => "ask_question"
         -#.search-feedback

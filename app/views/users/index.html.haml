@@ -6,7 +6,7 @@
     .filter
       = form_tag "/users", :class => "form", :id => "filter_users", :method => "get" do
         .field
-          = text_field_tag "q", params[:q], :class => "text_field filter_field", placeholder: t(".filter")
+          = text_field_tag "q", params[:q], :class => "search_box text_field filter_field", placeholder: t(".filter")
           = submit_tag(t('layouts.application.search'), :class => "filter_input")
 
   .filters.clearfix{ style: "background-color:#efefff;border:none;"}

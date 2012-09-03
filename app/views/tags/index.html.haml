@@ -5,7 +5,7 @@
   .filter
     = form_tag "/questions/tags", :class => "form", :id => "filter_tags", :method => "get" do
       .field
-        = text_field_tag "q", params[:q], :class => "text_field filter_field", placeholder: t(".filter")
+        = text_field_tag "q", params[:q], :class => "search_box text_field filter_field", placeholder: t(".filter")
         = submit_tag("filter")
 
   -if logged_in? && current_user.mod_of?(current_group)

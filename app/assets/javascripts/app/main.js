@@ -35,7 +35,7 @@ $(document).ready(function() {
     }).blur();
 	}
 	
-	$('.search_text,:password').val('');
+	$('.search_box,:password').val('');
 
   Loader.initialize($body, true);
 });
