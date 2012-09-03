@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
   before_filter :admin_required , :only => [:accept, :destroy]
   subtabs :index => [ [:most_active, [:activity_rate, Mongo::DESCENDING]], [:newest, [:created_at, Mongo::DESCENDING]],
                       [:oldest, [:created_at, Mongo::ASCENDING]], [:name, [:name, Mongo::ASCENDING]]]
+  before_filter :close_group_action, :except => [:index, :show, :join]                    
   # GET /groups
   # GET /groups.json
   def index
@@ -403,5 +404,10 @@ class GroupsController < ApplicationController
       flash[:error] = t("global.permission_denied")
       redirect_to group_path(@group)
     end
+  end
+
+  def close_group_action
+    flash[:error] = "This link has been closed."
+    redirect_to root_path
   end
 end
