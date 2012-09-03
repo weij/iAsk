@@ -1,6 +1,7 @@
 class Admin::ManageController < ApplicationController
   before_filter :login_required
   before_filter :check_permissions, :except => [:edit_card]
+  before_filter :disable_close_group, :only => [:close_group]
   layout "manage"
   tabs :dashboard => :dashboard,
        :properties => :properties,
@@ -89,5 +90,10 @@ class Admin::ManageController < ApplicationController
       flash[:error] = t("global.permission_denied")
       redirect_to domain_url(:custom => @group.domain)
     end
+  end
+
+  def disable_close_group
+    flash[:error] = "This link has been closed."
+    redirect_to domain_url(:custom => @group.domain, :controller => "manage", :action => "properties")
   end
 end
