@@ -7,10 +7,10 @@
 @import "helper/items/editors"
 @import "helper/items/comments"
 
-form#ask_question>input#question_title
+
+#question_title.search_text
   background: white image-url('search-icon.png') 5px 50% no-repeat
   padding-left: 23px
-
 
 // TobBar
 .top-bar
@@ -21,6 +21,8 @@ form#ask_question>input#question_title
   position: fixed
   z-index: 1000
   +outer-shadow
+  border: solid 1px #e0e0e0
+  
   .warp
     max-width: 1020px
     margin: 0 auto
