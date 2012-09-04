@@ -22,7 +22,7 @@
     
       %ul.tag-list.clearfix{style: "margin-left:10px; padding:0"}
         - @question.tags.each do |tag|
-          %li
+          %li.tag
             = tag_link(tag)
         - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
           %li.retag
@@ -57,7 +57,7 @@
           = question_body    
                     
         = render "reward_info"
-        = render "attachments", question: @question, attachments: @question.attachments, editing: false
+        = render "attachments", question: @question, attachments: @question.attachments, editing: true
         
         %meta{itemprop: "keywords", content: @question.tags.join(",")}
         %meta{itemprop: "inLanguage", content: @question.language}
