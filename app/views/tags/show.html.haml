@@ -15,6 +15,7 @@
           = image_tag tag_icon_path(current_group,tag.name)
         %p
           = tag.description
+        %div{style: 'clear:both'}
 
   %section
     -if @questions.empty?

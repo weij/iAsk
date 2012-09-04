@@ -55,6 +55,8 @@ Questions = function() {
         $('.quick_question .search-feedback').text("type to search");
         $('.content-tabs').show();
       },
+    }).on('submit', function(){
+      return false;
     });
 
     $(".flag-link-index").live("click", function(event) {
@@ -131,10 +133,7 @@ Questions = function() {
         }
         $("label#rqlabel").show();
       }
-    });
-
-
-    $('form#ask_question').submit(function(){
+    }).on('submit', function(){
 			if($body.hasClass("new") || $body.hasClass("edit")){
 				if($('input#question_title', $(this)).val().length < 5){
 					alert("Your question title is too short");
@@ -143,6 +142,7 @@ Questions = function() {
 				if($('ul.chzn-choices > li', $(this)).size() < 2){
 				  	return window.confirm("Are you should not use a tag for your question?");
 				}
+				return true;
       }
       return true;
     });
