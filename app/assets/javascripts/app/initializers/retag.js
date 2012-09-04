@@ -2,7 +2,7 @@ $(document).ready(function() {
   $('.retag-link').live('click',function(){
     var link = $(this);
     link.parent('.retag').hide();
-    link.parents('.tag-list').find('.tag').hide();
+    link.parent('.retag').parent('.tag-list').find('.tag').hide();
     $.ajax({
       dataType: "json",
       type: "GET",
