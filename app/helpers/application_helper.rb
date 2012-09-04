@@ -19,6 +19,8 @@ module ApplicationHelper
         </script>".html_safe
     ad
   end
+  
+  
 
   def known_languages(user, group)
     return group.languages unless logged_in?
@@ -541,5 +543,9 @@ module ApplicationHelper
 
   def payment_form(title, options = {})
     render :partial => "invoices/form", :locals => {:opts => options.merge(:title => title)}
+  end
+  
+  def triangle_arrow(tab, icon)
+    " #{icon}" if @active_subtab.to_s == tab
   end
 end
