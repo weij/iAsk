@@ -38,6 +38,8 @@ Votes = function() {
       } else {
         var btn_name = $(this).attr("name");
         var form = $(this).parents("form");
+        var vote_button = $(this);
+        vote_button.attr("disabled", "disabled");
         $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
           if(data.success){
             form.find(".votes_average").text(data.average);
@@ -62,7 +64,9 @@ Votes = function() {
               window.location="/users/login";
             }
           }
-        }, "json");
+        }, "json").complete(function(){          
+          vote_button.removeAttr("disabled");
+        });
       }
       return false;
     });
