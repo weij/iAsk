@@ -28,6 +28,8 @@ describe GroupsController do
     end
   end
 
+#Because we banned all actions for group except index, show and join. All of the following rspec cases should not pass.
+=begin
   describe "GET 'new'" do
     it "should be successful" do
       get 'new'
@@ -154,4 +156,6 @@ describe GroupsController do
       get 'disconnect_twitter_group', :id => @group.id
     end
   end
+
+=end
 end
