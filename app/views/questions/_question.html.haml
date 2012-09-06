@@ -25,12 +25,12 @@
     .item-right
       .item-actions
         .votes.action
-          -if question.votes_count.to_i != 0
+          -if question.votes_average.to_i != 0
             .count
-              = question.votes_count
+              = question.votes_average
           -else
             .count.zero
-              = question.votes_count          
+              = question.votes_average          
           .title votes
         .answers.action
           -if question.answers_count.to_i > 0
