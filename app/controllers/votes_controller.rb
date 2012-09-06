@@ -16,6 +16,11 @@ class VotesController < ApplicationController
       vote_type = "vote_down"
       value = -1
     end
+    
+    puts "=========================================================="
+    puts "params => #{params}"
+    puts "value => #{value}"
+    puts "=========================================================="
 
     state = :error
     if validate_vote(value, current_user)
@@ -42,17 +47,17 @@ class VotesController < ApplicationController
 
     case state
     when :created
-      average+=1
+      average += value
       if @voteable.class == Question
         Jobs::Votes.async.on_vote_question(@voteable.id, value, current_user.id, current_group.id).commit!
       elsif @voteable.class == Answer
         Jobs::Votes.async.on_vote_answer(@voteable.id, value, current_user.id, current_group.id).commit!
       end
     when :destroyed
-      average-=1
       value = value * -1
+      average += value     
     when :updated
-      average+= value *2
+      average += value * 2
     end
 
     if state != :error

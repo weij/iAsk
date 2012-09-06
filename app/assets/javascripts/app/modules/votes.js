@@ -38,8 +38,8 @@ Votes = function() {
       } else {
         var btn_name = $(this).attr("name");
         var form = $(this).parents("form");
-        var vote_button = $(this);
-        vote_button.attr("disabled", "disabled");
+        var voters = form.find('button');
+        voters.attr("disabled", "disabled");
         $.post(form.attr("action")+'.js', form.serialize()+"&"+btn_name+"=1", function(data){
           if(data.success){
             form.find(".votes_average").text(data.average);
@@ -65,7 +65,7 @@ Votes = function() {
             }
           }
         }, "json").complete(function(){          
-          vote_button.removeAttr("disabled");
+          voters.removeAttr("disabled");
         });
       }
       return false;

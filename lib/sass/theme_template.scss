@@ -216,16 +216,24 @@ form.history {
         background-color: #f0f0f0;
         &:hover, &.checked {
           background-color: #a2c538 !important; } } } } }
-          
-          
+                    
           
 .main-question .main-sidebar-left > .question_vote_box, #answers-content-wrap > .answers-list > article.answer > .answer_vote_box {
   .vote_box.vote > button.disabled {
     &.disabled {
       background-color: #f0f0f0; 
       &:hover {
-        background-color: #f0f0f0 !important } } } }
-          
+        background-color: #f0f0f0 !important; } 
+      &.negative {
+          background-position: 5px -417px; }
+      &.positive {
+          background-position: 5px -434px; }
+      &.negative:hover {
+        background-position: 5px -417px; }
+      &.positive:hover {
+        background-position: 5px -434px; } } } }
+
+
 
 // Members
 //------------------------------------------------------------------------------
