@@ -186,9 +186,8 @@ class QuestionsController < ApplicationController
 
     @answer = Answer.new(params[:answer])
 
-    if @question.user != current_user && !is_bot?
-      @question.viewed!(request.remote_ip)
-
+    if @question.user != current_user && !is_bot?&&logged_in?
+      @question.viewed!(current_user)
       if (@question.views_count % 10) == 0
         sweep_question_views
       end

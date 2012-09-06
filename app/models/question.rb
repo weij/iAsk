@@ -192,8 +192,8 @@ class Question
     Question.search(question.title).where(opts).similar_to(question)
   end
 
-  def viewed!(ip)
-    view_count_id = "#{self.id}-#{ip}"
+  def viewed!(user)
+    view_count_id = "#{self.id}-#{user.id}"
     if ViewsCount.where({:_id => view_count_id}).first.nil?
       ViewsCount.create(:_id => view_count_id)
       self.inc(:views_count, 1)

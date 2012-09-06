@@ -105,7 +105,7 @@ class ApplicationController < ActionController::Base
     end    
     @active_subtab ||= (params[:sort] || "votes")
     @questions = Question.minimal.where(conditions.merge(extra_conditions)).order_by(current_order)
-
+    
     extra_scope.keys.each do |key|
       @questions = @questions.send(key, extra_scope[key])
     end
