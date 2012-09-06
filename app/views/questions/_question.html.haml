@@ -25,7 +25,7 @@
     .item-right
       .item-actions
         .votes.action
-          -if question.votes_count.to_i > 0
+          -if question.votes_count.to_i != 0
             .count
               = question.votes_count
           -else
