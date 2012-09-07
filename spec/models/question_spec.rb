@@ -128,14 +128,14 @@ describe Question do
     describe "Question#viewed!" do
       it "should increment the question's view count" do
         @question.views_count.should == 0
-        @question.viewed!("127.0.0.0")
+        @question.viewed!(@current_user)
         @question.views_count.should == 1
       end
 
       it "should not increment the question's view count" do
-        @question.viewed!("127.0.0.0")
+        @question.viewed!(@current_user)
         @question.views_count.should == 1
-        @question.viewed!("127.0.0.0")
+        @question.viewed!(@current_user)
         @question.views_count.should == 1
       end
     end
