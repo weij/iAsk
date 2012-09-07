@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_questions(extra_conditions = {}, extra_scope = { })
-    if params[:language] || request.query_string =~ /tags=/
+    if params[:language] && request.query_string =~ /tags=/
       params.delete(:language)
       head :moved_permanently, :location => url_for(params)
       return
@@ -104,6 +104,12 @@ class ApplicationController < ActionController::Base
       @active_tab = "answers"
     end    
     @active_subtab ||= (params[:sort] || "votes")
+
+    if params[:tags]
+      @current_tags = @tag_names = params[:tags].split("|")
+      conditions[:tags] = {:$all => @tag_names}
+    end
+
     @questions = Question.minimal.where(conditions.merge(extra_conditions)).order_by(current_order)
     
     extra_scope.keys.each do |key|

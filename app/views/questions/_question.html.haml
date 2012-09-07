@@ -17,10 +17,12 @@
           = link_to t('.wiki_title', :title => title), question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
         -else
           = link_to title, question_path(question), :title => truncate(strip_tags(question.body), :length => 200)
-      %ul.tag-list.clearfix
+      %ul.tag-list.clearfix       
         - question.tags.each do |tag|
+          - tags = current_tags | [tag]
           %li
-            = tag_link(tag)
+            = link_to tag, raw(questions_url(:tags =>  tags.map{|t| CGI.escape(t)}.join("|")))
+
             
     .item-right
       .item-actions
