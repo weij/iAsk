@@ -14,7 +14,7 @@ en:
     index:
       title: All questions
       hot:     Hot
-      active:  Active
+      active:  Activity
       votes:   Votes
       newest:  Newest
       answers: Answers

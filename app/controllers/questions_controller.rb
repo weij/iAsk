@@ -14,7 +14,8 @@ class QuestionsController < ApplicationController
        :new => :ask_question
 
   subtabs :index => [[:newest, [:created_at, Mongo::DESCENDING]],
-                     [:votes, [:votes_average, Mongo::DESCENDING]],
+                     [:votes, [[:votes_average, Mongo::DESCENDING],
+                               [:views_count, Mongo::DESCENDING]]],
                      [:activity, [:last_target_date, :desc]],
                      [:hot, [[:hotness, Mongo::DESCENDING],
                              [:views_count, Mongo::DESCENDING]]],
