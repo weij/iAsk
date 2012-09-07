@@ -26,7 +26,7 @@
         = render "answers/answer", :question => question, :answer => answer if answer
 
   -else
-    -cache_for(:questions, current_order.to_s, params[:page].to_i, params[:per_page].to_i, @languages.sort, params[:unanswered] ? "unanswered" : "" ) do
+    -cache_for(:questions, current_order.to_s, params[:page].to_i, params[:per_page].to_i, params[:tags] ? params[:tags] : "", @languages.sort, params[:unanswered] ? "unanswered" : "" ) do
       /Questions
       -@questions.each do |question|
         = render "questions/question", :handers => [:haml], :question => question
