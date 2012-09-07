@@ -16,11 +16,6 @@ class VotesController < ApplicationController
       vote_type = "vote_down"
       value = -1
     end
-    
-    puts "=========================================================="
-    puts "params => #{params}"
-    puts "value => #{value}"
-    puts "=========================================================="
 
     state = :error
     if validate_vote(value, current_user)
