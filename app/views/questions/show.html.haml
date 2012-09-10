@@ -31,29 +31,28 @@
       .clear{style: "clear:both; border-top:1px solid #efefef; margin-left:15px;"}
 
       .description.markdown.clearfix
-        %div{itemprop: "articleBody"}
-          .activity-info        
-            .author
-              %small
+        .activity-info   
+          .author
+            .avatar_left
+              = avatar_img(@question.user, :size => "small") unless @question.user && @question.anonymous
+            .user_info
+              %span
+                = t('activerecord.attributes.question.asked_by')
+              = render "users/user_mini", user: @question.user, author: true
+              %time{datetime: @question.created_at.iso8601, itemprop: "datePublished"}
+                = t("time.ago", time: time_ago_in_words(@question.created_at))
+          .author             
+            - if @question.last_target_user
+              .avatar_left
+                = avatar_img(@question.last_target_user, :size => "small") unless @question.last_target_user && @question.anonymous
+              .user_info
                 %span
-                  = t('activerecord.attributes.question.asked_by')
-                = render "users/user_mini", user: @question.user, author: true
-                %time{datetime: @question.created_at.iso8601, itemprop: "datePublished"}
-                  = t("time.ago", time: time_ago_in_words(@question.created_at))
-                - if @question.updated_by
-                  <br />
                   = t('global.updated_by')
-                  = render "users/user_mini", user: @question.updated_by
-
-                  %time{datetime: @question.updated_at.iso8601, itemprop: "dateModified"}
-                    = link_to t("time.ago", time: time_ago_in_words(@question.updated_at)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
-                - if @question.last_target_user
-                  <br />
-                  = t('global.edited_by')
-                  = render "users/user_mini", user: @question.last_target_user
-                  %time{datetime: @question.last_target_date.iso8601, itemprop: "dateModified"}
-                    = link_to t("time.ago", time: time_ago_in_words(@question.last_target_date)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
+                = render "users/user_mini", user: @question.last_target_user
+                %time{datetime: @question.last_target_date.iso8601, itemprop: "dateModified"}
+                  = link_to t("time.ago", time: time_ago_in_words(@question.last_target_date)), history_question_path(@question), title: "#{t("questions.show.history")} (#{@question.versions_count})"
                     
+        .question_body{itemprop: "articleBody"}
           = question_body    
                     
         = render "reward_info"

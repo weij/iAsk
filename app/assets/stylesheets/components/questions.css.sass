@@ -2,50 +2,48 @@
 
 //Index
 article.Question.accepted
-  border-left: 5px solid #A2C538
+  border-left: 1px solid #A2C538
+  
+
+.activity-info
+  float: right
+  width: 250px
+  margin-top: 10px
+  padding: 6px
+  border-radius: 5px
+  background-color: #efefef
+  clear: right        
+  .author
+    clear: both
+    .avatar_left
+      float: left
+      margin-right: 5px
+    .user_info
+      font-size: 10px
+      padding-top: 8px
 
 
 // Main Question
-.main-question
-  width: 100%
+.main-question, article.answer
+  padding: 15px 0 5px 0
   .main-sidebar-left
     float: left
-    .question_vote_box
+    .question_vote_box, .answer_vote_box
       margin: 0 10px 0 10px
-      
   .main-content
     float: left
     padding: 0
-    width: 90%
+    width: 93%
     h1
       font-size: 25px
-      margin: 0px 15px 0px 15px
+      margin: 0px 15px 0px 13px
       &:first-letter
-        text-transform: uppercase
+        text-transform: uppercase 
+    .question_body, .answer_body
+      padding-left: 13px
       
-    .description
-      margin: 0px 15px 5px 15px
-      .activity-info
-        float: right
-        width: 250px
-        padding: 6px 0
-        margin: 0
-        magin: 0
-        border-radius: 5px
-        background-color: #efefef
-        clear: right
-  
-
-  .author
-    margin: 0px 15px 5px 15px
-    p
-      margin: 0px
-
-
-
   .toolbar
-    margin: 0 15px 10px 15px
-
+    margin: 0 5px 10px 15px
     .menubar
       a
         padding-left: 22px
@@ -133,6 +131,7 @@ article.Question.accepted
         background-position: 5px -767px !important
         &:hover, .add_reward:hover a
           background-position: 5px -787px !important
+          
 
 // Main Question - Answers
 #answers-content-wrap
