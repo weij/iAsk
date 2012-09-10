@@ -63,6 +63,9 @@ class QuestionsController < ApplicationController
         find_questions(:tags => {:$in => tags})
       when 'contributed'
         find_questions(:contributor_ids.in => [current_user.id])
+      when /tags\:([^\s]*)/
+        @current_tags = @tag_names = tags = $1.split("+") unless $1.empty?
+        find_questions           
       else
         session.delete :filter
         find_questions

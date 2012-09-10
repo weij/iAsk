@@ -53,50 +53,7 @@ header
       .search-feedback
         float: right
 
-//NAVIGATION
-ul.content-tabs
-  zoom: 1
-  width: 100%
-  &:before, &:after
-    display: table
-    content: ""
-  &:after
-    clear: both
-  li
-    display: inline
-    a
-      float: left
-      width: auto
-      padding: 0 15px 0 36px
-      display: block
-      line-height: 35px
-      text-transform: uppercase
-      font-size: $s
-      background-position: 7px 50%
-      background-repeat: no-repeat
 
-    &.questions a
-      background-image: image-url('q-icon-medium.png')
-    &.answers a
-      background-image: image-url('ans-icon-medium.png')
-    &.unanswered a
-      background-image: image-url('noans-icon-medium.png')
-    &.activities 
-      float: right
-      a
-        background-image: image-url('activity-iacon.png')
-    &.badges 
-      float: right
-      a
-        background-image: image-url('ribbon-medium.png')
-    &.users 
-      float: right
-      a
-        background-image: image-url('user-medium.png')
-    &.tags 
-      float: right
-      a
-        background-image: image-url('tags-medium.png')
 
 // FILTERS
 .filters
@@ -165,36 +122,8 @@ footer
     font-size: 12px
     a:hover
       border-bottom: 1px dotted
-
-// WIDGETS
-
-ul.content-tabs
-  li.ask-question
-    clear: both
-    text-align: center
-    margin-top: 15px
-    a
-      background-color: #D1E2E5
-      background-image: -moz-linear-gradient(center top , #D1E2E5, #D1E2E5 25%, #A9C2C7)
-      background-repeat: no-repeat
-      border-radius: 5px 5px 5px 5px
-      border-top: 1px solid #EAF2F3
-      box-shadow: 1px 1px 2px #636363
-      color: #4A757F
-      cursor: pointer
-      display: block
-      font-family: 'Open Sans Condensed',Arial,sans-serif
-      font-size: 20px
-      height: 42px
-      line-height: 45px
-      margin-top: -40px
-      margin-left: 757px
-      text-align: center
-      text-decoration: none
-      text-shadow: 0 1px 0 #C6D9DD
-      text-transform: uppercase
-      width: 150px
-
+      
+      
 
 .footer-widgets
   max-width: 1000px
@@ -204,3 +133,79 @@ ul.content-tabs
 .header-widgets
   float: left
   width: 860px
+
+// WIDGETS
+
+.ask-question
+  float: right
+  width: 198px
+  padding: 8px 0 5px
+  a.ask-button
+    background-color: #D1E2E5
+    background-image: -moz-linear-gradient(center top , #D1E2E5, #D1E2E5 25%, #A9C2C7)
+    background-repeat: no-repeat
+    border-radius: 5px 5px 5px 5px
+    border-top: 1px solid #EAF2F3
+    box-shadow: 1px 1px 2px #636363
+    color: #4A757F
+    cursor: pointer
+    font-family: 'Open Sans Condensed',Arial,sans-serif
+    font-size: 20px
+    height: 40px
+    line-height: 40px
+    text-align: center
+    text-decoration: none
+    text-shadow: 0 1px 0 #C6D9DD
+    text-transform: uppercase
+    width: 180px
+    display: block
+    
+    
+
+  
+  
+//NAVIGATION
+ul.content-tabs
+  zoom: 1
+  width: 100%
+  float:left
+  &:before, &:after
+    display: table
+    content: ""
+  &:after
+    clear: both
+  li
+    display: inline
+    a
+      float: left
+      width: auto
+      padding: 0 15px 0 36px
+      display: block
+      line-height: 35px
+      text-transform: uppercase
+      font-size: $s
+      background-position: 7px 50%
+      background-repeat: no-repeat
+
+    &.questions a
+      background-image: image-url('q-icon-medium.png')
+    &.answers a
+      background-image: image-url('ans-icon-medium.png')
+    &.unanswered a
+      background-image: image-url('noans-icon-medium.png')
+    &.activities 
+      float: right
+      a
+        background-image: image-url('activity-iacon.png')
+    &.badges 
+      float: right
+      a
+        background-image: image-url('ribbon-medium.png')
+    &.users 
+      float: right
+      a
+        background-image: image-url('user-medium.png')
+    &.tags 
+      float: right
+      a
+        background-image: image-url('tags-medium.png')
