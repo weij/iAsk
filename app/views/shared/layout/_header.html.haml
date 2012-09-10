@@ -9,17 +9,17 @@
           = markdown(announcement.message)
       = link_to t('scaffold.close'), hide_announcements_path, :id => "hide_announcement"
 
-  -if !(params[:controller] =~ /moderate\//)
-    - questions_link =  questions_link_for(params[:context])
-    = render "shared/content-nav", :questions_link => questions_link
+  /-if !(params[:controller] =~ /moderate\//)
+  /  - questions_link =  questions_link_for(params[:context])
+  /  = render "shared/content-nav", :questions_link => questions_link
 
-  .title.clearfix
-    -cc = yield :header
-    -if !cc.blank?
-      = cc
-    -else
-      -if !(params[:controller] =~ /moderate\//)
-        = render "shared/quick_question_box"
+  /.title.clearfix
+  /  -cc = yield :header
+  /  -if !cc.blank?
+  /    = cc
+  /  -else
+  /    -if !(params[:controller] =~ /moderate\//)
+  /      = render "shared/quick_question_box"
 
   %nav
     .filters.clearfix.clearfix{:class => @active_subtab, style: "background-color:#efefff; border-radius:5px; border:none; margin-bottom:20px" }

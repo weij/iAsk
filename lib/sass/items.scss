@@ -58,7 +58,7 @@ $dark_topbar_color: $topbar_color;
   ul.menubar {
     .active: darken($view_bg_color, 70%);
     #notification-counter {
-      border-left: 1px solid darken($topbar_color, 20%);
+      border-left: 0 solid darken($topbar_color, 20%);
     }
     &>li {
       &:hover small, &:hover a small, a:hover small {
@@ -106,7 +106,8 @@ ul.content-tabs {
 .tags-controller ul.content-tabs li.tags a,
 .activities-controller ul.content-tabs li.activities a {
   background-color: $light_brand_color;
-  color: $fg_light_brand_color; }
+  color: $fg_light_brand_color; 
+  margin-top: 10px;}
 
 //FILTERS BAR
 .filters {
