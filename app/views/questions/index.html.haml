@@ -2,19 +2,18 @@
 
 - content_for :nav_filters do
   = render "questions/nav_filters", :questions_link => questions_link
-
-
+  
 .questions-tags
-  .questions-tags-title
-    - if !self.current_tags.empty?
-      = "Tagged"
-    - self.current_tags.each do |tag|
-      %span.tag{:class => "questions-tags-element"}
-        %span.tag.tag-left
-          = tag
-        %span.delete-icon
-          - tags = (self.current_tags - [tag])
+  - if !current_tags.empty?
+    .title Tagged
+    .tags
+      - current_tags.each do |tag|
+        .tag
+          .tag-left
+            = tag
+          - tags = (current_tags - [tag])
           = link_to "X" , tags_url + ":" + tags.join("+"), :class => "remove_tag"
+          .clear{style: "clear:both"}
 
 %section.questions-index
   = render 'shared/posts'
