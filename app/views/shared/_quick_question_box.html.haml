@@ -1,5 +1,5 @@
 - unless params[:controller] == 'questions' && params[:action] == 'new'
-  .quick_question.clearfix
+  .quick_question{style: "display:inline-block"}
     -quick_question = Question.new
     =form_for(quick_question, url: new_question_url, html: {method: :get, class: "form", id: "ask_question", data: {'login-required' => true}}) do |f|
       -# TODO: refactor this
