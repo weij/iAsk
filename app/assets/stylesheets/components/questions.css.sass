@@ -2,50 +2,48 @@
 
 //Index
 article.Question.accepted
-  border-left: 5px solid #A2C538
+  border-left: 1px solid #A2C538
+  
+
+.activity-info
+  float: right
+  width: 250px
+  margin-top: 10px
+  padding: 6px
+  border-radius: 5px
+  background-color: #efefef
+  clear: right        
+  .author
+    clear: both
+    .avatar_left
+      float: left
+      margin-right: 5px
+    .user_info
+      font-size: 10px
+      padding-top: 8px
 
 
 // Main Question
-.main-question
-  width: 100%
+.main-question, article.answer
+  padding: 15px 0 5px 0
   .main-sidebar-left
     float: left
-    .question_vote_box
+    .question_vote_box, .answer_vote_box
       margin: 0 10px 0 10px
-      
   .main-content
     float: left
     padding: 0
-    width: 90%
+    width: 93%
     h1
       font-size: 25px
-      margin: 0px 15px 0px 15px
+      margin: 0px 15px 0px 13px
       &:first-letter
-        text-transform: uppercase
+        text-transform: uppercase 
+    .question_body, .answer_body
+      padding-left: 13px
       
-    .description
-      margin: 0px 15px 5px 15px
-      .activity-info
-        float: right
-        width: 250px
-        padding: 6px 0
-        margin: 0
-        magin: 0
-        border-radius: 5px
-        background-color: #efefef
-        clear: right
-  
-
-  .author
-    margin: 0px 15px 5px 15px
-    p
-      margin: 0px
-
-
-
   .toolbar
-    margin: 0 15px 10px 15px
-
+    margin: 0 5px 10px 15px
     .menubar
       a
         padding-left: 22px
@@ -133,6 +131,7 @@ article.Question.accepted
         background-position: 5px -767px !important
         &:hover, .add_reward:hover a
           background-position: 5px -787px !important
+          
 
 // Main Question - Answers
 #answers-content-wrap
@@ -272,17 +271,66 @@ article.Question.accepted
   .questions-tags-title
     padding: 5px
     margin: -15px 10px 5px 10px
-    font-size: 20px
-    color: rgb(112,112,112)
+    font-size: 16px
+    font-weight: 550
+    color: #707070
     font-family: 'Open Sans Condensed',Arial,sans-serif
-    font-weight: 900
-    .questions-tags-element
-      font-size: 16px
-      padding: 3px 5px
-      margin: 0px 10px 0px 10px
-      box-shadow: 0pt 0pt 5px rgb(211, 214, 215)
-      background: none repeat scroll 0% 0% rgb(243, 246, 246)
-      border-width: rgb(255, 255, 255)
-      border-style: solid
-      border-color: rgb(255, 255, 255)
-      color: rgb(88, 88, 88)
+    //line-height: 150%
+    .questions-tags-element.tag
+      padding: 3px
+      margin-right: 3px
+      white-space: nowrap
+      border-top-right-radius: 4px
+      border-bottom-right-radius: 4px
+      -moz-border-radius-topright: 4px
+      -moz-border-radius-bottomright: 4px
+      -webkit-border-bottom-right-radius: 4px
+      -webkit-border-top-right-radius: 4px
+      .tag.tag-left
+        background: #f3f6f6
+        border: #fff 1px solid 
+        border-top: #fff 2px solid
+        outline: #cfdbdb 1px solid
+        /* .box-shadow(0px,1px,0px,#88a8a8);*/
+
+        //display: inline-block
+        //float: left
+        height: 23px
+        line-height: 20px
+        font-weight: normal
+        font-size: 16px
+        padding: 0px 0px 0px 8px
+        text-decoration: none
+        text-align: center
+        white-space: nowrap
+        vertical-align: middle
+        font-family: Arial
+        color: #717179
+      .remove_tag
+        margin-top: -1px
+        //float: none
+        height: 23px
+        width: 18px
+        display: inline-block
+        line-height: 20px
+        text-align: center
+        background: #bbcdcd
+        //cursor: default
+        color: #fff
+        border-top: #cfdbdb 1px solid
+        font-family: Arial
+        border-top-right-radius: 4px
+        border-bottom-right-radius: 4px
+        -moz-border-radius-topright: 4px
+        -moz-border-radius-bottomright: 4px
+        -webkit-border-bottom-right-radius: 4px
+        -webkit-border-top-right-radius: 4px
+        text-shadow: 0px 1px 0px #7ea0a0
+        -moz-text-shadow: 0px 1px 0px #7ea0a0
+        -webkit-text-shadow: 0px 1px 0px #7ea0a0
+        margin: 0pt auto
+        padding: 0px
+        white-space: nowrap
+        list-style: none outside none
+        font-size: 16px
+
