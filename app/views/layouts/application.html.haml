@@ -8,6 +8,11 @@
       %p=link_to "Feedback", feedback_path
     = render_app_config
     = render :partial => "shared/topbar"
+    %div{style: "margin-top:40px;height:50px;background-color: #E9E9E1;"}
+      %div{style: "width:958px;margin: 0 auto 0; "}
+        -if !(params[:controller] =~ /moderate\//)
+          - questions_link =  questions_link_for(params[:context])
+          = render "shared/content-nav", :questions_link => questions_link
     #container{:class => @current_class}
       = show_flash_messages(:class => "flash", :markdown => true)
       #columns
