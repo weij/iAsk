@@ -118,7 +118,8 @@ Rails.application.routes.draw do
       get :related_questions
       get :random
 
-      match '/:filter' => 'questions#index', :as => :filtered, :constraints => { :filter => /all|unanswered|by_me|feed|preferred|contributed|expertise/ }
+      match '/:filter' => 'questions#index', :as => :filtered, 
+        :constraints => { :filter => /all|unanswered|by_me|feed|preferred|contributed|tags\:(.*)|expertise/ }
     end
 
     member do

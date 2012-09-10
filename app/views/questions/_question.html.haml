@@ -21,7 +21,7 @@
         - question.tags.each do |tag|
           - tags = current_tags | [tag]
           %li
-            = link_to tag, raw(questions_url(:tags =>  tags.map{|t| CGI.escape(t)}.join("|")))
+            = link_to tag, tags_path + ":" + tags.join("+")
             
     .item-right
       .item-actions
