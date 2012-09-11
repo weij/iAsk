@@ -1,12 +1,11 @@
-%nav.content-nav{style: "margin:40px auto 0 auto; width:958px"}
+%nav.content-nav
   %ul.content-tabs
-    %li.questions
+    %li.questions<
       = link_to t('layouts.application.all'), url_for(questions_link)
-    %li.unanswered
+    %li.unanswered><
       = link_to t('layouts.application.unanswered'), url_for(questions_link.merge(:unanswered => 1))
-    %li
-      = render "shared/quick_question_box"
-    .ask-question  
-      = link_to "ASK QUESTION", new_question_path, class: 'ask-button'
+  = render "shared/quick_question_box"
+  .ask-question  
+    = link_to "ASK QUESTION", new_question_path, class: 'ask-button'
     
   .clear{style: "clear:both; width: 100%;"}

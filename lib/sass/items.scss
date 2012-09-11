@@ -87,29 +87,6 @@ $dark_topbar_color: $topbar_color;
   .signin-dropdown {
     border-left: 1px solid darken($topbar_color, 20%); } }
 
-//NAVIGATION
-ul.content-tabs {
-  border-bottom: 1px solid $border_color;
-  li {
-    a {
-      color: $fg_color;
-      border-right: 1px solid $border_color;
-      margin-top: 10px;
-      background-color: #FFFFFF;
-      &:hover {
-        background-color: $light_brand_color;
-        color: $fg_light_brand_color; } } } }
-
-.questions-controller ul.content-tabs li.questions a,
-.questions-controller ul.content-tabs li.all a,
-.questions-controller ul.content-tabs li.unanswered a,
-.badges-controller ul.content-tabs li.badges a,
-.users-controller ul.content-tabs li.users a,
-.tags-controller ul.content-tabs li.tags a,
-.activities-controller ul.content-tabs li.activities a {
-  background-color: $light_brand_color;
-  color: $fg_light_brand_color; 
-  margin-top: 10px;}
 
 //FILTERS BAR
 .filters {
