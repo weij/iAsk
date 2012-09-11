@@ -40,8 +40,8 @@ zh-CN:
       language_tip: 选择在问这个问题是的语言。
       tags_tip: 使用标记来添加有关您的问题的详细信息。
     index: 
-      active: 活动
-      active_tooltip: 最近已更新的问题
+      activity: 活动
+      activity_tooltip: 最近已更新的问题
       ask_question: 问的问题
       empty: 但没人问过任何问题。是第一次 ！
       help_to_answer: 帮助我们回答

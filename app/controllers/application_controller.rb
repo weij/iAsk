@@ -83,7 +83,8 @@ class ApplicationController < ActionController::Base
     @current_group
   end
 
-  def find_questions(extra_conditions = {}, extra_scope = { })
+
+  def find_questions(extra_conditions = {}, extra_scope = {})
     if params[:language] && request.query_string =~ /tags=/
       params.delete(:language)
       head :moved_permanently, :location => url_for(params)

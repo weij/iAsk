@@ -16,13 +16,16 @@ class QuestionsController < ApplicationController
   subtabs :index => [[:newest, [:created_at, Mongo::DESCENDING]],
                      [:votes, [[:votes_average, Mongo::DESCENDING],
                                [:views_count, Mongo::DESCENDING]]],
-                     [:activity, [:last_target_date, :desc]],
+                     [:activity, [:last_target_date, Mongo::DESCENDING]],
                      [:hot, [[:hotness, Mongo::DESCENDING],
                              [:views_count, Mongo::DESCENDING]]],
                      [:followers, [:followers_count, Mongo::DESCENDING]],
                      [:answers, [:answers_count, Mongo::DESCENDING]],
                      [:expert, [:created_at, Mongo::DESCENDING]]],
-          :show => [[:votes, [:votes_average, Mongo::DESCENDING]], [:oldest, [:created_at, Mongo::ASCENDING]], [:newest, [:created_at, Mongo::DESCENDING]]]
+          :show => [[:votes, [:votes_average, Mongo::DESCENDING]], 
+                    [:oldest, [:created_at, Mongo::ASCENDING]], 
+                    [:newest, [:created_at, Mongo::DESCENDING]]]
+  
   helper :votes
 
   # GET /questions
