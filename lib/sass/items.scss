@@ -94,6 +94,8 @@ ul.content-tabs {
     a {
       color: $fg_color;
       border-right: 1px solid $border_color;
+      margin-top: 10px;
+      background-color: #FFFFFF;
       &:hover {
         background-color: $light_brand_color;
         color: $fg_light_brand_color; } } } }
