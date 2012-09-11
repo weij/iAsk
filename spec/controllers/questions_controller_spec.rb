@@ -17,6 +17,18 @@ describe QuestionsController do
     end
   end
 
+  describe "Filter tags" do
+    before (:each) do
+      @question_one = Fabricate(:question, :tags => ["x", "y"])
+      @question_two = Fabricate(:question, :tags => ["y", "z"])
+    end
+
+    it "should be successful" do
+      put 'index', :tags => ["x"]
+      response.should be_success
+    end
+  end
+
   describe "GET 'history'" do
     before (:each) do
       @question = Fabricate(:question)
