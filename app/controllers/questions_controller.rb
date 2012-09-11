@@ -16,7 +16,9 @@ class QuestionsController < ApplicationController
   subtabs :index => [[:newest, [:created_at, Mongo::DESCENDING]],
                      [:votes, [[:votes_average, Mongo::DESCENDING],
                                [:views_count, Mongo::DESCENDING]]],
-                     [:activity, [:last_target_date, Mongo::DESCENDING]],
+                     [:activity, [[:last_target_date, Mongo::DESCENDING], 
+                                  [:updated_at, Mongo::DESCENDING], 
+                                  [:activity_at, Mongo::DESCENDING]]],
                      [:hot, [[:hotness, Mongo::DESCENDING],
                              [:views_count, Mongo::DESCENDING]]],
                      [:followers, [:followers_count, Mongo::DESCENDING]],
@@ -298,7 +300,9 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if (logged_in? ||  (@question.user.valid? && recaptcha_valid?)) && @question.save
         @question.add_contributor(@question.user)
-
+        #TODO Fix the activity issue.
+        @question.update_last_target    
+        
         sweep_question_views
         html = nil
         if params[:facebook]

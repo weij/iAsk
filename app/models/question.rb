@@ -252,8 +252,7 @@ class Question
   end
 
   def update_activity_at
-    self[:subjetive] = self.tags.include?(I18n.t("global.subjetive", :default =>
-"subjetive"))
+    self[:subjetive] = self.tags.include?(I18n.t("global.subjetive", :default => "subjetive"))
 
     now = Time.now
     if new_record?
