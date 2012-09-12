@@ -19,6 +19,10 @@
       = multiauth_dropdown("Sign In")
     -elsif current_group.is_member?(current_user)
       %ul.user-list.menubar
+        = render "notifications/notifications_menu"
+        = render "users/top_user"
+        
+      %ul.content-tabs.menubar
         -if !current_group.isolate
           = render "groups/top_grouplist"
         %li.activities
@@ -29,8 +33,7 @@
           =link_to t('layouts.application.users'), users_path
         %li.badges
           = link_to t('layouts.application.badges'), badges_path, :"data-layout" => "badges", :rel => 'nofollow'
-        = render "notifications/notifications_menu"
-        = render "users/top_user"
+
     -else
       %ul.user-list.menubar.not_member
         %li

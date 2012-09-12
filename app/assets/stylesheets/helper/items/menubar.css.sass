@@ -105,6 +105,17 @@ li.sfHover > a > .sf-sub-indicator
 
 // HEADER - dropdowns for groups, user link, and admin/moderate
 //-------------------------------------------------------------------------------------------------------------------
+
+.questions-controller ul.content-tabs li.questions a, 
+.questions-controller ul.content-tabs li.all a,
+.questions-controller ul.content-tabs li.ununanswered a,  
+.badges-controller ul.content-tabs li.badges a, 
+.users-controller ul.content-tabs li.users a, 
+.tags-controller ul.content-tabs li.tags a, 
+.activities-controller ul.content-tabs li.activities a 
+  background-color: #D1E2E5
+  color: #666666
+  
 .top-bar
   .menubar
     float: left
@@ -133,6 +144,9 @@ li.sfHover > a > .sf-sub-indicator
         border: 0
         &.sf-with-ul
           padding-right: 30px
+          
+  ul.content-tabs
+    float: right
 
   ul.user-list
     float: right
@@ -164,6 +178,7 @@ li.sfHover > a > .sf-sub-indicator
           .warp
             padding: 5px
           cursor: auto
+          
 
 .index .toolbar .dropHover  ul,
 .main-question .toolbar .dropHover ul

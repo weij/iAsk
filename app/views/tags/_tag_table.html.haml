@@ -1,11 +1,11 @@
-%table.tag-list{:style => "width: 100%"}
+%table.tag-list
   = tag_table.each_slice(4) do |tags|
     %tr
       - tags.each do |tag|
-        %td{:style => "line-height:15px;"}
-          %div.tag{:class => "tag_#{tag.name}", style: "float:left"}
+        %td
+          %div.tag{:class => "tag_#{tag.name}"}
             = tag_link(tag)
-          %div.tag-number{style: "margin-left:5px;"}
+          %div.tag-number
             x
             = tag.count.to_i
 #additional_info

@@ -1,11 +1,10 @@
 - user = membership.user
-%li{style:"border:none;"}
-  / User Summary
-  .summary
-    = avatar_img(user, :size => "small")
-    = link_to h(user.display_name), user_path(user), :class => "pjax", :"data-layout" => "user"
-    .counter{:class => class_for_number(membership.reputation) }
-      =format_number(user.reputation_on(current_group))
-    .badges
-      -user.badges_on(current_group, :limit => 3).each do |badge|
-        =render :partial => "badges/badge", :object => badge, :locals => {:mini => true}
+/ User Summary
+.summary
+  = avatar_img(user, :size => "small")
+  = link_to h(user.display_name), user_path(user), :class => "pjax", :"data-layout" => "user"
+  .counter{:class => class_for_number(membership.reputation) }
+    =format_number(user.reputation_on(current_group))
+  .badges
+    -user.badges_on(current_group, :limit => 3).each do |badge|
+      =render :partial => "badges/badge", :object => badge, :locals => {:mini => true}

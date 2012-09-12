@@ -26,12 +26,12 @@
         = link_to t(".near"), users_path(:sort=>"near"), :title => t(".near_tooltip")
 
   /Users
-  %ul.items#users
-    %table
-      -@memberships.each_slice(6) do |tr_memberships|
-        %tr
-          -tr_memberships.each do |membership|
-            %td  
-              = render :partial => "membership", :object => membership
+  %table.items#users
+    -@memberships.each_slice(6) do |tr_memberships|
+      %tr
+        -(0..5).each do |i|
+          %td
+            = render :partial => "membership", :object => tr_memberships[i] if tr_memberships[i]
+       
 
   = paginate @memberships
