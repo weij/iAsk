@@ -22,13 +22,13 @@
         -if !current_group.isolate
           = render "groups/top_grouplist"
         %li.activities
-          = pjax_link_to t('activerecord.models.activity'), "index", activities_path('context' => (params[:context]||params[:action])), :rel => 'nofollow'
+          = link_to t('activerecord.models.activity'), activities_path('context' => (params[:context]||params[:action])), :rel => 'nofollow'
         %li.tags
-          = link_to t('layouts.application.tags'), tags_path, :class => "pjax", :"data-layout" => "tags"
+          = link_to t('layouts.application.tags'), tags_path, :"data-layout" => "tags"
         %li.users
           =link_to t('layouts.application.users'), users_path
         %li.badges
-          = link_to t('layouts.application.badges'), badges_path, :class => "pjax", :"data-layout" => "badges", :rel => 'nofollow'
+          = link_to t('layouts.application.badges'), badges_path, :"data-layout" => "badges", :rel => 'nofollow'
         = render "notifications/notifications_menu"
         = render "users/top_user"
     -else

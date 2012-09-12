@@ -14,10 +14,12 @@ Questions = function() {
   }
 
   function initializeOnIndex($body) {
-		if(window.location.search.indexOf("unanswered") == -1){
-			$('ul.content-tabs li.unanswered a').css("background-color", "#ffffff");			
+		if(window.location.search.indexOf("unanswered") == 1){
+			$('ul.content-tabs li.unanswered a').css("background-color", "#D1E2E5");
+      $('ul.content-tabs li.questions a').css("background-color", "#ffffff");			
 		}else{
-			$('ul.content-tabs li.questions a').css("background-color", "#ffffff");			
+      $('ul.content-tabs li.unanswered a').css("background-color", "#ffffff");
+			$('ul.content-tabs li.questions a').css("background-color", "#D1E2E5");			
 		}
 		
     Ui.navigateShortcuts($(".questions-index"), ".Question");
