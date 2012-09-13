@@ -1,7 +1,8 @@
 
 %section.clearfix.filters{:class => @active_subtab }
-  %ul
-    %header Filter:
+  .moderate
+    .header 
+      Filter:
     %li.retag
       = link_to t(".retag"), moderate_questions_path, :title => t(".retag_tooltip")
     %li.flagged
