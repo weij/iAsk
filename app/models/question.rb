@@ -193,10 +193,12 @@ class Question
   end
 
   def viewed!(user)
-    view_count_id = "#{self.id}-#{user.id}"
-    if ViewsCount.where({:_id => view_count_id}).first.nil?
-      ViewsCount.create(:_id => view_count_id)
-      self.inc(:views_count, 1)
+    if user
+      view_count_id = "#{self.id}-#{user.id}"
+      if ViewsCount.where({:_id => view_count_id}).first.nil?
+        ViewsCount.create(:_id => view_count_id)
+        self.inc(:views_count, 1)
+      end
     end
   end
 

@@ -138,6 +138,14 @@ describe Question do
         @question.viewed!(@current_user)
         @question.views_count.should == 1
       end
+
+      it "should not increment the question's view count without logging in" do
+        @question.views_count.should == 0
+        @current_user = nil
+        @question.viewed!(@current_user)
+        @question.views_count.should == 0
+      end
+
     end
 
     describe "Question#answer_added!" do
