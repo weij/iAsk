@@ -26,7 +26,11 @@
         = render "answers/answer", :question => question, :answer => answer if answer
 
   -else
-    -cache_for(:questions, current_order.to_s, params[:page].to_i, params[:per_page].to_i, params[:filter] ? params[:filter] : "", @languages.sort, (params[:unanswered] == 1 || session[:unanswered]) ? "unanswered" : "") do
+    -unanswered_key = (params[:unanswered] == 1 || session[:unanswered]) ? "unanswered" : ""
+    -puts "========================================================================"
+    -puts "===============================#{unanswered_key}========================================="
+    -puts "========================================================================"
+    -cache_for(:questions, current_order.to_s, params[:page].to_i, params[:per_page].to_i, params[:filter] ? params[:filter] : "", @languages.sort, unanswered_key) do
       /Questions
       -@questions.each do |question|
         = render "questions/question", :handers => [:haml], :question => question
