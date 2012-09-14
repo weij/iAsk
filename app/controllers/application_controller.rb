@@ -98,9 +98,12 @@ class ApplicationController < ActionController::Base
     end
 
     @active_tab = "questions"
-    if params[:unanswered]
+    if params[:unanswered] == '0'
+      session.delete :unanswered
+    elsif params[:unanswered] == '1' || session[:unanswered] == 'on'    
       conditions[:answered_with_id] = nil
       @active_tab = "unanswered"
+      session[:unanswered] = "on"
     elsif params[:answers]
       @active_tab = "answers"
     end    

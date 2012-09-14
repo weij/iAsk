@@ -47,11 +47,12 @@ module ActiveTab
             @active_subtab, @current_order = session[:subtab][key]
             @store_subtab = logged_in?
           end
-
+          
           if @active_subtab.nil?
             @active_subtab, @current_order = @subtabs.first
-          end
+          end                    
         end
+
       end
 
       private

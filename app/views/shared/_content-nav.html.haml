@@ -1,8 +1,13 @@
+-all, unanswered = "", ""
+-if session[:unanswered] || params[:unanswered] == '1' 
+  -unanswered = "selected"
+-else
+  -all = "selected"
 %nav.content-nav
   %ul.content-tabs
-    %li.questions<
-      = link_to t('layouts.application.all'), url_for(questions_link)
-    %li.unanswered><
+    %li.questions{class: all}<
+      = link_to t('layouts.application.all'), url_for(questions_link.merge(:unanswered => 0))
+    %li.unanswered{class: unanswered}><
       = link_to t('layouts.application.unanswered'), url_for(questions_link.merge(:unanswered => 1))
   = render "shared/quick_question_box"
   .ask-question  

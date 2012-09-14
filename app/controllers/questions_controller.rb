@@ -46,7 +46,13 @@ class QuestionsController < ApplicationController
       @template_format = 'mustache'
       request.format = :mustache
     end
-
+    
+    #TODO if user go to home page, it should remove some session data.
+    if request.path_info == '/'
+      session.delete :filter
+      session.delete :unanswered
+    end
+    
     if params[:filter] || session[:filter]
       filter = params[:filter] || session[:filter]
       session[:filter] = filter
