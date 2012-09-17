@@ -12,20 +12,20 @@
   %small
     = raw(current_group.question_prompt)
 
-.field
-  = f.label :tags, "#{t(:tags, :scope => "activerecord.attributes.question")}", :class => "label"
-  = f.select :tags, current_group.default_tags && @question.tags, {},{:multiple => true, :selected => @question.tags}
-  %small
-    = t(".tags_tip")
-
 .field.related_questions
   %label
     = t(".related_questions", :default => :"questions.show.related_questions" )
   %ul#related_questions
   %small= t(".related_questions", :default => :"questions.form.related_questions_desc" )
 
-.field
+%div
   =render "shared/editor", local_assigns.merge(markdown: true)
+
+.field
+  = f.label :tags, "#{t(:tags, :scope => "activerecord.attributes.question")}", :class => "label"
+  = f.select :tags, current_group.default_tags && @question.tags, {},{:multiple => true, :selected => @question.tags}
+  %small
+    = t(".tags_tip")
 
 .field
   =render "attachment_editor", local_assigns

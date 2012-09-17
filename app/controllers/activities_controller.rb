@@ -27,7 +27,7 @@ class ActivitiesController < ApplicationController
     @active_subtab ||= params[:tab] || "all"
     @activities = current_group.activities.where(conds).order(:created_at.desc).
                                            page(params[:page].to_i)
-
+    
     respond_to do |format|
       format.html
       format.json { render :json => @activities }

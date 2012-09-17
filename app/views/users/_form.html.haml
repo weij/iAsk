@@ -17,7 +17,7 @@
         = f.check_box "use_gravatar"
 
 .information
-  %fieldset
+  %fieldset{style: "margin-left: -250px"}
     %legend
       /= t("users.form.information")
 
@@ -95,7 +95,7 @@
     -#.field.networks
       -#= render "shared/networks", :f => f, :networks => @user.networks, :share => true
 
-    %fieldset
+    %fieldset{style: "margin-left: -200px"}
       %legend
         = t(".notifications")
       .field
