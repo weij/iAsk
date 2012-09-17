@@ -4,7 +4,10 @@
       - tags.each do |tag|
         %td
           %div.tag{:class => "tag_#{tag.name}"}
-            = tag_link(tag)
+            - if current_user.reputation_on(current_group) >= 100 || current_user.admin_of?(current_group) || current_user.mod_of?(current_group)
+              = tag_link(tag)
+            - else
+              = link_to tag.name, questions_url(:tags => tag.name)
           %div.tag-number
             x
             = tag.count.to_i

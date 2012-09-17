@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   before_filter :admin_required , :only => [:accept, :destroy]
   subtabs :index => [ [:most_active, [:activity_rate, Mongo::DESCENDING]], [:newest, [:created_at, Mongo::DESCENDING]],
                       [:oldest, [:created_at, Mongo::ASCENDING]], [:name, [:name, Mongo::ASCENDING]]]
-  before_filter :close_group_action, :except => [:index, :show, :join]                    
+  before_filter :close_group_action, :except => [:index, :show, :join, :update]                    
   # GET /groups
   # GET /groups.json
   def index
