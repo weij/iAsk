@@ -1,0 +1,61 @@
+!!! 5
+-ie_html :class => 'no-js', :lang => I18n.locale do
+  %head
+    = render 'shared/layout/head'
+
+  %body{:class => bodys_class(params)}
+    #feedback-btn
+      %p=link_to "Feedback", feedback_path
+    = render_app_config
+    = render :partial => "shared/topbar"
+    .quick_tabs{style: "background-color:#E9E9E1; clear:both;"}
+      -if !(params[:controller] =~ /moderate\//)
+        - questions_link =  questions_link_for(params[:context])        
+        = render "shared/content-nav", :questions_link => questions_link
+    #container{:class => @current_class}
+      = show_flash_messages(:class => "flash", :markdown => true)
+      #columns
+        %section.content-panel#ask-question
+          #ask-question{style: "float: left; width: 700px; margin-top: 20px"}
+            - if params[:controller] =~ /moderate\//
+              = render "shared/moderate_navigation"
+            = yield
+            
+        #helper
+          #tips.box
+            %h2
+              Tips
+            %ul
+              %li
+                %b
+                  ask a question interesting to this community
+              %li
+                provide enough details
+              %li
+                be clear and concise
+          #markdownHelp.box
+            %h2
+              Markdown basics
+            %ul
+              %li
+                *italic*
+              %li
+                **bold**
+              %li
+                %b 
+                  link
+                ":[text](http://url.com/ "title")"
+              %li
+                %b
+                  image
+                ":![alt text](/path/img.jpg "title")"
+              %li
+                numbered list: 1. Foo 2. Bar
+              %li
+                basic HTML tags are also supported
+        
+    
+      = render "shared/widgets", :context => 'mainlist', :position => 'footer'
+
+      = render "shared/layout/footer"
+

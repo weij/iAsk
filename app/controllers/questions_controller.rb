@@ -247,7 +247,8 @@ class QuestionsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # new.html.erb
+      #TODO 
+      format.html { render :layout => 'new'}
       format.mobile
       format.json  { render :json => @question.to_json }
     end

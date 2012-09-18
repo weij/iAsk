@@ -45,15 +45,18 @@
             }
             return resultsDiv.find('.no-results').html(defaultedOptions.noresultsText + " '" + $(this).attr('value') + "'");
           }, this);
-          if (val.length < defaultedOptions.minLength || val === prevVal) {
+  
+          if (val.length < defaultedOptions.minLength) {
             clearSearchingLabel();
             return false;
           }
+          
           currentOptions = select.find('option');
-          if (currentOptions.length < defaultedOptions.queryLimit && val.indexOf(prevVal) === 0 && prevVal !== '') {
+          if (currentOptions.length < defaultedOptions.queryLimit && val.indexOf(prevVal) === 0 && val !== prevVal && prevVal !== '') {
             clearSearchingLabel();
             return false;
           }
+          
           defaultedOptions.data[defaultedOptions.queryParameter] = val;
           defaultedOptions.success = function(data) {
             var currentOpt, items, keydownEvent, latestVal, newOpt, newOptions, noResult, _fn, _fn2, _i, _j, _len, _len2;

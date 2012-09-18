@@ -98,11 +98,10 @@ Questions = function() {
     }, function (data) {
       var terms = {};
       $.each(data, function (i, val) {
-          console.log('i: '+i)
-          console.log('val: '+val)
+        console.log('i: '+i)
+        console.log('val: '+val)
         terms[val["value"]] = val["caption"];
       });
-
       return terms;
     });
 
