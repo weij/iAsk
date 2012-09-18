@@ -7,14 +7,14 @@
     - if logged_in?
       - if (answer.wiki || current_user.can_edit_others_posts_on?(answer.group) || current_user.can_modify?(answer))
         %li.action
-          = link_to t("scaffold.edit"), edit_question_answer_path(question, answer), "data-lazy" => "1", :class => "show_form", "data-lazy-form" => "edit_answer"
+          = link_to t("scaffold.edit"), edit_question_answer_path(question, answer), "data-lazy" => "1", :class => "show_form", "data-lazy-form" => "edit_answer", title: t('questions.answer.edit_tooltip')
       - if current_user.mod_of?(question.group) || current_user.can_modify?(question)
         %li.action
           - unless question.accepted && !question.subjetive
-            = link_to t("questions.answer.pick_answer"), solve_question_path(question, :answer_id => answer)
+            = link_to t("questions.answer.pick_answer"), solve_question_path(question, :answer_id => answer), title: t('questions.answer.pick_tooltip')
           - else
             - if question.answer == answer
-              = link_to t("questions.answer.unset_answer"), unsolve_question_path(question, :answer_id => answer)
+              = link_to t("questions.answer.unset_answer"), unsolve_question_path(question, :answer_id => answer), title: t('questions.answer.unset_tooltip')
 
 
 
@@ -28,7 +28,7 @@
     - if !logged_in? || !current_user.mod_of?(current_group)
       - if @aflag.new_record? && current_user != answer.user
         %li.action
-          = link_to t('questions.answer.flag'), new_question_answer_flag_path(question,answer), :class => 'flag-link show_form', :rel => 'nofollow', :rel => 'nofollow', "data-lazy" => "1", "data-lazy-form" => "flag_answer"
+          = link_to t('questions.answer.flag'), new_question_answer_flag_path(question,answer), :class => 'flag-link show_form', :rel => 'nofollow', :rel => 'nofollow', "data-lazy" => "1", "data-lazy-form" => "flag_answer", title: t('questions.answer.flag_tooltip')
       - elsif !@aflag.new_record?
         %li.flagged
           %span.flag-link
@@ -45,7 +45,7 @@
 
     - if logged_in?
       %li.more.current.action
-        = link_to t('layouts.manage.actions'), "#"
+        = link_to t('layouts.manage.actions'), "#", title: t('questions.answer.action_tooltip')
         %ul.drop-menu
           %li.action
             = link_to t("questions.show.follow_up"), new_question_path(:original_question_id => question.id, :original_answer_id => @answer.id), :class => "pjax", :"data-layout" => "new-question"

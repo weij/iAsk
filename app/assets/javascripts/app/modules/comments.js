@@ -5,9 +5,12 @@ Comments = function() {
     $('.comment-votes form.comment-form button.vote').hide();
     var forms = $('.question_comment_form, .answer_comment_form');
     forms.find('.buttons').hide();
+    forms.find('.text_area').hide();
 
-    forms.delegate('textarea', 'focus', function() {
+    forms.delegate('a', 'click', function() {
       var form = $(this).parents('form');
+      form.find('.add-comment').hide();
+      form.find('.text_area').show();
       form.find('.buttons').show();
       if(!form.find('textarea').hasClass(form.data('editor'))) {
         form.find('textarea').addClass(form.data('editor'));
@@ -72,6 +75,8 @@ Comments = function() {
     $('.cancel_comment').on('click', function(){
       var form = $(this).parents('form');
       form.find('.buttons').hide();
+      form.find('.add-comment').show();
+      form.find('.text_area').hide();
       var htmlarea = form.find('.jHtmlArea')
       if(htmlarea.length > 0) {
         htmlarea.remove();

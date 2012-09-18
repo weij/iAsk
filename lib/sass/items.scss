@@ -185,10 +185,8 @@ input[type=submit], input.save, .add_attachment {
 .markdown {
   color: lighten($fg_color, 15%);
   a {
-    border-bottom: 1px dotted $fg_color;
     &:hover {
       color: $brand_color;
-      border-bottom: 1px dotted $brand_color;
     }
   }
 

@@ -46,10 +46,11 @@ en:
       share_on: "Share this question on %{site}"
       related_questions: Related questions
       flags: Reported as
-      flag: Flag
+      flag: Report
       flagged_as: Flagged as
       viewed: viewed
       to_answer_question: to answer this question
+      flag_tooltip: "Report this question"
       follow_tooltip: "Follow this question"
       accepted_tooltip: "One of the answers was accepted as the correct answer."
       unfollow_tooltip: "Stop following this question"
@@ -77,10 +78,15 @@ en:
     answer:
       pick_answer: Pick as solution
       unset_answer: Unset solution?
-      flag: Flag
+      flag: Report
       add_comment: Add comment
       favorite: Save
       unfavorite: Un-save
+      flag_tooltip: "Report this answer"
+      action_tooltip: "More action"
+      unset_tooltip: "reset solution"
+      pick_tooltip: "Select this answer as solution"
+      edit_tooltip: "You can edit this answer"
       favorite_tooltip: "Add this answer to your favorites"
       unfavorite_tooltip: "Remove this answer from your favorites"
     question:

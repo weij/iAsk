@@ -22,7 +22,7 @@
   %ul.menubar
     -if !logged_in? || current_user.can_answer_on?(current_group)
       %li.answer.action
-        = link_to t("questions.question.answer_verb"), "#to_answer", :id => "add_answer"
+        = link_to t("questions.question.answer_verb"), "#to_answer", :id => "add_answer", :title => t("#{i18n_scope}.to_answer_question")
 
 
     %li.follow.action
@@ -44,7 +44,7 @@
     - elsif current_user != @question.user
       - if !logged_in? || !current_user.mod_of?(current_group)
         %li.no-spam.action
-          = link_to t("#{i18n_scope}.flag"), new_question_flag_path(@question), :id => "flag_question", :class => "flag-link", "data-lazy" => "1", :rel => 'nofollow', :class => "show_form"
+          = link_to t("#{i18n_scope}.flag"), new_question_flag_path(@question), :title => t("#{i18n_scope}.flag_tooltip"), :id => "flag_question", :class => "flag-link", "data-lazy" => "1", :rel => 'nofollow', :class => "show_form"
 
     - if logged_in?
       -if current_user.can_create_reward?(@question)
@@ -68,7 +68,7 @@
 
     - if logged_in?
       %li.more.current.action
-        = link_to t("#{i18n_scope}.more_actions"), "#"
+        = link_to t("#{i18n_scope}.more_actions"), "#",:title => t("#{i18n_scope}.more_actions")
 
         %ul.drop-menu
           - if logged_in?

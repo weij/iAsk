@@ -72,7 +72,8 @@
           - @question.comments.each do |comment|
             - read = (@last_read_at && @last_read_at > comment.created_at && comment.votes_average < 2)
             = render "comments/comment", comment: comment, source: question_path(@question), mini: true, read: read
-        
+        /.post-comment 
+        /  = link_to "add comment", ""
         .panel-comments
           = form_for [@question, @comment ||= Comment.new], remote: true, html: {class: "question_comment_form", data: {commentable: @question.id, editor: current_group.wysiwyg_editor ? 'wysiwyg_editor' : 'markdown_editor', "login-required" => true}} do |f|
             %fieldset
@@ -152,5 +153,19 @@
         %h2
           -#i18n
           Your answer
+        %p{style:"font-size: 14px; margin: 0 50px 10px 50px"}
+          %strong
+            Please try to give a substantial answer.
+          If you wanted to comment on the question or answer,just
+          %strong
+            use the commenting tool
+          Please remember that you can always
+          %strong
+            revise your answers
+          \- no need to answer the same question twice. Also, please
+          %strong
+            don't forget to vote
+          \- it really helps to select the best questions and answers!
+
 
       = render "answers/form", markdown: true, question: @question

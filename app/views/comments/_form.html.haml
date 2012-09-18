@@ -10,6 +10,8 @@
 -opts[:placeholder] = t("questions.answer.add_comment")
 
 .markdown
+  %a.add-comment 
+    Add comment
   = f.text_area :body, opts
 
 -if local_assigns[:markdown] && !current_group.wysiwyg_editor
