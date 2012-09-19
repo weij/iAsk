@@ -146,7 +146,7 @@ class Question
     text :body do |body|
       body.gsub(/<\/?[^>]*>/, " ").gsub(/[\S]{245,}/, "") unless body.nil?
     end
-    field :group_id, :banned, :id, :language, :tags
+    field :group_id, :banned, :id, :language, :tags, :answered_with_id
   end
 
   def self.minimal

@@ -136,9 +136,19 @@ class QuestionsController < ApplicationController
     if params[:unanswers]
       conditions[:answered_with_id] = nil
     end
+    
+    current_tags = []
+    if session[:filter] =~ /tags\:([^\s]*)/
+      current_tags = $1.split("+") unless $1.empty?
+    end
+    conditions = {}
+    if session[:unanswered]
+      conditions[:answered_with_id] = nil
+    end
+    
 
-    @questions = Question.related_questions(@question).page(params[:page])
-
+    @questions = current_tags.reduce(Question.related_questions(@question, conditions)){|c, tag| c.where(tags: tag)}.page(params[:page])
+    
     respond_to do |format|
       format.js do
         content = ''
