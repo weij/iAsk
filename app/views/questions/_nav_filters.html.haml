@@ -1,5 +1,6 @@
 %li.question_count{style:"float:left; font-size:18px; font-weight:thin; color:#6996CF; padding:5px 0 0 10px;"}
-  = @questions.count 
+  %span
+    = @questions.count 
   questions
   
 -if current_group.languages.count > 1

@@ -28,7 +28,7 @@ Questions = function() {
 
     var extraParams = Utils.urlVars();
     extraParams['format'] = 'js';
-
+    var origin_question_count = $('li.question_count span').text();
 //     FIXME:filter is blocking mongodb
     $(".quick_question #ask_question").searcher({
       url : "/questions/related_questions.js",
@@ -42,10 +42,12 @@ Questions = function() {
         $('.quick_question .search-feedback').text("searching questions");
       },
       success: function(data) {
+        $('li.question_count span').text(data.count);
         $('.quick_question .search-feedback').text(data.message);
         $('#additional_info .pagination').html(data.pagination);
       },
       after_reset: function(data) {
+        $('li.question_count span').text(origin_question_count);
         $('.quick_question .search-feedback').text("type to search");
         $('.content-tabs').show();
       },

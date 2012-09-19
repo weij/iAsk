@@ -166,7 +166,7 @@ class QuestionsController < ApplicationController
         else
           content = render_to_string(:partial => "questions/empty");
         end
-        render :json => {:html => content, :message => t('searches.index.found_results', :quantity => @questions.total_count, :spelling_suggestion => @questions.spelling_suggestion) }.to_json
+        render :json => {:html => content, :count => @questions.total_count, :message => t('searches.index.found_results', :quantity => @questions.total_count, :spelling_suggestion => @questions.spelling_suggestion) }.to_json
       end
     end
   end
