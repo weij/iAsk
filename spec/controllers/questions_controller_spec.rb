@@ -19,13 +19,24 @@ describe QuestionsController do
 
   describe "Filter tags" do
     before (:each) do
-      @question_one = Fabricate(:question, :tags => ["x", "y"])
-      @question_two = Fabricate(:question, :tags => ["y", "z"])
+      Tag.create!(:name => "tag1", :group_id => @group.id)
+      Tag.create!(:name => "tag2", :group_id => @group.id)
+      Tag.create!(:name => "tag3", :group_id => @group.id)
+      @question_one = Fabricate(:question, :tags => ["tag1", "tag2"])
+      @question_two = Fabricate(:question, :tags => ["tag2", "tag3"])
+      @question_three = Fabricate(:question, :tags => ["tag1", "tag2","tag3"])
     end
 
     it "should be successful" do
-      put 'index', :tags => ["x"]
+      put 'index', :tags => ["tag1", "tag2"]
       response.should be_success
+    end
+
+    describe "and unanswered" do
+      it "should be successful" do
+        put 'index', :tags => ["tag1", "tag2"], :answered_with_id => nil
+        response.should be_success
+      end
     end
   end
 
