@@ -78,6 +78,22 @@ describe QuestionsController do
     end
   end
 
+    describe "GET 'related_questions' with tags and unanswered" do
+    before (:each) do
+      Xapit.enable
+      @question = Fabricate(:question)
+      stub_group(@question.group)
+      Tag.create!(:name => "tag1", :group_id => @group.id)
+      Tag.create!(:name => "tag2", :group_id => @group.id)
+      @tags = Tag.all
+    end
+
+    it "should be successful" do
+      get 'related_questions', :id => @question.id, :tags => @tags, :answered_with_id => nil, :format => :js
+      response.should be_success
+    end
+  end
+
   describe "GET 'tags_for_autocomplete'" do
     before (:each) do
       @question = Fabricate(:question)
