@@ -137,7 +137,7 @@ class QuestionsController < ApplicationController
       conditions[:answered_with_id] = nil
     end
     
-    current_tags = []
+    @current_tags = []
     if session[:filter] =~ /tags\:([^\s]*)/
       @current_tags = $1.split("+") unless $1.empty?
     end
