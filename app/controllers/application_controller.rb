@@ -92,7 +92,6 @@ class ApplicationController < ActionController::Base
     end
     set_page_title(t("questions.index.title"))
     conditions = scoped_conditions(:banned => false)
-
     if params[:sort] == "hot"
       conditions[:activity_at] = {"$gt" => 5.days.ago}
     end
@@ -108,7 +107,7 @@ class ApplicationController < ActionController::Base
       @active_tab = "answers"
     end    
     @active_subtab ||= (params[:sort] || "votes")
-
+    
     @questions = Question.minimal.where(conditions.merge(extra_conditions)).order_by(current_order)
     
     extra_scope.keys.each do |key|

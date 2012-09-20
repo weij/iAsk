@@ -75,7 +75,7 @@ class QuestionsController < ApplicationController
       when 'contributed'
         find_questions(:contributor_ids.in => [current_user.id])
       when /tags\:([^\s]*)/
-        @current_tags = @tag_names = tags = $1.split("+") unless $1.empty?
+        @current_tags = tags = $1.split("+") unless $1.empty?
         find_questions           
       else
         session.delete :filter
@@ -139,15 +139,14 @@ class QuestionsController < ApplicationController
     
     current_tags = []
     if session[:filter] =~ /tags\:([^\s]*)/
-      current_tags = $1.split("+") unless $1.empty?
+      @current_tags = $1.split("+") unless $1.empty?
     end
     conditions = {}
     if session[:unanswered]
       conditions[:answered_with_id] = nil
     end
     
-
-    @questions = current_tags.reduce(Question.related_questions(@question, conditions)){|c, tag| c.where(tags: tag)}.page(params[:page])
+    @questions = @current_tags.reduce(Question.related_questions(@question, conditions)){|c, tag| c.where(tags: tag)}.page(params[:page])
     
     respond_to do |format|
       format.js do
