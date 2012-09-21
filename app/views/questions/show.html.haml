@@ -122,12 +122,12 @@
               = t("questions.show.follow_up_of")
             = link_to @question.follow_up.original_question.title, question_path(@question.follow_up.original_question, anchor: @question.follow_up.original_answer_id), rel: 'nofollow'
 
-        -if @question.followed_up_by.limit(1).count > 0
-          %h1= t('global.followed_by')
-          %ul
-            -@question.followed_up_by.all.each do |child|
-              %li
-                = link_to child.title, question_path(child)
+        /-if @question.followed_up_by.limit(1).count > 0
+        /  %h1= t('global.followed_by')
+        /  %ul
+        /    -@question.followed_up_by.all.each do |child|
+        /      %li
+        /        = link_to child.title, question_path(child)
 
   - if !@answers.empty? || @question.accepted
     .answers-list
