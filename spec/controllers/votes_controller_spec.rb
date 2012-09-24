@@ -10,11 +10,14 @@ describe VotesController do
       #@group = Fabricate(:group)
       @group = stub_group
       @user = Fabricate(:user)
+      @question_owner = Fabricate(:user)
       @user.join!(@group)
+      @question_owner.join!(@group)
       @user.update_reputation(120, @group)
+      @question_owner.update_reputation(100, @group)
       @user.reload
       stub_authentication @user
-      @voteable = Fabricate(:question, :group => @group)
+      @voteable = Fabricate(:question, :user => @question_owner, :group => @group)
     end
 
     describe "POST 'create'" do
@@ -33,6 +36,7 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 1
+        @question_owner.reputation_on(@group).should == 102
 
         other_user = Fabricate(:user)
         other_user.join!(@group)
@@ -42,6 +46,7 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 2
+        @question_owner.reputation_on(@group).should == 104
       end
 
       it "should revoke the vote" do
@@ -49,10 +54,12 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 1
+        @question_owner.reputation_on(@group).should == 102
 
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 0
+        @question_owner.reputation_on(@group).should == 100
       end
 
       it "should change the vote" do
@@ -64,12 +71,14 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == -1
+        @question_owner.reputation_on(@group).should == 99
 
         @vote_attrs.delete("vote_down")
         @vote_attrs["vote_up"] = 1
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 1
+        @question_owner.reputation_on(@group).should == 102
       end
     end
 
@@ -82,12 +91,15 @@ describe VotesController do
       #@group = Fabricate(:group)
       @group = stub_group
       @user = Fabricate(:user)
+      @answer_owner = Fabricate(:user)
       @user.join!(@group)
+      @answer_owner.join!(@group)
       @user.update_reputation(120, @group)
+      @answer_owner.update_reputation(100, @group)
       @user.reload
       stub_authentication @user
       @question = Fabricate(:question, :group => @group)
-      @voteable = Fabricate(:answer, :group => @group, :question => @question)
+      @voteable = Fabricate(:answer, :user => @answer_owner, :group => @group, :question => @question)
     end
 
     describe "GET 'index'" do
@@ -114,6 +126,7 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 1
+        @answer_owner.reputation_on(@group).should == 102
 
         other_user = Fabricate(:user)
         other_user.join!(@group)
@@ -123,16 +136,21 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 2
+        @answer_owner.reputation_on(@group).should == 104
       end
 
       it "should revoke the vote" do
         @vote_attrs.merge!(:answer_id => @voteable.id, :format => "js")
         post 'create', @vote_attrs
+        body = JSON.load(response.body)
+        body["average"].should == 1
+        @answer_owner.reputation_on(@group).should == 102
 
         @vote_attrs.merge!(:answer_id => @voteable.id, :format => "js")
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 0
+        @answer_owner.reputation_on(@group).should == 100
       end
 
       it "should change the vote" do
@@ -144,12 +162,14 @@ describe VotesController do
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == -1
+        @answer_owner.reputation_on(@group).should == 99
 
         @vote_attrs.delete("vote_down")
         @vote_attrs["vote_up"] = 1
         post 'create', @vote_attrs
         body = JSON.load(response.body)
         body["average"].should == 1
+        @answer_owner.reputation_on(@group).should == 102
       end
     end
   end
