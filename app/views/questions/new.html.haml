@@ -10,7 +10,7 @@
 
   .field.form-options
     .column
-      .checkbox
+      %div{ class: "checkbox", :title=> "allow other user to edit this answer"}
         = f.label :wiki, "Wiki"
         = f.check_box :wiki
     .column

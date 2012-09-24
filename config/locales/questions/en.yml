@@ -46,10 +46,10 @@ en:
       share_on: "Share this question on %{site}"
       related_questions: Related questions
       flags: Reported as
-      flag: Report
+      flag: Flag
       flagged_as: Flagged as
       viewed: viewed
-      to_answer_question: to answer this question
+      to_answer_question: Give answer to this question
       flag_tooltip: "Report this question"
       follow_tooltip: "Follow this question"
       accepted_tooltip: "One of the answers was accepted as the correct answer."
