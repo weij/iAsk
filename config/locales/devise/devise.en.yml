@@ -55,7 +55,7 @@ en:
         instruction2: 'Click the link below to unlock your account:'
         link: 'Unlock my account'
       reset_password:
-        instruction1: 'Someone has requested a link to change your password, and you can do this through the link below.'
+        instruction1: 'Someone has requested a link to change your iAsk account password, and you can do this through the link below.'
         nonrequested: "If you didn't request this, please ignore this email."
         warning: "Your password won't change until you access the link above and create a new one."
         link: 'Change my password'

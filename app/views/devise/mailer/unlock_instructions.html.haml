@@ -1,0 +1,11 @@
+%div{style: "font-family: arial;"}
+  %p
+    Dear
+    = @resource.name
+    \,
+  %p
+    = t('devise.mailer.unlock.instruction1')
+  %p
+    = t('devise.mailer.unlock.instruction2')
+  %p
+    = link_to t('devise.mailer.unlock.link'), unlock_url(@resource, :unlock_token => @resource.unlock_token)

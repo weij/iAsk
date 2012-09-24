@@ -39,8 +39,8 @@ Shapado::Application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => "gmail.com",
-    :user_name => "ferolichy",
-    :password => "47554965",
+    :user_name => "iask.vanceinfo",
+    :password => "vanceinfo123456",
     :authentication => "plain",
     :enable_starttle_auto => true
 }

@@ -1,0 +1,35 @@
+%div{style: "font-family: arial;"}
+  %p
+    Dear
+    = @resource.name
+    \,
+  %p
+    Thank you for registering
+    = link_to "iAsk", "http://ask"
+  %p
+    Please click on the following link to verify your account. 
+  %p{style: "color: red;"}
+    = link_to "Account Verification Link", confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+  %p
+    Your iAsk Username:
+    = @resource.email
+  %div{style: "font-size: 87.5%;"}
+    %div{style: "font-weight: bold; font-family: arial;"}
+      Why e-mail verification?
+    %li
+      Protects your identity.
+    %li
+      Allows access to web sites that require verification.
+  %div{style: "margin-top: 10px; font-size: 87.5%;"}
+    %div{style: "font-weight: bold; font-family: arial;"}
+      Account Verification Link does not work?
+    %div
+      If you are unable to click on the link above, e-mail address verification can be completed by copying and pasting the following URL into your browser:
+  %p
+    =link_to confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+
+  %p
+    Thank you,
+  %p
+    iAsk
+
