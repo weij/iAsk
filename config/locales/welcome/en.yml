@@ -5,7 +5,7 @@ en:
       feedback_title: Title
       feedback_description: Description
       email_description: Please provide your email address so we can answer your message
-      captcha_error: "Please, make sure to fill the captcha correctly and provide a valid email address."
+      captcha_error: "Please, make sure to fill the feedback correctly (minimum are 3 words) and provide a valid email address."
       captcha_notice: "Thank you for your feedback, we will get back at you as soon as possible."
     index:
       hot: Hot

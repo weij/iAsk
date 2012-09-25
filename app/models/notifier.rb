@@ -112,7 +112,7 @@ class Notifier < ActionMailer::Base
     @language = language_for(user)
     set_locale @language
     mail(:to => AppConfig.exception_notification["exception_recipients"],
-         :from => "Shapado[feedback] <#{AppConfig.notification_email}>",
+         :from => AppConfig.exception_notification["exception_sender_address"],
          :subject => "feedback: #{subject}",
          :date => Time.now) do |format|
       format.text

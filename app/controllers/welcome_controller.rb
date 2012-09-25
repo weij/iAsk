@@ -36,10 +36,9 @@ class WelcomeController < ApplicationController
     ok = (recaptcha_valid? || logged_in?) &&
          !params[:feedback][:description].include?("[/url]")
 
-    if ok && !params[:feedback][:email].blank? && params[:feedback][:title].split(" ").size < 3 &&
+    if ok && !params[:feedback][:email].blank? && params[:feedback][:email] =~ /\A[\w+\-.]+@[\w+\-.]+.com\z/i && params[:feedback][:title].split(" ").size >= 3 &&
       single_words = params[:feedback][:description].split(" ").size
       ok = (single_words >= 3)
-
       links = words = 0
       params[:feedback][:description].split("http").map do |w|
         words += w.split(" ").size
@@ -49,6 +48,8 @@ class WelcomeController < ApplicationController
       if ok && links > 1 && words > 3
         ok = ((words-links) > 4)
       end
+    else
+      ok = false
     end
     if params[:feedback][:description].include?("href") || params[:feedback][:description].size > 400
       render text: 'no', status: 404
@@ -57,7 +58,6 @@ class WelcomeController < ApplicationController
 
     if !ok
       flash[:error] = I18n.t("welcome.feedback.captcha_error")
-      flash[:error] += ". Domo arigato, Mr. Roboto. "
       redirect_to feedback_path(:feedback => params[:feedback])
     else
       flash[:notice] = I18n.t("welcome.feedback.captcha_notice")
