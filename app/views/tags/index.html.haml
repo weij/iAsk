@@ -11,7 +11,7 @@
         = submit_tag("filter")
 
   -if logged_in? && current_user.mod_of?(current_group)
-    = link_to t("scaffold.new", :model =>"tag"), new_tag_url
+    = button_to t("scaffold.new", :model =>"tag"), new_tag_url, :method => :get
 
 #tag_table
   = render(:partial => "tag_table", :locals => {:tag_table => @tags})
