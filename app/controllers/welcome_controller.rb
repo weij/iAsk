@@ -51,7 +51,7 @@ class WelcomeController < ApplicationController
     else
       ok = false
     end
-    if params[:feedback][:description].include?("href") || params[:feedback][:description].size > 400
+    if params[:feedback][:description].include?("href") || params[:feedback][:description].size > 2000
       render text: 'no', status: 404
       return
     end
