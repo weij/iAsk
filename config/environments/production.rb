@@ -71,7 +71,7 @@ Shapado::Application.configure do
     :password => "vanceinfo123456",
     :authentication => "plain",
     :enable_starttle_auto => true
-}
+  }
 end
 
 class Goalie::CustomErrorPages

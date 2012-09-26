@@ -224,7 +224,9 @@ class Notifier < ActionMailer::Base
   end
 
   def from_email(group)
-    "#{group ? group.name : AppConfig.application_name} <notifications@#{Rails.application.config.action_mailer.default_url_options[:host]}>"
+    #TODO
+    #"#{group ? group.name : AppConfig.application_name} <notifications@#{Rails.application.config.action_mailer.default_url_options[:host]}>"
+    "#{group ? group.name : AppConfig.application_name} <#{AppConfig.notification_email}>"
   end
 
   def language_for(user=nil)
