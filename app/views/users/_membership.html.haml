@@ -1,7 +1,8 @@
 - user = membership.user
 / User Summary
 .summary
-  = avatar_img(user, :size => "small")
+  %a{ :href => user_path(user), :"data-layout" => "user" }
+    = avatar_img(user, :size => "small")
   = link_to h(user.display_name), user_path(user), :class => "pjax", :"data-layout" => "user"
   .counter{:class => class_for_number(membership.reputation) }
     =format_number(user.reputation_on(current_group))
