@@ -26,7 +26,7 @@ class Widget
 
   def self.types(tab="",ads=false)
     types = %w[UsersWidget AboutWidget BadgesWidget TopUsersWidget TagCloudWidget
- PagesWidget CurrentTagsWidget CustomHtmlWidget SuggestionsWidget GroupNetworksWidget ShareWidget]
+ PagesWidget CurrentTagsWidget CustomHtmlWidget SuggestionsWidget GroupNetworksWidget ShareWidget HelloWidget]
     if ads
       types += %w[AdsenseWidget]
     end
