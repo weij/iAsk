@@ -2,7 +2,8 @@ rails_root = '<%= "#{deploy_to}/current/" %>'
 rails_env  = '<%= environment %>'
 pid_file   = '<%= unicorn_pid %>'
 socket_file= '<%= unicorn_socket %>'
-log_file   = '<%= deploy_to %>/shared/logs/unicorn.log'
+log_file   = '<%= deploy_to %>/shared/log/unicorn.log'
+err_log    = '<%= deploy_to %>/shared/log/unicorn_error.log'
 username   = '<%= unicorn_user %>'
 group      = '<%= unicorn_group %>'
 old_pid    = pid_file + '.oldbin'
@@ -19,7 +20,7 @@ listen socket_file, :backlog => 1024
 listen 8888, :backlog => 1024
 pid pid_file
 
-stderr_path log_file
+stderr_path err_log
 stdout_path log_file
 
 preload_app true
