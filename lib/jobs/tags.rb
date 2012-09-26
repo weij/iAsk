@@ -3,6 +3,7 @@ module Jobs
     extend Jobs::Base
 
     def self.question_retagged(question_id, new_tags, old_tags, at_time)
+      new_tags, old_tags = new_tags.reject{|tag|tag.blank?}, old_tags.reject{|tag|tag.blank?}
       question = Question.find(question_id)
       if !new_tags.blank?
         tags = question.group.tags.where(:name.in => new_tags).only(:name).map(&:name)

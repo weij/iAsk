@@ -585,10 +585,10 @@ class QuestionsController < ApplicationController
   def retag_to
     @question = current_group.questions.by_slug(params[:id])
 
-    @question.tags = params[:question][:tags]
+    @question.tags = params[:question][:tags].reject{|tag| tag.blank?}
     @question.updated_by = current_user
     @question.last_target = @question
-
+    
     tags_changes = @question.changes["tags"]
 
     if @question.save
