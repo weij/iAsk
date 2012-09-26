@@ -533,22 +533,27 @@ Time.zone.now ? 1 : 0)
   # self follows user
   def add_friend(user)
     return false if user == self
-    FriendList.collection.update({ "_id" => self.friend_list_id}, { "$addToSet" => { :following_ids => user.id } })
-    FriendList.collection.update({ "_id" => user.friend_list_id}, { "$addToSet" => { :follower_ids => self.id } })
-
-    self.inc(:following_count, 1)
-    user.inc(:followers_count, 1)
+    if FriendList.where({ "_id" => self.friend_list_id}).where({ :following_ids => user.id }).first.nil?
+      FriendList.collection.update({ "_id" => self.friend_list_id}, { "$addToSet" => { :following_ids => user.id } })
+      FriendList.collection.update({ "_id" => user.friend_list_id}, { "$addToSet" => { :follower_ids => self.id } })
+    
+      self.inc(:following_count, 1)
+      user.inc(:followers_count, 1)
+    end
     true
   end
 
   def remove_friend(user)
     return false if user == self
-    FriendList.collection.update({ "_id" => self.friend_list_id}, { "$pull" => { :following_ids => user.id } })
-    FriendList.collection.update({ "_id" => user.friend_list_id}, { "$pull" => { :follower_ids => self.id } })
-
-    self.inc(:following_count, -1)
-    user.inc(:followers_count, -1)
-    true
+    
+    unless FriendList.where({ "_id" => self.friend_list_id}).where({ :following_ids => user.id }).first.nil?
+      FriendList.collection.update({ "_id" => self.friend_list_id}, { "$pull" => { :following_ids => user.id } })
+      FriendList.collection.update({ "_id" => user.friend_list_id}, { "$pull" => { :follower_ids => self.id } })
+    
+      self.inc(:following_count, -1)
+      user.inc(:followers_count, -1)
+    end 
+    true 
   end
 
   def followers(scope = {}, memberships=false)
@@ -584,12 +589,14 @@ Time.zone.now ? 1 : 0)
     FriendList.only(:following_ids).where(:_id => self.friend_list_id).first.following_ids.include?(user.id)
   end
 
-  def viewed_on!(group, ip)
-    if member_of? group
-      view_count_id = "#{self.id}-#{group.id}-#{ip}"
-      if ViewsCount.where({:_id => view_count_id}).first.nil?
-        ViewsCount.create(:_id => view_count_id)
-        Membership.increment({:group_id => group.id, :user_id => self.id}, {:views_count => 1.0})
+  def viewed_on!(group, user)
+    if user
+      if member_of? group
+        view_count_id = "#{self.id}-#{group.id}-#{user.id}"
+        if ViewsCount.where({:_id => view_count_id}).first.nil?
+          ViewsCount.create(:_id => view_count_id)
+          Membership.increment({:group_id => group.id, :user_id => self.id}, {:views_count => 1.0})
+        end
       end
     end
   end

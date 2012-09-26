@@ -312,7 +312,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to user_path(@user)
+        redirect_to root_path
       end
       format.json {
         render(json: {success: success, message: message }.to_json)
@@ -330,7 +330,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to user_path(@user)
+        redirect_to root_path
       end
       format.js { render(json: {success: true, message: flash[:notice] }.to_json) }
     end
@@ -420,7 +420,7 @@ class UsersController < ApplicationController
 
     add_feeds_url(url_for(:format => "atom"), t("feeds.user"))
 
-    @user.viewed_on!(current_group, request.remote_ip) if @user != current_user && !is_bot?
+    @user.viewed_on!(current_group, current_user) if @user != current_user && !is_bot?
   end
 end
 

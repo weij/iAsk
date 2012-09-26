@@ -9,7 +9,7 @@ Ui = function() {
     initializeAjaxTooltips();
     initializeSmoothScrollToTop();
     Form.initialize();
-    }
+  }
 
     $('[rel=tipsy]').tipsy({gravity: 's'});
     $('.tipsy-plans').tipsy({gravity: 'e', opacity: 1});
@@ -51,7 +51,8 @@ Ui = function() {
       } else {document.location=$(this).attr('href')}
     });
 
-    $(".toggle-action").on("ajax:success", function(xhr, data, status) {
+
+    $(".toggle-action").on("ajax:success", function(xhr, data, status) {      
       if(data.success) {
         var link = $(this);
         var href = link.attr('href'), title = link.attr('title'), text = link.data('ujs:enable-with');

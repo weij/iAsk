@@ -5,7 +5,7 @@
     %aside
       %ul.list
         - recent_users.each do |user|
-          %a{ :href => user_path(user), :class => "pjax", :"data-layout" => "user" }
+          %a{ :href => user_path(user), :"data-layout" => "user" }
             = avatar_img(user, :size => "small", :class => "gravatar")
     %footer
       = link_to t("scaffold.more"), users_path

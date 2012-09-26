@@ -78,7 +78,7 @@ en:
     answer:
       pick_answer: Pick as solution
       unset_answer: Unset solution?
-      flag: Report
+      flag: Flag
       add_comment: Add comment
       favorite: Save
       unfavorite: Un-save

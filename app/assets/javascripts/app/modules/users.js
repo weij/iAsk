@@ -1,6 +1,43 @@
 Users = function() {
   var self = this;
 
+
+  $(".users-controller .toggle-action").on("ajax:success", function(xhr, data, status) {      
+    if(data.success) {
+      var link = $(this);
+      var href = link.attr('href'), text = link.data('ujs:enable-with');
+      var dataUndo = link.data('undo'), dataText = link.data('text');
+      var img = link.children('img');
+      var counter = $(link.data('counter'));
+
+      //alert(text+"  "+dataText);
+      link.attr({href: dataUndo});
+      
+
+      if(dataText && $.trim(dataText)!=''){
+        link.text(dataText);
+        link.data('ujs:enable-with', dataText);
+        link.data({'undo': href, 'text': text});
+      }
+      
+
+      img.attr({src: img.data('src'), 'data-src': img.attr('src')});
+      if(typeof(link.data('increment'))!='undefined') {
+
+        counter.text(parseFloat($.trim(counter.text()))+link.data('increment'));
+      }
+
+      if(text=="+ Follow user"){
+        var count=parseInt($('li.followers_count strong').text())+1;
+        $('li.followers_count strong').text(count);
+      } else if(text=="- Unfollow user"){
+        var count=parseInt($('li.followers_count strong').text())-1;
+        $('li.followers_count strong').text(count);
+      } 
+      Messages.show(data.message, "notice");
+    }
+  });
+
   function initialize($body) {
     if($body.hasClass("index")) {
       Users.initializeOnIndex($body);

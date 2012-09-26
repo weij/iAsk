@@ -49,7 +49,7 @@
             = @user.following_count
           %small
             = link_to t('.following'), follows_user_path(@user, :sort=>"following")
-        %li
+        %li.followers_count
           %strong
             = @user.followers_count
           %small
