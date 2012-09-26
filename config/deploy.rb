@@ -39,8 +39,10 @@ namespace :deploy do
     assets.compass
     assets.package
 
-    #magent.restart
-#    bluepill.restart
+    magent.restart
+    bluepill.restart
+    
+    xpait.start
 
     run "rm -rf #{current_path}/tmp/cache/*"
   end
@@ -61,12 +63,12 @@ namespace :websocket do
 
   desc "Init websocket with bluepill"
   task :init do
-    rvmsudo "bluepill load #{websocket_remote_config}"
+    rvmsudo "bluepill load #{websocket_remote_config} --no-privileged"
   end
 
   desc "Start websocket with bluepill"
   task :start do
-    rvmsudo "bluepill websocket start"
+    rvmsudo "bluepill websocket start --no-privileged"
   end
 
   desc "Restart websocket with bluepill"
@@ -77,18 +79,18 @@ namespace :websocket do
 
   desc "Stop websocket with bluepill"
   task :stop do
-    rvmsudo "bluepill websocket stop"
+    rvmsudo "bluepill websocket stop --no-privileged"
   end
 
   desc "Display the bluepill status"
   task :status do
-    rvmsudo "bluepill websocket status"
+    rvmsudo "bluepill websocket status --no-privileged"
   end
 
   desc "Stop websocket and quit bluepill"
   task :quit do
-    rvmsudo "bluepill websocket stop"
-    rvmsudo "bluepill websocket quit"
+    rvmsudo "bluepill websocket stop --no-privileged"
+    rvmsudo "bluepill websocket quit --no-privileged"
   end
 end
 
