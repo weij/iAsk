@@ -1,5 +1,4 @@
-Capistrano::Configuration.instance.load do
-  
+Capistrano::Configuration.instance.load do  
 
   # Defines where the unicorn pid will live.
   set(:xapit_pid) { File.join(pids_path, "xapit.pid") } unless exists?(:xapit_pid)

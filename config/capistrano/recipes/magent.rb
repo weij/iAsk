@@ -12,33 +12,33 @@ Capistrano::Configuration.instance.load do
 
     desc "Init magent with bluepill"
     task :init do
-      rvmsudo "bluepill load #{magent_remote_config}"
+      run "bluepill load #{magent_remote_config} --no-privileged"
     end
 
     desc "Start magent with bluepill"
     task :start do
-      rvmsudo "bluepill magent start"
+      run "bluepill magent start --no-privileged"
     end
 
     desc "Restart magent with bluepill"
     task :restart do
-      rvmsudo "bluepill magent restart"
+      run "bluepill magent restart --no-privileged"
     end
 
     desc "Stop magent with bluepill"
     task :stop do
-      rvmsudo "bluepill magent stop"
+      run "bluepill magent stop --no-privileged"
     end
 
     desc "Display the bluepill status"
     task :status do
-      rvmsudo "bluepill magent status"
+      run "bluepill magent status --no-privileged"
     end
 
     desc "Stop magent and quit bluepill"
     task :quit do
-      rvmsudo "bluepill magent stop"
-      rvmsudo "bluepill magent quit"
+      run "bluepill magent stop --no-privileged"
+      run "bluepill magent quit --no-privileged"
     end
   end
 end

@@ -1,9 +1,6 @@
 
-
 Capistrano::Configuration.instance.load do
-  set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
-  set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids logs db db/mongo db/redis system) unless exists?(:shared_dirs)
-    
+  
   set :web_server, :nginx         unless exists?(:web_server)
   set :app_server, :unicorn       unless exists?(:app_server)
   set :application_port, 80       unless exists?(:application_port)
@@ -15,7 +12,11 @@ Capistrano::Configuration.instance.load do
   set :rails_env, 'production' unless exists?(:rails_env)
   
   set(:pids_path) { File.join(shared_path, "pids") } unless exists?(:pids_path)
+  set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
     
+  set :monitorer, 'bluepill' unless exists?(:monitorer)
+  
+  set :shared_dirs, %w(config config/pills uploads backup bundle tmp sockets pids log db db/mongo db/redis system) unless exists?(:shared_dirs)
     
   namespace :app do
     task :setup, :roles => :app do

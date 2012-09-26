@@ -6,7 +6,6 @@ Capistrano::Configuration.instance.load do
   end
     
   after "deploy:update_code" do
-    run "echo '---------------echo -------------------------------'"
     symlinks.make
     bundler.install
   end

@@ -15,7 +15,7 @@ Capistrano::Configuration.instance.load do
   set(:redis_remote_config) { "#{shared_path}/config/redis.conf" } unless exists?(:redis_remote_config)
   
   set(:mongo_dbpath) { "#{shared_path}/db/mongo/" } unless exists?(:mongo_dbpath)  
-  set(:mongo_logpath) { "#{shared_path}/logs/mongo.log" } unless exists?(:mongo_logpath)  
+  set(:mongo_logpath) { "#{shared_path}/log/mongo.log" } unless exists?(:mongo_logpath)  
   
   def redis_start_cmd
     "start-stop-daemon --start --quiet --umask 007 --pidfile #{redis_pid} --chuid #{user}:#{group} "\
