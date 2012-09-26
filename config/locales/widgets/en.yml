@@ -120,3 +120,6 @@ en:
     about:
       title: About
       description: "This widget displays a short description of your group."
+    hello:
+       title: hello
+       description: "Hello World!"
