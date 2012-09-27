@@ -127,7 +127,7 @@ class Notifier < ActionMailer::Base
                        :locale => @language)
     @ip = ip
     mail(:to => AppConfig.exception_notification["exception_recipients"],
-         :from => "Shapado[feedback] <#{AppConfig.notification_email}>",
+         :from => "Ask Vanceinfo <#{AppConfig.notification_email}>",
          :subject => @subject,
          :date => Time.now) do |format|
       format.text
@@ -226,7 +226,7 @@ class Notifier < ActionMailer::Base
   def from_email(group)
     #TODO
     #"#{group ? group.name : AppConfig.application_name} <notifications@#{Rails.application.config.action_mailer.default_url_options[:host]}>"
-    "#{group ? group.name : AppConfig.application_name} <#{AppConfig.notification_email}>"
+    "Ask Vanceinfo <#{AppConfig.notification_email}>"
   end
 
   def language_for(user=nil)

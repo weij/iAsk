@@ -42,7 +42,7 @@ namespace :deploy do
     magent.restart
     bluepill.restart
     
-    xapit.restart
+#    xapit.restart
 
     run "rm -rf #{current_path}/tmp/cache/*"
   end
