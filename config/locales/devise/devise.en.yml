@@ -61,5 +61,6 @@ en:
         link: 'Change my password'
       confirm_account:
         welcome: Welcome
+        hello: 'Hello World!'
         instruction1: 'You can confirm your account through the link below:'
         link: 'Confirm my account'
