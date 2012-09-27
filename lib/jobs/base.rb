@@ -42,6 +42,8 @@ module Jobs
           end
         end
 
+#TODO we don't need twitter
+=begin
         if user.notification_opts.badges_to_twitter
           token = badge.name(user.language)
           group_name = group.name
@@ -50,6 +52,7 @@ module Jobs
           txt = I18n.t("jobs.base.create_badge.send_twitter", :link => link, :token => "##{token}", :group_name => "##{group_name}") # TODO: link the twitter account
           user.twitter_client.update(txt)
         end
+        
         if group.notification_opts.badges_to_twitter
           token = badge.name(user.language)
           group_name = group.name
@@ -60,6 +63,8 @@ module Jobs
                        :group_name => "##{group_name}") # TODO: link the twitter account
           group.twitter_client.update(txt)
         end
+=end
+
       end
     end
 
