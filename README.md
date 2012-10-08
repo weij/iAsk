@@ -39,25 +39,29 @@
     ~~~
 
 
-2. Prepare for deploy      
+2. Prepare for deploy       
     cap production deploy:setup  
-    cap production deploy:update
+    cap production nginx:start
 
 3. Prepare the dependency data server    
     cap production db:mongodb:start    
-    cap production db:redis:start    
+    cap production db:redis:start 
     
-4. Start the index engine server     
+4. Setup bluepill
+    cap production symlinks:make
+    cap production bluepill:init
+    cap production magent:init
+    
+5. Do the deployment      
+    cap production deploy
+    
+6. Start the index engine server     
     cap production xapit:start
-
-5. Start the server      
-    cap production unicorn:start    
-    cap production nginx:start
     
     
 ## Quickly Redeploy     
-    cap production deploy:update
-    cap production unicorn:restart   
+    cap production deploy
+    
     
 Or (if you want to deal with the cache issues.)   
     cap production deploy:update

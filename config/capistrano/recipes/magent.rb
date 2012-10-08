@@ -41,4 +41,9 @@ Capistrano::Configuration.instance.load do
       run "bluepill magent quit --no-privileged"
     end
   end
+  
+  after 'deploy:setup' do
+    magent.setup if Capistrano::CLI.ui.agree("Create magent configuration file?[Yn]")
+  end if is_using('bluepill', :monitorer)
+  
 end
