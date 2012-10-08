@@ -52,6 +52,9 @@ module Jobs
       if user.comments_count_on(group) >= 10
         create_badge(user, group, :token => "commentator", :source => comment, :unique => true)
       end
+
+#TODO we don't need twitter
+=begin
       if user.notification_opts.comments_to_twitter
         shortlink = shorten_url(link, commentable)
         author = user
@@ -74,6 +77,7 @@ module Jobs
         status = make_status(message, shortlink, 138)
         group.twitter_client.update(status)
       end
+=end
     end
 
     def self.on_follow(follower_id, followed_id, group_id)
