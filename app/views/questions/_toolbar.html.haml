@@ -46,11 +46,11 @@
         %li.no-spam.action
           = link_to t("#{i18n_scope}.flag"), new_question_flag_path(@question), :title => t("#{i18n_scope}.flag_tooltip"), :id => "flag_question", :class => "flag-link", "data-lazy" => "1", :rel => 'nofollow', :class => "show_form"
 
-    - if logged_in?
-      -if current_user.can_create_reward?(@question)
-        %li.add_reward.action
-          = link_to t("#{i18n_scope}.create_reward"), "#", :rel => "nofollow", :id => "add_reward", :class => "show_form", :title => t("#{i18n_scope}.create_reward_description")
-      = render "requests_menu", :question => @question, :i18n_scope => i18n_scope
+    /- if logged_in?
+    /  -if current_user.can_create_reward?(@question)
+    /    %li.add_reward.action
+    /      = link_to t("#{i18n_scope}.create_reward"), "#", :rel => "nofollow", :id => "add_reward", :class => "show_form", :title => t("#{i18n_scope}.create_reward_description")
+    /  = render "requests_menu", :question => @question, :i18n_scope => i18n_scope
 
     %li.followUp.action
       = link_to t("#{i18n_scope}.follow_up"), new_question_path(:from_question => @question.id), :rel => "nofollow", :title => t("#{i18n_scope}.follow_up_description")
