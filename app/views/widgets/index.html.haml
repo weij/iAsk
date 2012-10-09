@@ -4,14 +4,12 @@
 %p.description
   =t(".description")
 
-%ul.admin-nav
-  %li.mainlist_widgets
-    = link_to t(".mainlist_widgets"), widgets_path(:tab=>"mainlist"), :title => t(".mainlist_widgets_title")
-  %li.question_widgets
-    = link_to t(".question_widgets"), widgets_path(:tab=>"question"), :title => t(".question_widgets_title")
-  %li.external_widgets
-    = link_to t(".external_widgets"), widgets_path(:tab=>"external"), :title => t(".external_widgets_title")
 
+%ul.admin-nav
+  -['mainlist', 'question', 'ask', 'badges', 'external'].each do |tab|
+    %li{class: "#{tab}_widgets"}
+      = link_to t(".#{tab}_widgets"),  widgets_path(:tab=>tab), :title => t(".#{tab}_widgets_title")
+ 
 .widgets-admin
 
   .select-widget

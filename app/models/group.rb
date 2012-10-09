@@ -114,7 +114,10 @@ class Group
 
   embeds_one :mainlist_widgets, :class_name => "WidgetList", :as => "group_mainlist_widgets"
   embeds_one :question_widgets, :class_name => "WidgetList", :as => "group_questions"
+  embeds_one :ask_widgets, :class_name => "WidgetList", :as => "group_ask"
+  embeds_one :badges_widgets, :class_name => "WidgetList", :as => "group_badges"
   embeds_one :external_widgets, :class_name => "WidgetList", :as => "group_external"
+
 
   references_many :badges, :dependent => :destroy, :validate => false
   references_many :questions, :dependent => :destroy, :validate => false
@@ -341,6 +344,8 @@ class Group
   def reset_widgets!
     self.question_widgets = WidgetList.new
     self.mainlist_widgets = WidgetList.new
+    self.ask_widgets = WidgetList.new
+    self.badges_widgets = WidgetList.new
     self.external_widgets = WidgetList.new
     self.create_default_widgets
 
@@ -620,6 +625,8 @@ class Group
   def create_widget_lists
     self.mainlist_widgets = WidgetList.new
     self.question_widgets = WidgetList.new
+    self.ask_widgets = WidgetList.new
+    self.badges_widgets = WidgetList.new
     self.external_widgets = WidgetList.new
   end
 

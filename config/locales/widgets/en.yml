@@ -14,9 +14,13 @@ en:
       welcome_widgets: Welcome
       mainlist_widgets: Main list
       question_widgets: Question
+      ask_widgets: ASK
+      badges_widgets: Badges
       external_widgets: External
       mainlist_widgets_title: Widgets that will appear on the main list of questions
       question_widgets_title: Widgets that will appear on each question page
+      ask_widgets_title: Widgets that will appear on the ask question page
+      badges_widgets_title: Widgets that will appear on badges page
       external_widgets_title: Widgets that you will be able to embed on your own site
       header: Header
       zone: "Page's section:"

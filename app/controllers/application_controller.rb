@@ -200,7 +200,21 @@ class ApplicationController < ActionController::Base
   end
 
   def widgets_context(controller, action)
-    @widgets_context ||= (controller == "questions" && action == "show" && @question.present?) ? 'question' : 'mainlist'
+    @widgets_context ||= case controller
+      when 'questions'
+        case action
+          when 'show'
+            'question'
+          when 'new'
+            'ask'
+          else
+            'mainlist'
+        end
+      when 'badges'
+        'badges'
+      else
+        'mainlist'
+    end
   end
 
   def layout_for_theme

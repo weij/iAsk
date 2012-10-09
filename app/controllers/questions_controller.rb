@@ -203,7 +203,6 @@ class QuestionsController < ApplicationController
     if @question.reward && @question.reward.ends_at < Time.now
       Jobs::Questions.async.close_reward(@question.id).commit!(1)
     end
-
     options = {:banned => false}
     options[:_id] = {:$ne => @question.answer_id} if @question.answer_id
     @answers = @question.answers.where(options).

@@ -6,7 +6,9 @@ class WidgetsController < ApplicationController
 
   subtabs :widgets => [[:mainlist, "mainlist"],
                        [:question, "question"],
-                       [:external, "external"]]
+                       [:external, "external"], 
+                       [:ask, "ask"], 
+                       [:badges, "badges"]]
 
   # GET /widgets
   # GET /widgets.json
