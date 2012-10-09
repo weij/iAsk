@@ -15,8 +15,8 @@
     #container{:class => @current_class}
       = show_flash_messages(:class => "flash", :markdown => true)
       #columns
-        %section.content-panel#ask-question
-          #ask-question{style: "float: left; width: 700px; margin-top: 20px"}
+        %section.content-panel.ask-question
+          .ask_question{style: "float: left; width: 700px; margin-top: 20px"}
             - if params[:controller] =~ /moderate\//
               = render "shared/moderate_navigation"
             = yield

@@ -113,7 +113,7 @@ Questions = function() {
       target : $("#related_questions"),
       fields : $("form#ask_question input[type=text][name*=question]"),
       behaviour : "focusout",
-      timeout : 2500,
+      timeout : 500,
       extraParams : { 'format' : 'js',
                       'per_page' : 5,
                       mini: true
