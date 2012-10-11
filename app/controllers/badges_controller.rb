@@ -11,7 +11,7 @@ class BadgesController < ApplicationController
       conditions[:type] = params[:filter]
     end
 
-    @badges = Badge.collection.master.group({key: [:token, :type, :for_tag], initial: {count: 3}, reduce: "function(doc, prev) { prev.count += 1}", cond: conditions}).map do |attrs|
+    @badges = Badge.collection.master.group({key: [:token, :type, :for_tag], initial: {count: 0}, reduce: "function(doc, prev) { prev.count += 1}", cond: conditions}).map do |attrs|
       Badge.new(attrs)
     end
 

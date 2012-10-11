@@ -55,6 +55,10 @@ class Badge
       "gold"
     end
   end
+  
+  def self.count(token)
+    Badge.where(:token => token, :group_id => current_group.id).count
+  end
 
   def to_param
     self.token

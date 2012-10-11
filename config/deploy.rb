@@ -40,7 +40,9 @@ namespace :deploy do
     assets.package
 
     magent.restart
-    bluepill.restart
+#TODO    bluepill.restart
+    bluepill.stop
+    bluepill.start
     
 #    xapit.restart
 
