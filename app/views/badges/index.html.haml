@@ -33,7 +33,7 @@
 
             = pjax_link_to badge.name, "badges", badge_path(link_params), {:class => "badge #{badge.type}", :title => badge.description}
             .counter
-              == × #{Badge.count(badge["token"])}
+              == × #{Badge.count(badge["token"], current_group)}
         %td
           .badge_description
             =badge.description

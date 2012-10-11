@@ -56,7 +56,7 @@ class Badge
     end
   end
   
-  def self.count(token)
+  def self.count(token, current_group)
     Badge.where(:token => token, :group_id => current_group.id).count
   end
 
