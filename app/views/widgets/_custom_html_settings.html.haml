@@ -4,11 +4,14 @@
 .field
   %h3= t('widgets.settings.content')
   = label "settings[content[#{default_lang}]]", language_desc(default_lang), :class => "label"
-  = text_area_tag "settings[content[#{default_lang}]]", widget.settings["content"][default_lang], :class => "text_field"
+  = text_field_tag "settings[title[#{default_lang}]]", widget.settings["title"][default_lang], :class => "text_field", :placeholder => "Title"
+  = text_area_tag "settings[content[#{default_lang}]]", widget.settings["content"][default_lang], :class => "text_field", :placeholder => "Content"
   .lang-fields
     -langs.each do |lang|
       %div{:id => "content-#{lang}"}
+        = label "settings[title[#{lang}]]", language_desc(lang), class: 'label'
+        = text_field_tag "settings[title[#{lang}]]", widget.settings["title"][lang], :class => "text_field"
         = label "settings[content[#{lang}]]", language_desc(lang), class: 'label'
-        =text_area_tag "settings[content[#{lang}]]", widget.settings["content"][lang], :class => "text_field"
+        = text_area_tag "settings[content[#{lang}]]", widget.settings["content"][lang], :class => "text_field"
 
 = render :partial => "shared/external_widget_settings", :locals => {:widget => widget}

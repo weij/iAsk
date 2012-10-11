@@ -1,4 +1,4 @@
-=form_for(widget, :url => widget_path(widget, :tab => tab), :class => "form widgets-settings") do |f|
+=form_for(widget, :url => widget_path(widget, :tab => tab), :html => {:class => "form widgets-settings"}) do |f|
   = hidden_field_tag "position", position
   .field
     .checkbox

@@ -1,7 +1,8 @@
 
 .module.clearfix.widget.block{:class => 'widget-about'}
-  %h3= I18n.t(:"devise.mailer.confirm_account.welcome")
-
+  -if !(widget.settings||{})["notitle"]
+    %h3= I18n.t(:"devise.mailer.confirm_account.welcome")
+    
   %aside
     .markdown
       = find_and_preserve(shapado_auto_link(markdown(widget.content)))
