@@ -1,5 +1,3 @@
-
-= render "shared/widgets", :context => 'mainlist', :position => 'header'
 %header
   -announcements = current_announcements(session[:announcement_hide_time])
   -unless announcements.empty?

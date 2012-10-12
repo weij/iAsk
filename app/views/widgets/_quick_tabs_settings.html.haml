@@ -1,0 +1,8 @@
+- langs = current_group.languages.sort
+- default_lang = langs.delete(current_group.language) || current_group.language
+
+.field
+  %h3= t('widgets.settings.style')
+  = label "settings[style]", "Style", :class => "label"
+  = text_field_tag "settings[style]", widget.settings["style"], :class => "text_field", :placeholder => "Style"
+  

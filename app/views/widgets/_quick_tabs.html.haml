@@ -1,0 +1,4 @@
+.widget-quick_tabs{style: "#{widget.style}"}
+  - questions_link =  questions_link_for(params[:context])        
+  = render "shared/content-nav", :questions_link => questions_link
+

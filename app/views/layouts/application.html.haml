@@ -6,12 +6,11 @@
   %body{:class => bodys_class(params)}
     #feedback-btn
       %p=link_to "Feedback", feedback_path
-    = render_app_config
+    .render_app_config
+      = render_app_config
     = render :partial => "shared/topbar"
-    .quick_tabs{style: "background-color:#E9E9E1; clear:both;"}
-      -if !(params[:controller] =~ /moderate\//)
-        - questions_link =  questions_link_for(params[:context])        
-        = render "shared/content-nav", :questions_link => questions_link
+    = render "shared/widgets", :context => 'mainlist', :position => 'header'
+
     #container{:class => @current_class}
       = show_flash_messages(:class => "flash", :markdown => true)
       #columns
@@ -19,7 +18,7 @@
         -["column3", "column2"].each do |c|
           =render "shared/layout/#{c}"
 
-      /= render "shared/widgets", :context => 'mainlist', :position => 'footer'
+      = render "shared/widgets", :context => 'mainlist', :position => 'footer'
 
       = render "shared/layout/footer"
 
