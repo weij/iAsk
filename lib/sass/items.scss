@@ -50,9 +50,9 @@ $dark_topbar_color: $topbar_color;
   background-repeat: repeat-x;
 
   @if lightness($topbar_color) > 90% {
-    @include background-image(linear-gradient($topbar_color, darken($topbar_color, lightness($topbar_color) - 90%) 75%, darken($topbar_color, lightness($topbar_color) - 90%)));}
+    @include background-image(linear-gradient(#E0E0E0, #16160F 45%, #16160F));}
   @else {
-    @include background-image(linear-gradient(lighten($topbar_color, 20%), $topbar_color 75%, $topbar_color));
+    @include background-image(linear-gradient(#E0E0E0, #16160F 45%, #16160F));
   }
 
   ul.menubar {
