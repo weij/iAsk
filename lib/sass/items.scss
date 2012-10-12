@@ -268,9 +268,9 @@ div.jHtmlArea {
   background: $border_color; }
 
 .badge {
-  background-color: $light_brand_color;
+  background-color: #EDF3F4;
   @include border-radius(4px);
-  border: 1px solid darken($light_brand_color, 20%);
+  box-shadow: 0 0 5px #D3D6D7;
   &:hover {
     border: 1px solid darken($light_brand_color, 20%);
     background-color: darken($light_brand_color, 20%);
