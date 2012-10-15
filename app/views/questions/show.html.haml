@@ -23,10 +23,7 @@
       %ul.tag-list.clearfix{style: "margin-left:10px; padding:0"}
         - @question.tags.each do |tag|
           %li.tag
-            = tag_link(tag)
-        - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
-          %li.retag
-            = link_to t('.retag'), retag_question_path(@question), class: 'retag-link'
+            = tag_link(tag)        
             
       .clear{style: "clear:both; border-top:1px solid #efefef; margin-left:15px;"}
 

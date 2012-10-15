@@ -20,6 +20,9 @@
 
 .toolbar
   %ul.menubar
+    - if logged_in? && (current_user.can_modify?(@question) || current_user.can_retag_others_questions_on?(current_group))
+      %li.retag
+        = link_to t('.retag'), retag_question_path(@question), class: 'retag-link'
     -if !logged_in? || current_user.can_answer_on?(current_group)
       %li.answer.action
         = link_to t("questions.question.answer_verb"), "#to_answer", :id => "add_answer", :title => t("#{i18n_scope}.to_answer_question")

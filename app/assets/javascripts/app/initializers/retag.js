@@ -1,8 +1,10 @@
 $(document).ready(function() {
   $('.retag-link').live('click',function(){
     var link = $(this);
+    var tag_list = link.parent('.retag').parents('.main-content').children('.tag-list');
     link.parent('.retag').hide();
-    link.parent('.retag').parent('.tag-list').find('.tag').hide();
+    tag_list.find('.tag').parent('li').hide();
+    tag_list.find('.tag:parent').css('border', 'none');
     $.ajax({
       dataType: "json",
       type: "GET",
@@ -10,7 +12,7 @@ $(document).ready(function() {
       extraParams : { 'format' : 'js'},
       success: function(data) {
         if(data.success){
-          link.parents(".tag-list").before(data.html);
+          tag_list.before(data.html);
           $(".chosen-retag").ajaxChosen({
             method: 'GET',
             url: '/questions/tags_for_autocomplete.js',
@@ -18,13 +20,11 @@ $(document).ready(function() {
           }, function (data) {
             var terms = {};
             $.each(data, function (i, val) {
-              console.log('i: ' + i)
-              console.log('val: ' + "[" + val.caption + ", " + val.value + "]")
               terms[val["value"]] = val["caption"];
             });
 
-          return terms;
-        });
+            return terms;
+          });
         } else {
             Messages.show(data.message, "error");
             if(data.status == "unauthenticate") {
@@ -50,12 +50,11 @@ $(document).ready(function() {
       success: function(data, textStatus) {
           if(data.success) {
               var tags = $.map(data.tags, function(n){
-                  return '<li><a class="tag" rel="tag" href="/questions/tags/'+n+'">'+n+'</a></li>'
+                return '<li><a class="tag" rel="tag" href="/questions/tags/'+n+'">'+n+'</a></li>'
               })
-              form.next('.tag-list').find('li a.tag').remove();
+              form.next('.tag-list').find('li>.tag').parent('li').remove();
               form.next('.tag-list').prepend($.unique(tags).join(''));
               form.remove();
-              console.log(tags.join(''))
               $('.retag').show();
               Messages.show(data.message, "notice");
           } else {
@@ -76,8 +75,9 @@ $(document).ready(function() {
   $('.cancel-retag').live('click', function(){
       var link = $(this);
       var form = link.parents('form');
-      form.next('.tag-list').find('.tag').show();
-      form.next('.tag-list').find('.retag').show();
+      var toolbar = form.parent('.main-content');
+      form.next('.tag-list').find('.tag').parent('li').show();
+      toolbar.find('.retag').show();
       form.remove();
       return false;
   });
