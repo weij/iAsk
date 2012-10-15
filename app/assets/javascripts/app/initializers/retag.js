@@ -4,7 +4,7 @@ $(document).ready(function() {
     var tag_list = link.parent('.retag').parents('.main-content').children('.tag-list');
     link.parent('.retag').hide();
     tag_list.find('.tag').parent('li').hide();
-    tag_list.find('.tag:parent').css('border', 'none');
+    tag_list.find('.tag:parent');
     $.ajax({
       dataType: "json",
       type: "GET",

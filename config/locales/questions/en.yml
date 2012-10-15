@@ -57,6 +57,7 @@ en:
       asked_on: "asked on"
       last_activity: Latest activity
       retag: Retag
+      edit_tag: Edit this question's tag 
       unauthenticated_retag: You need an account to retag questions
       request_closing: Request closing
       request_closing_details: Request to close this question
