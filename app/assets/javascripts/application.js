@@ -2,7 +2,7 @@
 //= require jquery_ujs
 
 //= require app/modules/effects.js
-//= require vendor/chosen.jquery.min.js
+//= require vendor/chosen.jquery.js
 //= require vendor/ajax-chosen.js
 //= require vendor/jquery.cookie.js
 //= require vendor/jquery.pjax.js

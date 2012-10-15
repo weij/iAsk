@@ -37,8 +37,7 @@ $(document).ready(function() {
 	
 	$('.search_box,:password').val('');
 	
-
-
-  Loader.initialize($body, true);
+	
+	Loader.initialize($body, true);
 });
 
