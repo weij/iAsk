@@ -55,7 +55,7 @@
         -if @active_subtab=="newest"
           %time{:pubdate => "pubdate", :datetime => last_target_date.iso8601}
             = pjax_link_to t("time.ago", :time => time_ago_in_words(question.created_at)), "question", question_path(question, :anchor => last_target_id)
-            by
+            =" by "
           -if creator
             =render :partial => "users/user_data", :locals => {:user => creator}
           -else
