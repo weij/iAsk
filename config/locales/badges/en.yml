@@ -99,6 +99,7 @@ en:
         name: Student
         description: Asked a question with at least one up vote
       shapado:
+        name: iAsk
         description: Visited the site each day for 8 consecutive days
       editor:
         name: Editor
