@@ -348,7 +348,6 @@ class Group
     self.badges_widgets = WidgetList.new
     self.external_widgets = WidgetList.new
     self.create_default_widgets
-
   end
 
   def create_default_widgets

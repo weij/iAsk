@@ -9,7 +9,7 @@
     .render_app_config
       = render_app_config
     = render :partial => "shared/topbar"
-    = render "shared/widgets", :context => 'mainlist', :position => 'header'
+    = render "shared/widgets", :position => 'header'
 
     #container{:class => @current_class}
       = show_flash_messages(:class => "flash", :markdown => true)
@@ -18,7 +18,7 @@
         -["column3", "column2"].each do |c|
           =render "shared/layout/#{c}"
 
-      = render "shared/widgets", :context => 'mainlist', :position => 'footer'
+      = render "shared/widgets", :position => 'footer'
 
       = render "shared/layout/footer"
 

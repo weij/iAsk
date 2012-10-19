@@ -1,0 +1,11 @@
+header:
+  questions: 
+    new: ask
+sidebar:
+  questions:
+    new: ask
+    show: question
+  question: question
+  badges: 
+    index: badges
+    show: badges

@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
   rescue_from Error404, :with => :render_404
   rescue_from Mongoid::Errors::DocumentNotFound, :with => :render_404
 
+  
   protected
 
   def check_mobile_logout
@@ -216,7 +217,7 @@ class ApplicationController < ActionController::Base
         'mainlist'
     end
   end
-
+  
   def layout_for_theme
     if @template_format == 'mustache'
       current_group.current_theme.has_layout_html?

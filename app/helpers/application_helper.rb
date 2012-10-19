@@ -1,7 +1,20 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   include RailsRinku
-
+    
+  def find_widgets(position)
+    context = @widgets_context
+    @mainlist ||= current_group.send(:mainlist_widgets)
+    widget_list = current_group.send(:"#{context}_widgets")
+    if widget_list
+      widgets = widget_list.send(position)
+      if !widgets || widgets.empty?
+        widgets = @mainlist.send(position)
+      end
+      widgets
+    end
+  end
+  
   def default_adsense(position)
     return if position == 'navbar'
     settings = AppConfig.default_adsense[position]
@@ -19,7 +32,6 @@ module ApplicationHelper
         </script>".html_safe
     ad
   end
-  
   
 
   def known_languages(user, group)
