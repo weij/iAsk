@@ -68,6 +68,12 @@ module QuestionsHelper
     url.html_safe
   end
 
+  def time_format(time)
+    time = time.split(" ")
+    size = time.size
+    date = time[size-3].to_s+" "+time[size-2].to_s+" "+time[size-1].to_s
+  end
+
   protected
   def escape_url(url)
     URI.escape(url, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))

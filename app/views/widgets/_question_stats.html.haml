@@ -1,0 +1,22 @@
+.module.clearfix.widget.block{:class => 'widget-question_stats'}
+  = render "widgets/header", :widget => widget
+  %aside
+    -if @question
+      .question_stats
+        %p
+          Asked: 
+          %strong
+            %abbr
+              = time_format(t("time.ago", time: time_ago_in_words(@question.created_at)))
+        %p
+          Seen: 
+          %strong
+            = @question.views_count.to_s+"  times"
+        %p
+          Last updated: 
+          %strong
+            -if @question.last_target_user
+              = time_format(t("time.ago", time: time_ago_in_words(@question.last_target_date)))
+            -else
+              = time_format(t("time.ago", time: time_ago_in_words(@question.created_at)))
+    

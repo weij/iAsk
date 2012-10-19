@@ -89,6 +89,7 @@ en:
       title: Question Badges
       description: "This widget displays badges earned on that question."
     question_stats:
+      title: Stats
       description: "This widget displays stats about a question such as creation date and number of views."
     related_questions:
       title: Related Questions
@@ -124,6 +125,3 @@ en:
     about:
       title: About
       description: "This widget displays a short description of your group."
-    hello:
-       title: hello
-       description: "Hello World!"

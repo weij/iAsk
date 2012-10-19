@@ -1,0 +1,3 @@
+class QuestionStatsWidget < Widget
+  
+end
