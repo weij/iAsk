@@ -1,11 +1,12 @@
--related_questions = Question.related_questions(@question).page(1).per_page(widget.settings['limit']||10)
-- if related_questions && !related_questions.empty?
-  .module.widget.block{:class => 'widget-related_questions'}
-    %h3= I18n.t(:"widgets.#{widget.name}.title")
-    %aside
-      .related_questions
-        %ul.list
-          -related_questions.each do |rq|
-            - if !rq.nil?
-              %li
-                = link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
+-if @question
+  -related_questions = Question.related_questions(@question).page(1).per_page(widget.settings['limit']||10)
+  - if related_questions && !related_questions.empty?
+    .module.widget.block{:class => 'widget-related_questions'}
+      %h3= I18n.t(:"widgets.#{widget.name}.title")
+      %aside
+        .related_questions
+          %ul.list
+            -related_questions.each do |rq|
+              - if !rq.nil?
+                %li
+                  = link_to h(rq.title), question_path(rq), :title => truncate(strip_tags(rq.body), :length => 200)
