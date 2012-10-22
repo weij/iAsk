@@ -7,7 +7,7 @@
           Asked: 
           %strong
             %abbr
-              = time_format(t("time.ago", time: time_ago_in_words(@question.created_at)))
+              = @question.created_at.strftime("%b %d '%y") 
         %p
           Seen: 
           %strong
@@ -16,7 +16,7 @@
           Last updated: 
           %strong
             -if @question.last_target_user
-              = time_format(t("time.ago", time: time_ago_in_words(@question.last_target_date)))
+              = widget_string_format(t("time.ago", time: time_ago_in_words(@question.last_target_date)))
             -else
-              = time_format(t("time.ago", time: time_ago_in_words(@question.created_at)))
+              = widget_string_format(t("time.ago", time: time_ago_in_words(@question.created_at)))
     

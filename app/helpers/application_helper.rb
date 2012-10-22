@@ -560,4 +560,10 @@ module ApplicationHelper
   def triangle_arrow(tab, icon)
     " #{icon}" if @active_subtab.to_s == tab
   end
+
+  def widget_string_format(time)
+    time = time.split(" ")
+    size = time.size
+    date = time[size-3].to_s+" "+time[size-2].to_s+" "+time[size-1].to_s
+  end
 end
