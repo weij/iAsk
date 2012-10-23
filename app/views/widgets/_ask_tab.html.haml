@@ -1,0 +1,10 @@
+-questions_link =  questions_link_for(params[:context])
+.widget-ask_tab{style: "#{widget.style}"}
+  %nav.content-nav
+    .content-tabs
+      %a{href: url_for(questions_link.merge(:unanswered => 0)), id: "questions"}
+        
+    .content-text
+      %span
+        Please ask your question here
+    .clear{style: "clear:both; width: 100%;"}
