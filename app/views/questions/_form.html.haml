@@ -22,10 +22,10 @@
   =render "shared/editor", local_assigns.merge(markdown: true)
 
 .field
-  = f.label :tags, "#{t(:tags, :scope => "activerecord.attributes.question")}", :class => "label"
+  = f.label :tags, "#{t(:tags, :scope => "activerecord.attributes.question")}", :class => "label",title: t(".tags_tip")
   = f.select :tags, current_group.default_tags && @question.tags, {},{:multiple => true, :selected => @question.tags}
   %small
-    = t(".tags_tip")
+    = "tips: least type 3 char and a space can auto search tags"
 
 .field
   =render "attachment_editor", local_assigns
