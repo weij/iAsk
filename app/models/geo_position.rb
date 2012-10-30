@@ -1,5 +1,5 @@
 class GeoPosition
-  include Mongoid::Fields::Serializable
+#TODO  include Mongoid::Fields::Serializable
 
   attr_reader :lat, :long
 

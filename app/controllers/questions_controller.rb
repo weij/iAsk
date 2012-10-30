@@ -13,21 +13,16 @@ class QuestionsController < ApplicationController
   tabs :default => :questions, :tags => :tags,
        :new => :ask_question
 
-  subtabs :index => [[:newest, [:created_at, Mongo::DESCENDING]],
-                     [:votes, [[:votes_average, Mongo::DESCENDING],
-                               [:views_count, Mongo::DESCENDING]]],
-                     [:activity, [[:last_target_date, Mongo::DESCENDING], 
-                                  [:updated_at, Mongo::DESCENDING], 
-                                  [:activity_at, Mongo::DESCENDING]]],
-                     [:hot, [[:hotness, Mongo::DESCENDING],
-                             [:views_count, Mongo::DESCENDING]]],
-                     [:followers, [:followers_count, Mongo::DESCENDING]],
-                     [:answers, [[:answers_count, Mongo::DESCENDING],
-                                [:accepted, Mongo::DESCENDING]]],
-                     [:expert, [:created_at, Mongo::DESCENDING]]],
-          :show => [[:votes, [:votes_average, Mongo::DESCENDING]], 
-                    [:oldest, [:created_at, Mongo::ASCENDING]], 
-                    [:newest, [:created_at, Mongo::DESCENDING]]]
+  subtabs :index => [[:newest, [:created_at, -1]],
+                     [:votes, [[:votes_average, -1], [:views_count, -1]]],
+                     [:activity, [[:last_target_date, -1], [:updated_at, -1], [:activity_at, -1]]],
+                     [:hot, [[:hotness, -1], [:views_count, -1]]],
+                     [:followers, [:followers_count, -1]],
+                     [:answers, [[:answers_count, -1], [:accepted, -1]]],
+                     [:expert, [:created_at, -1]]],
+          :show => [[:votes, [:votes_average, -1]], 
+                    [:oldest, [:created_at, -1]], 
+                    [:newest, [:created_at, -1]]]
   
   helper :votes
 
@@ -42,10 +37,10 @@ class QuestionsController < ApplicationController
   # - all the questions tagged with one of the tag I follow_up
 
   def index
-    if current_group.current_theme.has_questions_index_html? && current_group.current_theme.questions_index_html.size > 0
-      @template_format = 'mustache'
-      request.format = :mustache
-    end
+#TODO    if current_group.current_theme.has_questions_index_html? && current_group.current_theme.questions_index_html.size > 0
+#TODO      @template_format = 'mustache'
+#TODO      request.format = :mustache
+#TODO    end
     
     #TODO if user go to home page, it should remove some session data.
     if request.path_info == '/'

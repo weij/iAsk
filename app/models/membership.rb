@@ -4,7 +4,7 @@ class Membership
 
   ROLES = %w[user moderator owner]
 
-  identity :type => String
+  field :_id, :type => String
   default_scope where(:state => "active")
 
   field :state, :type => String, :default => 'active'
@@ -31,26 +31,20 @@ class Membership
   field :reputation_today, :type => Hash, :default => {}
 
 
-  referenced_in :user
-  referenced_in :group
+  belongs_to :user
+  belongs_to :group
 
   validates_inclusion_of :role,  :in => ROLES
   validates_presence_of :user
   validates_presence_of :group
   validates_uniqueness_of :user_id, :scope => [:group_id]
 
-  index :group_id
-  index :user_id
-  index :reputation
-  index :state
-  index [
-    [:user_id, Mongo::ASCENDING],
-    [:group_id, Mongo::ASCENDING]
-  ], :unique => true
-  index [
-    [:state, Mongo::ASCENDING],
-    [:group_id, Mongo::ASCENDING]
-  ]
+  index :group_id => 1
+  index :user_id => 1
+  index :reputation => 1
+  index :state => 1
+  index({user_id: 1, group_id: 1}, {unique: true})
+  index({state: 1, group_id: 1})
 
   before_save :update_user_info
   after_create :add_to_user

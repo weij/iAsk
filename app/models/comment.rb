@@ -6,7 +6,7 @@ class Comment
 #   include Shapado::Models::GeoCommon FIXME
 
 
-  identity :type => String
+  field :_id, :type => String
 
   field :body, :type =>  String
   field :language, :type =>  String, :default => "en"
@@ -15,7 +15,7 @@ class Comment
   field :position, :type =>  GeoPosition, :default => GeoPosition.new(0, 0) # FIXME
 
   field :user_id, :type => String
-  referenced_in :user
+  belongs_to :user
 
   embedded_in :commentable, polymorphic: true
 

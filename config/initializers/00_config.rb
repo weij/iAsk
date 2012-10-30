@@ -1,4 +1,4 @@
-require 'magent/web_socket_channel'
+#TODO require 'magent/web_socket_channel'
 
 Rails.application.config.session_options[:domain] = ".#{AppConfig.domain}"
 Rails.application.config.session_options[:key] = AppConfig.session_key

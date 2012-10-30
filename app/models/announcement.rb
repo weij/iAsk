@@ -2,7 +2,7 @@ class Announcement
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  identity :type => String
+  field :_id, :type => String
 
   field :message, :type => String
   field :starts_at, :type => Timestamp
@@ -10,7 +10,7 @@ class Announcement
 
   field :only_anonymous, :type => Boolean, :default => false
 
-  referenced_in :group
+  belongs_to :group
 
   validates_presence_of :message
   validates_presence_of :starts_at

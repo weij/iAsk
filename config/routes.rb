@@ -1,5 +1,5 @@
-ENV["MAGENT_WEB_PATH"] = "/magent"
-require 'magent_web'
+#TODO ENV["MAGENT_WEB_PATH"] = "/magent"
+#TODO require 'magent_web'
 
 #ENV["BUGHUNTER_PATH"] = "/errors"
 #require 'bug_hunter'
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   match '/facebook' => "facebook#index", :as => :facebook, :method => :any
   match '/facebook/enable_page' => 'facebook#enable_page', :as => :enable_page_facebook
 
-  mount MagentWeb.app => ENV["MAGENT_WEB_PATH"]
+#  mount MagentWeb.app => ENV["MAGENT_WEB_PATH"]
 #  mount BugHunter.app => ENV["BUGHUNTER_PATH"]
 
   match '/facts' => redirect("/")

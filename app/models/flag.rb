@@ -10,15 +10,16 @@ class Flag
 
   REASONS = ["spam", "offensive", "attention"]
 
-  identity :type => String
+  field :_id, :type => String
 
-  field :reason, :type => String, :required => true, :default => "spam"
+  field :reason, :type => String, :default => "spam"
 
   field :user_id, :type => String
-  referenced_in :user
+  belongs_to :user
 
   embedded_in :flaggable, :polymorphic => true, :inverse_of => :flags
 
+  validates_presence_of :reason
   validates_presence_of :flaggable
   validates_presence_of :user
   validates_inclusion_of :reason, :in => REASONS

@@ -3,7 +3,7 @@ class Tag
   include Mongoid::Timestamps
   include MongoidExt::Storage
 
-  identity :type => String
+  field :_id, :type => String
   paginates_per 100
 
   field :name,  :type => String
@@ -16,11 +16,11 @@ class Tag
 
   file_key :icon, :max_length => 256.kilobytes
 
-  referenced_in :group
-  referenced_in :user
+  belongs_to :group
+  belongs_to :user
 
-  index :name
-  index :group_id
+  index :name => 1
+  index :group_id => 1
 
   validates_uniqueness_of :name, :scope => :group_id, :allow_blank => false
 

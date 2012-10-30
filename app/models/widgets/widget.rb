@@ -1,7 +1,7 @@
 class Widget
   include Mongoid::Document
 
-  identity :type => String
+  field :_id, :type => String
   field :name, :type => String
   field :settings, :type => Hash
   field :position, :type => String

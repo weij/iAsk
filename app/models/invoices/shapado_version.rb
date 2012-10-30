@@ -1,7 +1,7 @@
 class ShapadoVersion
   include Mongoid::Document
 
-  field :token, :type => String, :index => true
+  field :token, :type => String
   field :price, :type => Integer
 
   field :page_views, :type => Integer
@@ -14,8 +14,11 @@ class ShapadoVersion
   field :phone_support, :type => Boolean
   field :uses_stripe, :type => Boolean
 
-  references_many :groups, :validate => false
-
+#  references_many :groups, :validate => false
+  has_many :groups, :validate => false
+  
+  index({token: 1}, {sparse: true})
+  
   validates_presence_of :token, :price
   validates_uniqueness_of :token
 
@@ -69,6 +72,7 @@ class ShapadoVersion
     return unless AppConfig.is_shapadocom
 
     versions_data = YAML.load_file("#{Rails.root}/config/versions.yml")
+    puts versions_data
 
     versions_data.each do |token, data|
       version = ShapadoVersion.where(:token => token).first

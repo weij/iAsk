@@ -9,25 +9,32 @@ class User
   include Shapado::Models::Networks
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-         :lockable, :token_authenticatable, :encryptable, :trackable, :omniauthable, :confirmable, :encryptor => :restful_authentication_sha1
+         :lockable, :token_authenticatable, :encryptable, :trackable, :omniauthable, 
+         :confirmable, :encryptor => :restful_authentication_sha1
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
   LOGGED_OUT_LANGUAGE_FILTERS = %w[any] + AVAILABLE_LANGUAGES
 
-  identity :type => String
-  field :login,                     :type => String, :limit => 40
-  index :login
+  #TODO identity :type => String
+  field :_id,                       :type => String
+  #TODO  field :login,                     :type => String,  :limit => 40
+  field :login,                     :type => String
+  index :login => 1
+  validates   :login,               length: {mininum: 3, maximum: 40}
 
-  field :name,                      :type => String, :limit => 100, :default => '', :null => true
+  field :name,                      :type => String, :default => ''
+  validates   :name,                length: {mininum: 3, maximum: 100, allow_blank: true}
 
-  field :bio,                       :type => String, :limit => 200
-  field :website,                   :type => String, :limit => 200
-  field :location,                  :type => String, :limit => 200
+  field :bio,                       :type => String #TODO, :limit => 200
+  field :website,                   :type => String #TODO, :limit => 200
+  field :location,                  :type => String #TODO, :limit => 200
+  validates :bio, :website, :location, length: {mininum: 0, maximum: 200}
+  
   field :birthday,                  :type => Time
 
   field :identity_url,              :type => String
-  index :identity_url
+  index :identity_url => 1
 
   field :role,                      :type => String, :default => "user"
   field :last_logged_at,            :type => Time
@@ -35,10 +42,11 @@ class User
   field :preferred_languages,       :type => Set, :default => []
 
   field :language,                  :type => String, :default => "en"
-  index :language
+  index :language => 1
   field :timezone,                  :type => String
-  field :language_filter,           :type => String, :default => "user", :in => LANGUAGE_FILTERS
-
+  field :language_filter,           :type => String, :default => "user" #TODO, :in => LANGUAGE_FILTERS
+  validates :language_filter,       inclusion: {in: LANGUAGE_FILTERS}
+  
   field :ip,                        :type => String
   field :country_code,              :type => String
   field :country_name,              :type => String, :default => "unknown"
@@ -51,11 +59,12 @@ class User
 
   field :group_ids,                 :type => Array, :default => []
 
-  field :feed_token,                :type => String, :default => lambda { BSON::ObjectId.new.to_s }
+  field :feed_token,                :type => String, :default => lambda { Moped::BSON::ObjectId.new.to_s }
+#TODO  field :feed_token,                :type => String, :default => lambda { BSON::ObjectId.new.to_s }
   field :socket_key,                :type => String, :default => lambda { BSON::ObjectId.new.to_s }
 
   field :anonymous,                 :type => Boolean, :default => false
-  index :anonymous
+  index :anonymous => 1
 
   attr_accessible :anonymous, :login
 
@@ -68,19 +77,20 @@ class User
   field :use_gravatar, :type => Boolean, :default => true
   file_list :thumbnails
 
-  referenced_in :friend_list
+  #TODO referenced_in :friend_list
+  belongs_to :friend_list
 
-  references_many :memberships, :class_name => "Membership", :validate => false
-  references_many :owned_groups, :inverse_of => :user, :class_name => "Group", :validate => false
-  references_many :questions, :dependent => :destroy, :validate => false
-  references_many :answers, :dependent => :destroy, :validate => false
-  references_many :badges, :dependent => :destroy, :validate => false
-  references_many :searches, :dependent => :destroy, :validate => false
-  references_many :activities, :dependent => :destroy, :validate => false
-  references_many :invitations, :dependent => :destroy, :validate => false
-  references_one :external_friends_list, :dependent => :destroy, :validate => false
+  has_many :memberships, :class_name => "Membership", :validate => false
+  has_many :owned_groups, :inverse_of => :user, :class_name => "Group", :validate => false
+  has_many :questions, :dependent => :destroy, :validate => false
+  has_many :answers, :dependent => :destroy, :validate => false
+  has_many :badges, :dependent => :destroy, :validate => false
+  has_many :searches, :dependent => :destroy, :validate => false
+  has_many :activities, :dependent => :destroy, :validate => false
+  has_many :invitations, :dependent => :destroy, :validate => false
+  has_one :external_friends_list, :dependent => :destroy, :validate => false
 
-  references_one :read_list, :dependent => :destroy, :validate => false
+  has_one :read_list, :dependent => :destroy, :validate => false
 
   before_create :initialize_fields
   after_create :create_lists

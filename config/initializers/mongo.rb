@@ -1,3 +1,4 @@
+=begin
 Magent.setup(YAML.load_file(Rails.root.join('config', 'magent.yml')),
                   Rails.env, {})
 
@@ -16,3 +17,4 @@ Dir.glob("#{Rails.root}/app/javascripts/**/*.js") do |js_path|
 end
 
 Mongoid.config.raise_not_found_error = false
+=end

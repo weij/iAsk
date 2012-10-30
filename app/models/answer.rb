@@ -11,44 +11,45 @@ class Answer
 
   track_activities :user, :question, :body, :language, :scope => [:group_id] do |activity, answer|
     question = answer.question
-    follower_ids = question.follower_ids+question.contributor_ids
+    follower_ids = question.follower_ids + question.contributor_ids
     follower_ids.delete(activity.user_id)
     activity.add_followers(*follower_ids)
   end
 
-  identity :type => String
+  field :_id, :type => String
 
-  field :body, :type => String, :required => true
+  field :body, :type => String
   field :language, :type =>  String, :default => "en"
-  index :language
+  index :language => 1
   field :flags_count, :type =>  Integer, :default => 0
   field :banned, :type =>  Boolean, :default => false
-  index :banned
+  index :banned => 1
   field :wiki, :type => Boolean, :default => false
   field :anonymous, :type => Boolean, :default => false
-  index :anonymous
+  index :anonymous => 1
   field :short_url, :type => String
 
   field :rewarded, :type => Boolean, :default => false
 
   field :favoriters_count, :type => Integer, :default => 0
-  references_and_referenced_in_many :favoriters, :class_name => "User", :validate => false
+  has_and_belongs_to_many :favoriters, :class_name => "User", :validate => false
 
-  referenced_in :group
-  index :group_id
+  belongs_to :group
+  index :group_id => 1
 
-  referenced_in :user
-  index :user_id
+  belongs_to :user
+  index :user_id => 1
 
-  referenced_in :updated_by, :class_name => "User"
-  referenced_in :original_question, :class_name => "Question"
+  belongs_to :updated_by, :class_name => "User"
+  belongs_to :original_question, :class_name => "Question"
 
-  referenced_in :question
-  index :question_id
+  belongs_to :question
+  index :question_id => 1
 
   embeds_many :flags, :as => :flaggable
   embeds_many :comments, :as => :commentable
 
+  validates_presence_of :body
   validates_presence_of :user_id
   validates_presence_of :question_id
 

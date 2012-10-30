@@ -14,12 +14,12 @@ class Group
                  "support", "survey", "download", "downloads", "faqs", "wiki",
                  "assets1", "assets2", "assets3", "assets4", "staging", "code"]
 
-  identity :type => String
+  field :_id, :type => String
 
   field :name, :type => String
   field :subdomain, :type => String
   field :domain, :type => String
-  index :domain, :unique => true
+  index({ domain: 1 }, { unique: true })
   field :legend, :type => String
   field :description, :type => String
   field :default_tags, :type => Array, :default => []
@@ -37,10 +37,10 @@ class Group
 
   field :language, :type => String
   field :languages, :type => Set, :default => Set.new
-  index :languages
+  index :languages => 1
 
   field :activity_rate, :type => Float, :default => 0.0
-  index :activity_rate
+  index :activity_rate => 1
 
   field :openid_only, :type => Boolean, :default => false
   field :registered_only, :type => Boolean, :default => false
@@ -99,18 +99,18 @@ class Group
   slug_key :name, :unique => true
   filterable_keys :name
 
-  referenced_in :shapado_version, :class_name => "ShapadoVersion"
+  belongs_to :shapado_version, :class_name => "ShapadoVersion"
   field :next_recurring_charge, :type => Time
 
   field :stripe_balance, :type => String
   field :stripe_customer_id, :type => String
-  index :stripe_customer_id
+  index :stripe_customer_id => 1
 
   field :has_late_payment, :type => Boolean, :default => false
   field :upcoming_invoice, :type => Hash
 
-  references_many :tags, :dependent => :destroy, :validate => false
-  references_many :activities, :dependent => :destroy, :validate => false
+  has_many :tags, :dependent => :destroy, :validate => false
+  has_many :activities, :dependent => :destroy, :validate => false
 
   embeds_one :mainlist_widgets, :class_name => "WidgetList", :as => "group_mainlist_widgets"
   embeds_one :question_widgets, :class_name => "WidgetList", :as => "group_questions"
@@ -119,20 +119,20 @@ class Group
   embeds_one :external_widgets, :class_name => "WidgetList", :as => "group_external"
 
 
-  references_many :badges, :dependent => :destroy, :validate => false
-  references_many :questions, :dependent => :destroy, :validate => false
-  references_many :answers, :dependent => :destroy, :validate => false
-  references_many :pages, :dependent => :destroy, :validate => false
-  references_many :announcements, :dependent => :destroy, :validate => false
-  references_many :constrains_configs, :dependent => :destroy, :validate => false
-  references_many :invitations, :dependent => :destroy, :validate => false
-  references_many :themes, :dependent => :destroy, :validate => false
-  references_many :memberships, :dependent => :destroy, :validate => false
-  referenced_in :current_theme, :class_name => "Theme"
+  has_many :badges, :dependent => :destroy, :validate => false
+  has_many :questions, :dependent => :destroy, :validate => false
+  has_many :answers, :dependent => :destroy, :validate => false
+  has_many :pages, :dependent => :destroy, :validate => false
+  has_many :announcements, :dependent => :destroy, :validate => false
+  has_many :constrains_configs, :dependent => :destroy, :validate => false
+  has_many :invitations, :dependent => :destroy, :validate => false
+  has_many :themes, :dependent => :destroy, :validate => false
+  has_many :memberships, :dependent => :destroy, :validate => false
+  belongs_to :current_theme, :class_name => "Theme"
 
-  references_many :invoices, :dependent => :destroy, :validate => false
+  has_many :invoices, :dependent => :destroy, :validate => false
 
-  referenced_in :owner, :class_name => "User"
+  belongs_to :owner, :class_name => "User"
   embeds_many :comments
   embeds_one :stats, :class_name => "GroupStat"
 
@@ -142,8 +142,7 @@ class Group
   validates_length_of       :name,           :in => 3..40
   validates_length_of       :description,    :in => 3..10000, :allow_blank => true
   validates_length_of       :legend,         :maximum => 50
-  validates_length_of       :default_tags,   :in => 0..15,
-      :message =>  I18n.t('activerecord.models.default_tags_message')
+  validates_length_of       :default_tags,   :in => 0..15,    :message =>  I18n.t('activerecord.models.default_tags_message')
   validates_uniqueness_of   :name
   validates_uniqueness_of   :subdomain
   validates_uniqueness_of   :domain
@@ -190,10 +189,7 @@ class Group
     users = User.where(:_id.in => ids)
   end
 
-  index([
-    [:state, Mongo::ASCENDING],
-    [:domain, Mongo::ASCENDING],
-  ], :unique => true)
+  index({state: 1, domain: 1}, {unique: true})
 
   # TODO: store this variable
   def has_custom_domain?

@@ -1,3 +1,4 @@
+=begin
 module Mongoid
   module State
     alias :new? :new_record?
@@ -13,3 +14,4 @@ module Mongoid
     end
   end
 end
+=end

@@ -22,20 +22,16 @@ class Question
     activity.add_followers(*follower_ids)
   end
 
-  index :tags
-  index [
-    [:group_id, Mongo::ASCENDING],
-    [:banned, Mongo::ASCENDING],
-    [:language, Mongo::ASCENDING]
-  ]
+  index :tags => 1
+  index({:group_id => 1, :banned => 1, :language => 1})
 
-  identity :type => String
+  field :_id, :type => String
 
   field :title, :type => String, :default => ""
   field :body, :type => String
   slug_key :title, :unique => true, :min_length => 8
   field :slugs, :type => Array, :default  => []
-  index :slugs
+  index :slugs => 1
 
   field :answers_count, :type => Integer, :default => 0
   field :views_count, :type => Integer, :default => 0
@@ -46,48 +42,46 @@ class Question
 
   field :adult_content, :type => Boolean, :default => false
   field :banned, :type => Boolean, :default => false
-  index :banned
+  index :banned => 1
   field :accepted, :type => Boolean, :default => false
   field :closed, :type => Boolean, :default => false
   field :closed_at, :type => Time
 
   field :anonymous, :type => Boolean, :default => false
-  index :anonymous
+  index :anonymous => 1
 
   field :answered_with_id, :type => String
-  referenced_in :answered_with, :class_name => "Answer"
+  belongs_to :answered_with, :class_name => "Answer"
 
   field :wiki, :type => Boolean, :default => false
   field :subjetive, :type => Boolean, :default => false
   field :language, :type => String, :default => "en"
-  index :language
+  index :language => 1
 
   field :activity_at, :type => Time
 
   field :short_url, :type => String
 
-  referenced_in :user
-  index :user_id
+  belongs_to :user
+  index :user_id => 1
 
   field :answer_id, :type => String
-  referenced_in :answer
+  belongs_to :answer
 
-  referenced_in :group
-  index :group_id
+  belongs_to :group
+  index :group_id => 1
 
-  index([
-    [:group_id, Mongo::ASCENDING],
-    [:slug, Mongo::ASCENDING],
-  ], :unique => true, :sparse => true)
+  index({:group_id => 1, :slug => 1}, {:unique => true, :sparse => true})
 
   field :followers_count, :type => Integer, :default => 0
-  references_and_referenced_in_many :followers, :class_name => "User", :validate => false
+  has_and_belongs_to_many :followers, :class_name => "User", :validate => false
+
 
   field :contributors_count, :type => Integer, :default => 0
-  references_and_referenced_in_many :contributors, :class_name => "User", :validate => false
+  has_and_belongs_to_many :contributors, :class_name => "User", :validate => false
 
   field :updated_by_id, :type => String
-  referenced_in :updated_by, :class_name => "User"
+  belongs_to :updated_by, :class_name => "User"
 
   field :close_reason_id, :type => String
 
@@ -103,10 +97,10 @@ class Question
 #   referenced_in :last_target, :polymorphic => true
 
   field :last_target_user_id, :type => String
-  referenced_in :last_target_user, :class_name => "User"
+  belongs_to :last_target_user, :class_name => "User"
 
-  references_many :answers, :dependent => :destroy, :validate => false
-  references_many :badges, :as => "source", :validate => false
+  has_many :answers, :dependent => :destroy, :validate => false
+  has_many :badges, :as => "source", :validate => false
 
   embeds_many :comments, :as => :commentable#, :order => "created_at asc"
   embeds_many :flags, :as => "flaggable", :validate => false

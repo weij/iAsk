@@ -4,7 +4,8 @@ module OmniAuth
       include OmniAuth::Strategy
 
       def initialize(app, options = {}, &block)
-        super(app, :sso, options, &block)
+        super(app, options, &block)
+        #TODO super(app, :sso, options, &block)
         @sso_url = nil
       end
 
