@@ -1,7 +1,7 @@
 class Reward
   include Mongoid::Document
 
-  identity :type => String
+  field :_id, :type => String
 
   field :started_at, :type => Time, :default => Time.now
   field :ends_at, :type => Time
@@ -9,7 +9,7 @@ class Reward
   field :active, :type => Boolean, :default => true
   field :reputation, :type => Integer
 
-  referenced_in :created_by, :class_name => "User"
+  belongs_to :created_by, :class_name => "User"
   embedded_in :question, :inverse_of => :reward
 
   validates_presence_of :reputation

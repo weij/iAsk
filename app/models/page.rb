@@ -14,7 +14,7 @@ class Page
     activity.add_followers(*follower_ids)
   end
 
-  identity :type => String
+  field :_id, :type => String
   field :title, :type => String
   field :body, :type => String
   field :wiki, :type => Boolean, :default => false
@@ -22,10 +22,10 @@ class Page
   field :language, :type => String
   field :adult_content, :type => Boolean, :default => false
 
-  referenced_in :user
-  referenced_in :group
+  belongs_to :user
+  belongs_to :group
 
-  referenced_in :updated_by, :class_name => "User"
+  belongs_to :updated_by, :class_name => "User"
 
   slug_key :title, :unique => true, :min_length => 3
 

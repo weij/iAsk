@@ -2,11 +2,11 @@ class Invitation
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  identity :type => String
+  field :_id, :type => String
   field :token, :type => String
-  index :token
+  index :token => 1
   field :email, :type => String
-  index :email
+  index :email => 1
   field :accepted, :type => Boolean, :default => false
   field :state, :type => String, :default => "pending"
   field :accepted_by, :type => String
@@ -14,8 +14,8 @@ class Invitation
   field :user_role, :type => String, :default => "user"
   field :body, :type => String
 
-  referenced_in :group
-  referenced_in :user
+  belongs_to :group
+  belongs_to :user
 
   before_create :generate_token
 

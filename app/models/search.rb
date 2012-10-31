@@ -2,7 +2,7 @@ class Search
   include Mongoid::Document
   include MongoidExt::Slugizer
 
-  identity :type => String
+  field :_id, :type => String
 
   field :name, :type => String
   field :query, :type => String
@@ -10,8 +10,8 @@ class Search
 
   slug_key :name
 
-  referenced_in :group
-  referenced_in :user
+  belongs_to :group
+  belongs_to :user
 
   validates_presence_of :name
   validates_presence_of :query
