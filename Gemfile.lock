@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jameszhan/mongoid_ext.git
-  revision: b41998112ab55df47151e4f1bdf90dac5abd0b8a
+  revision: 23d76789ebed84eb236a2a7b04872cd9b29ac4b7
   specs:
     mongoid_ext (0.8.0)
       differ (>= 0.1.2)
@@ -377,6 +377,7 @@ DEPENDENCIES
   mechanize
   mini_magick (~> 2.3)
   mongoid
+  mongoid-grid_fs
   mongoid_ext!
   mustache
   niftier-generators (= 0.1.2)

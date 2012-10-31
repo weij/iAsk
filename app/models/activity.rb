@@ -6,7 +6,7 @@ class Activity
 
   ACTIONS = %w[create update destroy]
 
-  identity :type => String
+  field :_id, :type => String
 
   field :action, :type => String
   field :scope, :type => Hash
@@ -15,10 +15,10 @@ class Activity
   field :times, :type => Integer, :default => 1
 
   field :group_id, :type => String
-  referenced_in :group
+  belongs_to :group
 
   field :user_id, :type => String
-  referenced_in :user
+  belongs_to :user
 
   field :trackable_info, :type => Hash
   field :trackable_param, :type => String
@@ -31,7 +31,7 @@ class Activity
 
   field :follower_ids, :type => Array, :default => []
 
-  index :action
+  index :action => 1
 
   before_validation :store_user_name, :on => :create
   validates_presence_of :user

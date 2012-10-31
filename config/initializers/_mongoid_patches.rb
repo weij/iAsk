@@ -1,9 +1,11 @@
-=begin
+
 module Mongoid
   module State
     alias :new? :new_record?
   end
 end
+
+=begin
 
 module Mongoid
   module Keys

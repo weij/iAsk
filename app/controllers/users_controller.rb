@@ -9,10 +9,10 @@ class UsersController < ApplicationController
   before_filter :check_signup_type, :only => [:new]
   before_filter :track_pageview
 
-  tab_config = [[:newest, [:created_at, Mongo::DESCENDING]],
-                [:hot, [:hotness, Mongo::DESCENDING]],
-                [:votes, [:votes_average, Mongo::DESCENDING], [:created_at, Mongo::DESCENDING]],
-                [:oldest, [:created_at, Mongo::ASCENDING]]]
+  tab_config = [[:newest, [:created_at, -1]],
+                [:hot, [:hotness, -1]],
+                [:votes, [:votes_average, -1], [:created_at, -1]],
+                [:oldest, [:created_at, 1]]]
 
   subtabs :index => [[:reputation, "reputation"],
                      [:newest, %w(joined_at desc)],

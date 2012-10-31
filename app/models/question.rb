@@ -177,7 +177,7 @@ class Question
     opts[:group_id] = question.group_id
     opts[:banned] = false
 
-    if question.new_record?
+    if question.new?
       question.language = nil
     elsif question.language
       opts[:language] = question.language
