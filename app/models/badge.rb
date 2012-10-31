@@ -17,17 +17,17 @@ class Badge
     @tokens ||= GOLD + SILVER + BRONZE
   end
 
-  identity :type => String
+  field :_id, :type => String
 
-  referenced_in :user
+  belongs_to :user
   validates_presence_of :user
 
-  referenced_in :group
+  belongs_to :group
   validates_presence_of :group
 
   field :token, :type => String
   validates_presence_of :token
-  index :token
+  index :token => 1
 
   field :type, :type => String
   validates_presence_of :type
