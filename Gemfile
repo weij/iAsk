@@ -28,7 +28,7 @@ gem 'mustache'
 
 # mongodb
 gem 'mongoid'
-gem 'mongo_store', :git => 'git://github.com/jameszhan/mongo_store.git'
+#gem 'mongo_store', :git => 'git://github.com/jameszhan/mongo_store.git'
 gem 'mongoid_ext', :git => 'git://github.com/jameszhan/mongoid_ext.git'
 
 gem 'xapian-ruby', '1.2.7.1'
