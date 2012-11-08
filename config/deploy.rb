@@ -2,33 +2,34 @@ set :application, "iask"
 set :asset_packager, "jammit"
 set :deploy_to, "/opt/var/deploy/iask"
 
-set :user, "expedia"
-set :password, "expedia"
+set :user, "deploy"
+set :password, "123456"
 set :use_sudo, false
 
 #sudo: no tty present and no askpass program specified
 default_run_options[:pty] = true
 
-set :group, "expedia"
+set :group, "deploy"
 
 set :default_environment, {
-  'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.3-p194',
-  'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p194:/usr/local/rvm/gems/ruby-1.9.3-p194@global',
-  'PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p194/bin:/usr/local/rvm/gems/ruby-1.9.3-p194@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p194/bin:/usr/local/rvm/bin:$PATH',
-  'RUBY_VERSION' => 'ruby-1.9.3-p194'
+  'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.3-p286',
+  'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p286:/usr/local/rvm/gems/ruby-1.9.3-p286@global',
+  'PATH' => '/usr/local/rvm/gems/ruby-1.9.3-p286/bin:/usr/local/rvm/gems/ruby-1.9.3-p286@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p286/bin:/usr/local/rvm/bin:$PATH',
+  'RUBY_VERSION' => 'ruby-1.9.3-p286'
 }
 
 task :production do |t|
   set :repository, "git@github.com:birdnest/iAsk.git"
-  set :branch, "master"
+  set :branch, "deploy"
   set :rails_env, :production
   set :unicorn_workers, 6 
 
   set :scm, :git
   
-  role :web, "172.18.6.88"
-  role :app, "172.18.6.88"
-  role :db,  "172.18.6.88", :primary => true
+  role :web, "172.18.6.86"
+  role :app, "172.18.6.86"
+  role :redis, "172.18.6.86"
+  role :db,  "172.18.6.80", :primary => true
 end
 
 namespace :deploy do

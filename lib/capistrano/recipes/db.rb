@@ -3,19 +3,19 @@ require 'erb'
 Capistrano::Configuration.instance.load do
   
   # Defines where the db pid will live.
-  set(:mongo_pid) { File.join(pids_path, "mongo.pid") } unless exists?(:mongo_pid)
+  set(:mongo_pid) { File.join(opt_pids_path, "mongo.pid") } unless exists?(:mongo_pid)
   set(:redis_pid) { File.join(pids_path, "redis.pid") } unless exists?(:redis_pid)
   
   set(:mongo_daemon) { "/usr/bin/mongod" } unless exists?(:mongo_daemon)  
   set(:redis_daemon) { "/usr/bin/redis-server" } unless exists?(:redis_daemon)
   
   set(:mongo_local_config) { "#{templates_path}/mongodb.conf.erb" } unless exists?(:mongo_local_config)
-  set(:mongo_remote_config) { "#{shared_path}/config/mongodb.conf" } unless exists?(:mongo_remote_config)  
+  set(:mongo_remote_config) { "/opt/etc/mongo/master.conf" } unless exists?(:mongo_remote_config)  
   set(:redis_local_config) { "#{templates_path}/redis.conf.erb" } unless exists?(:redis_local_config)
   set(:redis_remote_config) { "#{shared_path}/config/redis.conf" } unless exists?(:redis_remote_config)
   
-  set(:mongo_dbpath) { "#{shared_path}/db/mongo/" } unless exists?(:mongo_dbpath)  
-  set(:mongo_logpath) { "#{shared_path}/log/mongo.log" } unless exists?(:mongo_logpath)  
+  set(:mongo_dbpath) { "/opt/var/db/mongo/master" } unless exists?(:mongo_dbpath)  
+  set(:mongo_logpath) { "/opt/var/log/mongo/master.log" } unless exists?(:mongo_logpath)  
   
   def redis_start_cmd
     "start-stop-daemon --start --quiet --umask 007 --pidfile #{redis_pid} --chuid #{user}:#{group} "\
@@ -43,19 +43,19 @@ Capistrano::Configuration.instance.load do
     
     namespace :redis do
       desc "|capistrano-recipes| start the redis"
-      task :start, :roles => :db, :only => { :primary => true } do
+      task :start, :roles => :redis do
         run redis_start_cmd do |ch, stream, out|
           puts out
         end
       end
       desc "|capistrano-recipes| stop the redis"
-      task :stop, :roles => :db, :only => { :primary => true } do
+      task :stop, :roles => :redis do
         run redis_stop_cmd do |ch, stream, out|
           puts out
         end
       end
       desc "|capistrano-recipes| restart the redis"
-      task :restart, :roles => :db, :only => { :primary => true } do
+      task :restart, :roles => :redis do
         redis.stop
         redis.start
       end
@@ -177,9 +177,9 @@ production:
   database: #{application}-production
       EOF
 
-      put db_config.result(binding), "#{shared_path}/config/mongoid.yml"
+      put db_config.result(binding), "#{shared_path}/config/mongoid.yml", :roles => [:app]
       
-      generate_config(mongo_local_config, mongo_remote_config)   
+      generate_config(mongo_local_config, mongo_remote_config, [:db])   
       generate_config(redis_local_config, redis_remote_config)       
     end
   end

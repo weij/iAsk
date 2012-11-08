@@ -12,6 +12,7 @@ Capistrano::Configuration.instance.load do
   set :rails_env, 'production' unless exists?(:rails_env)
   
   set(:pids_path) { File.join(shared_path, "pids") } unless exists?(:pids_path)
+  set(:opt_pids_path) { File.join("/opt/var/run", "pids") } unless exists?(:opt_pids_path)
   set :sockets_path, "/var/run/#{application}" unless exists?(:sockets_path)
     
   set :monitorer, 'bluepill' unless exists?(:monitorer)

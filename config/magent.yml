@@ -10,4 +10,6 @@ test:
 production:
   database: shapado-magent-production
   websocket_channel: magent.websocket
+  host: 172.18.6.80
+  port: 27017
 

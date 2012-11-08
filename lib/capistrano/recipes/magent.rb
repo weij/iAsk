@@ -11,22 +11,22 @@ Capistrano::Configuration.instance.load do
     end
 
     desc "Init magent with bluepill"
-    task :init do
+    task :init, :roles => :app do
       run "bluepill load #{magent_remote_config} --no-privileged"
     end
 
     desc "Start magent with bluepill"
-    task :start do
+    task :start, :roles => :app do
       run "bluepill magent start --no-privileged"
     end
 
     desc "Restart magent with bluepill"
-    task :restart do
+    task :restart, :roles => :app do
       run "bluepill magent restart --no-privileged"
     end
 
     desc "Stop magent with bluepill"
-    task :stop do
+    task :stop, :roles => :app do
       run "bluepill magent stop --no-privileged"
     end
 
