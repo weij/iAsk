@@ -1,14 +1,12 @@
 Capistrano::Configuration.instance.load do
   # These are set to the same structure in shared <=> current
-  set :normal_symlinks, %w(tmp log config/mongoid.yml config/auth_providers.yml) unless exists?(:normal_symlinks)
+  _cset :normal_symlinks, %w(config/mongoid.yml config/auth_providers.yml)  
 
   # Weird symlinks go somewhere else. Weird.
-  set :weird_symlinks, { 'bundle' => 'vendor/bundle',
-                         'pids' => 'tmp/pids', 
-                         'log'  => 'tmp/log'} unless exists?(:weird_symlinks)
+  _cset :weird_symlinks, { 'bundle' => 'vendor/bundle' }  
 
-  set(:auth_local_config) { "#{templates_path}/auth_providers.yml.erb" } unless exists?(:auth_local_config)
-  set(:auth_remote_config) { "#{shared_path}/config/auth_providers.yml" } unless exists?(:auth_remote_config)
+  _cset(:auth_local_config) { "#{templates_path}/auth_providers.yml.erb" }  
+  _cset(:auth_remote_config) { "#{shared_path}/config/auth_providers.yml" }  
   
   
   namespace :symlinks do

@@ -1,8 +1,8 @@
 Capistrano::Configuration.instance.load do
-  set(:magent_queue, :default) unless exists?(:magent_queue)
-  set(:magent_grace_time, 120) unless exists?(:magent_grace_time)
-  set(:magent_local_config) { "#{templates_path}/magent.bluepill.erb" } unless exists?(:magent_local_config)
-  set(:magent_remote_config) { "#{shared_path}/config/pills/magent.pill" } unless exists?(:magent_remote_config)
+  _cset(:magent_queue, :default)  
+  _cset(:magent_grace_time, 120)  
+  _cset(:magent_local_config) { "#{templates_path}/magent.bluepill.erb" }  
+  _cset(:magent_remote_config) { "#{shared_path}/config/pills/magent.pill" } 
 
   namespace :magent do
     desc "Configure magent pill"
@@ -42,8 +42,6 @@ Capistrano::Configuration.instance.load do
     end
   end
   
-  after 'deploy:setup' do
-    magent.setup if Capistrano::CLI.ui.agree("Create magent configuration file?[Yn]")
-  end if is_using('bluepill', :monitorer)
+
   
 end

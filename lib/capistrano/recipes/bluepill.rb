@@ -1,6 +1,6 @@
 Capistrano::Configuration.instance.load do
-  set(:bluepill_local_config) { "#{templates_path}/app.bluepill.erb" } unless exists?(:bluepill_local_config)
-  set(:bluepill_remote_config) { "#{shared_path}/config/pills/#{application}.pill" } unless exists?(:bluepill_remote_config)
+  _cset(:bluepill_local_config) { "#{templates_path}/app.bluepill.erb" }  
+  _cset(:bluepill_remote_config) { "#{shared_path}/config/pills/#{application}.pill" } 
 
   namespace :bluepill do
     desc "|capistrano-recipes| Parses and uploads bluepill configuration for this app."
@@ -67,8 +67,4 @@ Capistrano::Configuration.instance.load do
     end
   end
 
-  after 'deploy:setup' do
-    bluepill.install if Capistrano::CLI.ui.agree("Do you want to install the bluepill monitor? [Yn]")
-    bluepill.setup if Capistrano::CLI.ui.agree("Create bluepill configuration file? [Yn]")
-  end if is_using('bluepill', :monitorer)
 end

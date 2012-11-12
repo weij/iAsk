@@ -1,7 +1,7 @@
 Capistrano::Configuration.instance.load do  
 
   # Defines where the unicorn pid will live.
-  set(:xapit_pid) { File.join(pids_path, "xapit.pid") } unless exists?(:xapit_pid)
+  _cset(:xapit_pid) { File.join(pids_path, "xapit.pid") } 
 
   set(:xapit_local_yml) { File.join(templates_path, "xapit.yml.erb") }
   set(:xapit_remote_yml) { "#{shared_path}/config/xapit.yml" }
@@ -51,7 +51,4 @@ Capistrano::Configuration.instance.load do
     end
   end
 
-  after 'deploy:setup' do
-    xapit.setup if Capistrano::CLI.ui.agree("Create xapit configuration file? [Yn]")
-  end  
 end

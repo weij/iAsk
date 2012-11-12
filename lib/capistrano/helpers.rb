@@ -67,11 +67,11 @@ end
 # Generates a configuration file parsing through ERB
 # Fetches local file and uploads it to remote_file
 # Make sure your user has the right permissions.
-def generate_config(local_file,remote_file)
+def generate_config(local_file, remote_file, roles = :app)
   temp_file = '/tmp/' + File.basename(local_file)
   buffer    = parse_config(local_file)
   File.open(temp_file, 'w+') { |f| f << buffer }
-  upload temp_file, remote_file, :via => :scp
+  upload temp_file, remote_file, :via => :scp, :roles => roles
   `rm #{temp_file}`
 end
 

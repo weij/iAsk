@@ -3,24 +3,24 @@ Capistrano::Configuration.instance.load do
   # Number of workers (Rule of thumb is 1 per CPU)
   # Just be aware that every worker needs to cache all classes and thus eat some
   # of your RAM.
-  set :unicorn_workers, 4 unless exists?(:unicorn_workers)
+  _cset :unicorn_workers, 4 
 
   # Workers timeout in the amount of seconds below, when the master kills it and
   # forks another one.
-  set :unicorn_workers_timeout, 30 unless exists?(:unicorn_workers_timeout)
+  _cset :unicorn_workers_timeout, 30  
 
   # Workers are started with this user/group
   # By default we get the user/group set in capistrano.
-  set(:unicorn_user) { user }   unless exists?(:unicorn_user)
-  set(:unicorn_group) { group } unless exists?(:unicorn_group)
+  _cset(:unicorn_user) { user }    
+  _cset(:unicorn_group) { group }  
 
   # The wrapped bin to start unicorn
   # This is necessary if you're using rvm
-  set :unicorn_bin, 'unicorn' unless exists?(:unicorn_bin)
-  set :unicorn_socket, File.join(sockets_path,'unicorn.sock') unless exists?(:unicorn_socket)
+  _cset :unicorn_bin, 'unicorn' 
+  _cset :unicorn_socket, File.join(sockets_path,'unicorn.sock') 
 
   # Defines where the unicorn pid will live.
-  set(:unicorn_pid) { File.join(pids_path, "unicorn.pid") } unless exists?(:unicorn_pid)
+  _cset(:unicorn_pid) { File.join(pids_path, "unicorn.pid") }  
 
   # Our unicorn template to be parsed by erb
   # You may need to generate this file the first time with the generator
@@ -77,7 +77,4 @@ Capistrano::Configuration.instance.load do
     end
   end
 
-  after 'deploy:setup' do
-    unicorn.setup if Capistrano::CLI.ui.agree("Create unicorn configuration file? [Yn]")
-  end if is_using_unicorn
 end

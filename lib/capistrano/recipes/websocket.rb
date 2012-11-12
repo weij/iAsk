@@ -1,6 +1,7 @@
 Capistrano::Configuration.instance.load do
   
   set(:websocket_remote_config) { "#{shared_path}/config/pills/websocket.pill"}
+  
   namespace :websocket do
     desc "setup websocket pill"
     task :setup do
