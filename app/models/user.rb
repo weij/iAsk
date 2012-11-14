@@ -9,7 +9,9 @@ class User
   include Shapado::Models::Networks
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-         :lockable, :token_authenticatable, :encryptable, :trackable, :omniauthable, :confirmable, :encryptor => :restful_authentication_sha1
+         :lockable, :token_authenticatable, :encryptable, :trackable, :omniauthable, 
+         #:confirmable, 
+         :encryptor => :restful_authentication_sha1
 
   ROLES = %w[user moderator admin]
   LANGUAGE_FILTERS = %w[any user] + AVAILABLE_LANGUAGES
