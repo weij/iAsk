@@ -15,8 +15,8 @@ server {
 
     # path for static files
     root <%= deploy_to %>/current/public;
-    access_log <%= deploy_to %>/shared/log/nginx.access.log;
-    error_log  <%= deploy_to %>/shared/log/nginx.error.log;
+    access_log <%= shared_path %>/log/nginx.access.log;
+    error_log  <%= shared_path %>/log/nginx.error.log;
 
     # this rewrites all the requests to the maintenance.html
     # page if it exists in the doc root. This is for capistrano's

@@ -7,13 +7,14 @@ Capistrano::Configuration.instance.load do
   end
   
   after "deploy:setup" do
-    db.setup if Capistrano::CLI.ui.agree("Create mongoid.yml in app's shared path? [Yn]")
+    db.mongodb.setup_mongoid if Capistrano::CLI.ui.agree("Create mongoid.yml in app's shared path? [Yn]")
+    db.mongodb.setup if Capistrano::CLI.ui.agree("Do you want to generate mongo.conf in dbserver. [Yn]")
+    db.redis.setup if Capistrano::CLI.ui.agree("Do you want to generate redis.conf in app server. [Yn]")
   end
   
   after 'deploy:setup' do
     xapit.setup if Capistrano::CLI.ui.agree("Create xapit configuration file? [Yn]")
   end
-
   
   after 'deploy:setup' do
     magent.setup if Capistrano::CLI.ui.agree("Create magent configuration file?[Yn]")
@@ -39,7 +40,5 @@ Capistrano::Configuration.instance.load do
     bundler.install
   end
   
-  after 'deploy:update', 'assets:symlink'
-  after 'deploy:update', 'assets:precompile'
   
 end

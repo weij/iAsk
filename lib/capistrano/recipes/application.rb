@@ -16,7 +16,7 @@ Capistrano::Configuration.instance.load do
     
   _cset :monitorer, 'bluepill' 
   
-  set :shared_dirs, %w(config config/pills uploads backup bundle sockets db db/mongo db/redis)
+  set :shared_dirs, %w(config config/pills uploads backup bundle sockets db db/mongo db/redis tmp tmp/logs)
  
   namespace :app do
     task :setup, :roles => :app do

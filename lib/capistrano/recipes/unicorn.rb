@@ -1,5 +1,5 @@
 Capistrano::Configuration.instance.load do
-  
+
   # Number of workers (Rule of thumb is 1 per CPU)
   # Just be aware that every worker needs to cache all classes and thus eat some
   # of your RAM.

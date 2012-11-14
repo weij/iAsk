@@ -27,7 +27,7 @@ Capistrano::Configuration.instance.load do
   namespace :xapit do
     desc "|capistrano-recipes| Starts xapit directly"
     task :start, :roles => :app do
-      run "cd #{current_path} && #{xapit_start_cmd}"
+      run "cd #{latest_release} && #{xapit_start_cmd}"
     end
 
     desc "|capistrano-recipes| Stops xapit directly"

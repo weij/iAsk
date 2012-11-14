@@ -4,8 +4,7 @@ Capistrano::Configuration.instance.load do
 
   namespace :bluepill do
     desc "|capistrano-recipes| Parses and uploads bluepill configuration for this app."
-    task :setup, :roles => :app , :except => { :no_release => true } do
-      #TODO
+    task :setup, :roles => :app, :except => { :no_release => true } do
       sudo "mkdir -p /var/run/bluepill"
       sudo "chown #{user}:#{group} /var/run/bluepill"
       generate_config(bluepill_local_config, bluepill_remote_config)
@@ -17,12 +16,12 @@ Capistrano::Configuration.instance.load do
     end
 
     desc "|capistrano-recipes| Install the bluepill monitoring tool"
-    task :install, :roles => [:app] do
+    task :install, :roles => :app do
       run "gem install bluepill"
     end
 
     desc "|capistrano-recipes| Stop processes that bluepill is monitoring and quit bluepill"
-    task :quit, :roles => [:app] do
+    task :quit, :roles => :app do
       args = exists?(:options) ? options : ''
       begin
         run "bluepill stop #{args} --no-privileged"
@@ -34,33 +33,33 @@ Capistrano::Configuration.instance.load do
     end
 
     desc "|capistrano-recipes| Load the pill from {your-app}/config/pills/{app-name}.pill"
-    task :init, :roles =>[:app] do
+    task :init, :roles => :app do
       run "bluepill load #{shared_path}/config/pills/#{application}.pill --no-privileged"
     end
 
     desc "|capistrano-recipes| Starts your previous stopped pill"
-    task :start, :roles =>[:app] do
+    task :start, :roles => :app do
       args = exists?(:options) ? options : ''
       app = exists?(:app) ? app : application
       run "bluepill #{app} start #{args} --no-privileged"
     end
 
     desc "|capistrano-recipes| Stops some bluepill monitored process"
-    task :stop, :roles =>[:app] do
+    task :stop, :roles => :app do
       args = exists?(:options) ? options : ''
       app = exists?(:app) ? app : application
       run "bluepill #{app} stop #{args} --no-privileged"
     end
 
     desc "|capistrano-recipes| Restarts the pill from {your-app}/config/pills/{app-name}.pill"
-    task :restart, :roles =>[:app] do
+    task :restart, :roles => :app do
       args = exists?(:options) ? options : ''
       app = exists?(:app) ? app : application
       run "bluepill #{app} restart #{args} --no-privileged"
     end
 
     desc "|capistrano-recipes| Prints bluepills monitored processes statuses"
-    task :status, :roles => [:app] do
+    task :status, :roles => :app do
       args = exists?(:options) ? options : ''
       app = exists?(:app) ? app : application
       run "bluepill #{app} status #{args} --no-privileged"
