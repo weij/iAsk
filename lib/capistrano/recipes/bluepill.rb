@@ -1,6 +1,6 @@
 Capistrano::Configuration.instance.load do
-  _cset(:bluepill_local_config) { "#{templates_path}/app.bluepill.erb" }  
-  _cset(:bluepill_remote_config) { "#{shared_path}/config/pills/#{application}.pill" } 
+  _cset(:bluepill_local_config) { File.join(templates_path, "app.bluepill.erb") }  
+  _cset(:bluepill_remote_config) { File.join(shared_path, "config/pills/#{application}.pill") } 
 
   namespace :bluepill do
     desc "|capistrano-recipes| Parses and uploads bluepill configuration for this app."

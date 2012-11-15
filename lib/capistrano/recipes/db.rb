@@ -2,20 +2,21 @@ require 'erb'
 
 Capistrano::Configuration.instance.load do
   
-  # Defines where the db pid will live.
-  _cset(:mongo_pid) { File.join("/opt/var/run/mongo", "master.pid") } 
-  _cset(:redis_pid) { File.join(pids_path, "redis.pid") }  
-  
-  _cset(:mongo_daemon) { "/usr/bin/mongod" } 
-  _cset(:redis_daemon) { "/usr/local/bin/redis-server" } 
-  
-  _cset(:mongo_local_config) { "#{templates_path}/mongodb.conf.erb" }  
-  _cset(:mongo_remote_config) { "/opt/etc/mongo/master.conf" }    
-  _cset(:redis_local_config) { "#{templates_path}/redis.conf.erb" } 
-  _cset(:redis_remote_config) { "#{shared_path}/config/redis.conf" }  
-  
+  _cset(:mongo_daemon) { "/usr/bin/env mongod" } 
+  _cset(:mongo_configpath) { "/opt/var/db/mongo" }
   _cset(:mongo_dbpath) { "/opt/var/db/mongo/master" } 
-  _cset(:mongo_logpath) { "/opt/var/log/mongo/master.log" }  
+  _cset(:mongo_pidpath) { "/opt/var/run/mongo" }
+  _cset(:mongo_pid) { File.join(mongo_pidpath, "master.pid") }   
+  _cset(:mongo_logpath) { "/opt/var/log/mongo" }
+  _cset(:mongo_log) { File.join(mongo_logpath, "master.log") }
+  _cset(:mongo_local_config) { File.join(templates_path, "mongodb.conf.erb") }  
+  _cset(:mongo_remote_config) { File.join(mongo_configpath, "master.conf") }
+  
+       
+  _cset(:redis_pid) { File.join(pids_path, "redis.pid") }
+  _cset(:redis_daemon) { "/usr/bin/env redis-server" }
+  _cset(:redis_local_config) { File.join(templates_path, "redis.conf.erb") } 
+  _cset(:redis_remote_config) { File.join(shared_path, "config/redis.conf") }  
   
   def redis_start_cmd
     "start-stop-daemon --start --quiet --umask 007 --pidfile #{redis_pid} --chuid #{user}:#{group} "\
@@ -30,7 +31,7 @@ Capistrano::Configuration.instance.load do
   def mongodb_start_cmd
     "start-stop-daemon --background --start --quiet --pidfile #{mongo_pid} --make-pidfile "\
     "--chuid #{user}:#{group} --exec #{mongo_daemon} -- --dbpath #{mongo_dbpath} "\
-    "--logpath #{mongo_logpath} --config #{mongo_remote_config} run"
+    "--logpath #{mongo_log} --config #{mongo_remote_config} run"
 #    "mongod --logpath=#{shared_path}/logs/mongo.log --dbpath=#{shared_path}/db/mongo/ --fork"
   end
   
@@ -110,12 +111,8 @@ production:
       
       desc "|capistrano-recipes| setup mongo db path and mongo conf file"
       task :setup, :roles => :db do
-        [mongo_logpath, mongo_pid, mongo_remote_config].each do |file|
-          path = File.dirname(file)
+        [mongo_logpath, mongo_dbpath, mongo_pidpath, mongo_configpath].each do |path|
           run "if [ ! -d '#{path}' ]; then mkdir -p #{path}; fi;"
-        end
-        [mongo_dbpath].each do |dir|
-          run "if [ ! -d '#{dir}' ]; then mkdir -p #{dir}; fi;"
         end
         generate_config(mongo_local_config, mongo_remote_config, :db) 
       end

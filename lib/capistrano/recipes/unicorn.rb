@@ -1,34 +1,31 @@
 Capistrano::Configuration.instance.load do
 
   # Number of workers (Rule of thumb is 1 per CPU)
-  # Just be aware that every worker needs to cache all classes and thus eat some
-  # of your RAM.
+  # Just be aware that every worker needs to cache all classes and thus eat some of your RAM.
   _cset :unicorn_workers, 4 
 
-  # Workers timeout in the amount of seconds below, when the master kills it and
-  # forks another one.
+  # Workers timeout in the amount of seconds below, when the master kills it and forks another one.
   _cset :unicorn_workers_timeout, 30  
 
   # Workers are started with this user/group
   # By default we get the user/group set in capistrano.
-  _cset(:unicorn_user) { user }    
-  _cset(:unicorn_group) { group }  
+  _cset(:unicorn_user, user)    
+  _cset(:unicorn_group, group)  
 
   # The wrapped bin to start unicorn
   # This is necessary if you're using rvm
-  _cset :unicorn_bin, 'unicorn' 
-  _cset :unicorn_socket, File.join(sockets_path,'unicorn.sock') 
+  _cset :unicorn_bin, "cd #{current_path} && /usr/bin/env RAILS_ENV=#{rails_env} bundle exec unicorn"
+  _cset(:unicorn_socket){ File.join(sockets_path, 'unicorn.sock') }
 
   # Defines where the unicorn pid will live.
   _cset(:unicorn_pid) { File.join(pids_path, "unicorn.pid") }  
 
   # Our unicorn template to be parsed by erb
-  # You may need to generate this file the first time with the generator
-  # included in the gem
+  # You may need to generate this file the first time with the generator included in the gem
   set(:unicorn_local_config) { File.join(templates_path, "unicorn.rb.erb") }
 
   # The remote location of unicorn's config file. Used by god to fire it up
-  set(:unicorn_remote_config) { "#{shared_path}/config/unicorn.rb" }
+  set(:unicorn_remote_config) { File.join(shared_path, "config/unicorn.rb") }
  
   
   def unicorn_start_cmd

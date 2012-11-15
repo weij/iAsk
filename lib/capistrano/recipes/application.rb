@@ -12,11 +12,12 @@ Capistrano::Configuration.instance.load do
   _cset :rails_env, 'production' 
   
   _cset(:pids_path) { File.join(shared_path, "pids") }  
-  _cset :sockets_path, "/opt/var/run/#{application}"  
-    
-  _cset :monitorer, 'bluepill' 
   
-  set :shared_dirs, %w(config config/pills uploads backup bundle sockets db db/mongo db/redis tmp tmp/logs)
+  _cset(:sockets_path){ File.join(shared_path, "sockets/#{application}") }
+    
+#  _cset :monitorer, 'bluepill' 
+  
+  set :shared_dirs, %w(config uploads backup bundle sockets db db/mongo db/redis tmp tmp/logs)
  
   namespace :app do
     task :setup, :roles => :app do

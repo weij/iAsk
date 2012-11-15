@@ -36,8 +36,11 @@ end
 
 namespace :deploy do
   task :start do
-    bluepill.init   
-    magent.init   
+    db.redis.start
+    unicorn.start
+    xapit.start
+    magent.start
+    nginx.start
   end
   
   task :stop do
@@ -47,11 +50,11 @@ namespace :deploy do
     run "echo '#{`git describe`}' > #{current_path}/public/version.txt"
 #    run "cd #{current_path} && ln -sf #{shared_path}/config/auth_providers.yml #{current_path}/config/auth_providers.yml"
 
-    assets.compass
-    assets.package
+#    assets.compass
+#    assets.package
 
-    magent.restart
-    bluepill.restart
+#    magent.restart
+#    bluepill.restart
     
 #    xapit.restart
 

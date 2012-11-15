@@ -4,14 +4,14 @@ Capistrano::Configuration.instance.load do
   _cset(:xapit_pid) { File.join(pids_path, "xapit.pid") } 
 
   set(:xapit_local_yml) { File.join(templates_path, "xapit.yml.erb") }
-  set(:xapit_remote_yml) { "#{shared_path}/config/xapit.yml" }
+  set(:xapit_remote_yml) { File.join(shared_path, "config/xapit.yml") }
   set(:xapit_local_config) { File.join(templates_path, "xapit.ru.erb") }
-  set(:xapit_remote_config) { "#{shared_path}/config/xapit.ru" }
+  set(:xapit_remote_config) { File.join(shared_path, "config/xapit.ru") }
   
   
   def xapit_start_cmd
 #    "rackup -E #{rails_env} -P #{xapit_pid} -D #{xapit_remote_config}"
-    "rackup --env=#{rails_env} --pid=#{xapit_pid} --daemonize --warn --debug #{xapit_remote_config}"
+    "cd #{current_path} && /usr/bin/env RAILS_ENV=#{rails_env} bundle exec rackup --env=#{rails_env} --pid=#{xapit_pid} --daemonize --warn --debug #{xapit_remote_config}"
   end
 
   def xapit_stop_cmd

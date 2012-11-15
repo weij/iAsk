@@ -5,8 +5,8 @@ Capistrano::Configuration.instance.load do
   # Weird symlinks go somewhere else. Weird.
   _cset :weird_symlinks, { 'bundle' => 'vendor/bundle' }  
 
-  _cset(:auth_local_config) { "#{templates_path}/auth_providers.yml.erb" }  
-  _cset(:auth_remote_config) { "#{shared_path}/config/auth_providers.yml" }  
+  _cset(:auth_local_config) { File.join(templates_path, "auth_providers.yml.erb") }  
+  _cset(:auth_remote_config) { File.join(shared_path, "config/auth_providers.yml") }  
   
   namespace :symlinks do
     desc "|capistrano-recipes| Make all the symlinks in a single run"
