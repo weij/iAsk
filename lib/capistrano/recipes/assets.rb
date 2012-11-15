@@ -1,9 +1,9 @@
 Capistrano::Configuration.instance.load do
 
-  _cset :asset_packager, "jammit"  
   set :asset_env, "RAILS_GROUPS=assets"
-  _cset :assets_role, [:app]
   set :assets_prefix, "assets"
+  _cset :asset_packager, "jammit"  
+  _cset :assets_role, [:app]
   
   namespace :assets do
     

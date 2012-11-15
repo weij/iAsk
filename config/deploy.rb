@@ -21,13 +21,10 @@ set :default_environment, {
 
 task :production do |t|
   set :repository, "git@github.com:birdnest/iAsk.git"
-#  set :branch, "master"
   set :rails_env, :production
   set :unicorn_workers, 6 
 
   set :scm, :git
-  
-  set :assets_role, [:app]
   
   role :web, "172.18.6.86", :no_release => true
   role :app, "172.18.6.86"
@@ -35,7 +32,7 @@ task :production do |t|
 end
 
 namespace :deploy do
-  task :start do
+  task :start, :roles => :app, :except => { :no_release => true } do
     db.redis.start
     unicorn.start
     xapit.start
@@ -43,7 +40,7 @@ namespace :deploy do
     nginx.start
   end
   
-  task :stop do
+  task :stop, :roles => :app, :except => { :no_release => true } do
     db.redis.stop
     unicorn.stop
     xapit.stop

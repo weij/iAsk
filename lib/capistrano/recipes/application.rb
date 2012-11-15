@@ -15,8 +15,6 @@ Capistrano::Configuration.instance.load do
   
   _cset(:sockets_path){ File.join(shared_path, "sockets/#{application}") }
     
-#  _cset :monitorer, 'bluepill' 
-  
   set :shared_dirs, %w(config uploads backup bundle sockets db db/mongo db/redis tmp tmp/logs)
  
   namespace :app do

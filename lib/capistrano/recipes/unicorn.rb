@@ -67,8 +67,7 @@ Capistrano::Configuration.instance.load do
 
     desc <<-EOF
     |capistrano-recipes| Parses the configuration file through ERB to fetch our variables and \
-    uploads the result to #{unicorn_remote_config}, to be loaded by whoever is booting \
-    up the unicorn.
+    uploads the result to #{unicorn_remote_config}, to be loaded by whoever is booting up the unicorn.
     EOF
     task :setup, :roles => :app , :except => { :no_release => true } do
       # TODO: refactor this to a more generic setup task once we have more socket tasks.

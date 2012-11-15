@@ -65,6 +65,7 @@
     cap production deploy:setup  
     cap production deploy:update
     cap production db:mongodb:start
+    cap production db:bootstrap
     cap production deploy:start
     ~~~
 

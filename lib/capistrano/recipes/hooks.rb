@@ -20,13 +20,6 @@ Capistrano::Configuration.instance.load do
     magent.setup if Capistrano::CLI.ui.agree("Create magent configuration file?[Yn]")
   end
   
-  
-#  after 'deploy:setup' do
-#    bluepill.install if Capistrano::CLI.ui.agree("Do you want to install the bluepill monitor? [Yn]")
-#    bluepill.setup if Capistrano::CLI.ui.agree("Create bluepill configuration file? [Yn]")
-#  end if is_using('bluepill', :monitorer)
-  
-  
   after 'deploy:setup' do
     nginx.setup if Capistrano::CLI.ui.agree("Create nginx configuration file? [Yn]")
   end if is_using_nginx

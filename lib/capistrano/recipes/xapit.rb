@@ -7,10 +7,8 @@ Capistrano::Configuration.instance.load do
   set(:xapit_remote_yml) { File.join(shared_path, "config/xapit.yml") }
   set(:xapit_local_config) { File.join(templates_path, "xapit.ru.erb") }
   set(:xapit_remote_config) { File.join(shared_path, "config/xapit.ru") }
-  
-  
+    
   def xapit_start_cmd
-#    "rackup -E #{rails_env} -P #{xapit_pid} -D #{xapit_remote_config}"
     "cd #{current_path} && /usr/bin/env RAILS_ENV=#{rails_env} bundle exec rackup --env=#{rails_env} --pid=#{xapit_pid} --daemonize --warn --debug #{xapit_remote_config}"
   end
 
@@ -37,15 +35,13 @@ Capistrano::Configuration.instance.load do
 
     desc "|capistrano-recipes| Restarts xapit directly"
     task :restart, :roles => :app do
-#      run xapit_restart_cmd
       xapit.stop
       xapit.start
     end
     
     desc <<-EOF
     |capistrano-recipes| Parses the configuration file through ERB to fetch our variables and \
-    uploads the result to #{xapit_remote_config}, to be loaded by whoever is booting \
-    up the unicorn.
+    uploads the result to #{xapit_remote_config}, to be loaded by whoever is booting up the unicorn.
     EOF
     task :setup, :roles => :app , :except => { :no_release => true } do
       generate_config(xapit_local_config, xapit_remote_config)

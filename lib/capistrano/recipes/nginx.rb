@@ -1,18 +1,18 @@
 Capistrano::Configuration.instance.load do
 
-    # Where your nginx lives. Usually /opt/nginx or /usr/local/nginx for source compiled.
-    _cset(:nginx_path_prefix){ File.join(shared_path, "config/nginx") }
+  # Where your nginx lives. Usually /opt/nginx or /usr/local/nginx for source compiled.
+  _cset(:nginx_path_prefix){ File.join(shared_path, "config/nginx") }
 
-    # Path to the nginx erb template to be parsed before uploading to remote
-    _cset(:nginx_local_config) { File.join(templates_path, "nginx.conf.erb") } 
-    # Path to where your remote config will reside (I use a directory sites inside conf)
-    _cset(:nginx_remote_config) { File.join(nginx_path_prefix, "conf.d/#{application}.site.conf") }
+  # Path to the nginx erb template to be parsed before uploading to remote
+  _cset(:nginx_local_config) { File.join(templates_path, "nginx.conf.erb") } 
+  # Path to where your remote config will reside (I use a directory sites inside conf)
+  _cset(:nginx_remote_config) { File.join(nginx_path_prefix, "conf.d/#{application}.site.conf") }
 
-    _cset(:nginx_local_etc) { File.join(templates_path, "nginx.etc.erb") } 
-    _cset(:nginx_remote_etc) { File.join(nginx_path_prefix, "nginx.conf") }  
+  _cset(:nginx_local_etc) { File.join(templates_path, "nginx.etc.erb") } 
+  _cset(:nginx_remote_etc) { File.join(nginx_path_prefix, "nginx.conf") }  
 
-    _cset(:nginx_daemon) { "/usr/bin/env nginx" }  
-    _cset(:nginx_pid) { File.join(pids_path, "nginx.pid") } 
+  _cset(:nginx_daemon) { "/usr/bin/env nginx" }  
+  _cset(:nginx_pid) { File.join(pids_path, "nginx.pid") } 
 
 
   # Nginx tasks are not *nix agnostic, they assume you're using Debian/Ubuntu.

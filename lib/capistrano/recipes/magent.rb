@@ -1,8 +1,6 @@
 Capistrano::Configuration.instance.load do
   _cset(:magent_queue, :default)  
   _cset(:magent_grace_time, 120)  
-#  _cset(:magent_local_config) { "#{templates_path}/magent.bluepill.erb" }  
-#  _cset(:magent_remote_config) { "#{shared_path}/config/pills/magent.pill" } 
 
   _cset(:magent_bin, "cd #{current_path} && /usr/bin/env RAILS_ENV=#{rails_env} bundle exec magent")
   
@@ -49,44 +47,28 @@ production:
   websocket_channel: magent.websocket
       EOF
       put db_config.result(binding), "#{shared_path}/config/magent.yml"
-#      generate_config(magent_local_config, magent_remote_config)      
     end
 
-#    desc "Init magent with bluepill"
-#    task :init, :roles => :app do
-#      run "bluepill load #{magent_remote_config} --no-privileged"
-#    end
 
     desc "Start magent with bluepill"
     task :start, :roles => :app do
-#      run "bluepill magent start --no-privileged"
       run "#{magent_bin} -d -Q #{magent_queue} -l #{magent_log_path} -P #{magent_pid_path} start"
     end
 
     desc "Restart magent with bluepill"
     task :restart, :roles => :app do
-#      run "bluepill magent restart --no-privileged"
       run "#{magent_bin} -d -Q #{magent_queue} -l #{magent_log_path} -P #{magent_pid_path} restart"
     end
 
     desc "Stop magent with bluepill"
     task :stop, :roles => :app do
-#      run "bluepill magent stop --no-privileged"
       run "#{magent_bin} -d -Q #{magent_queue} -l #{magent_log_path} -P #{magent_pid_path} stop"
     end
-
-#    desc "Display the bluepill status"
-#    task :status, :roles => :app do
-#      run "bluepill magent status --no-privileged"
-#      run "#{magent_bin} -d -Q #{magent_queue} -l #{shared_path}/log -P #{magent_pid_path} status"
-#    end
 
     desc "Stop magent and quit bluepill"
     task :quit, :roles => :app do
       run "#{magent_bin} -d -Q #{magent_queue} -l #{magent_log_path} -P #{magent_pid_path} stop"
       run "#{magent_bin} -d -Q #{magent_queue} -l #{magent_log_path} -P #{magent_pid_path} quit"
-#     run "bluepill magent stop --no-privileged"
-#      run "bluepill magent quit --no-privileged"
     end
   end
   

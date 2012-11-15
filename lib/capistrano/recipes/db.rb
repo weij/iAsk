@@ -11,8 +11,7 @@ Capistrano::Configuration.instance.load do
   _cset(:mongo_log) { File.join(mongo_logpath, "master.log") }
   _cset(:mongo_local_config) { File.join(templates_path, "mongodb.conf.erb") }  
   _cset(:mongo_remote_config) { File.join(mongo_configpath, "master.conf") }
-  
-       
+         
   _cset(:redis_pid) { File.join(pids_path, "redis.pid") }
   _cset(:redis_daemon) { "/usr/bin/env redis-server" }
   _cset(:redis_local_config) { File.join(templates_path, "redis.conf.erb") } 
@@ -21,7 +20,6 @@ Capistrano::Configuration.instance.load do
   def redis_start_cmd
     "start-stop-daemon --start --quiet --umask 007 --pidfile #{redis_pid} --chuid #{user}:#{group} "\
     "--exec #{redis_daemon} -- #{redis_remote_config}"
-#    "redis-server #{redis_remote_config} &"
   end
   
   def redis_stop_cmd
@@ -32,7 +30,6 @@ Capistrano::Configuration.instance.load do
     "start-stop-daemon --background --start --quiet --pidfile #{mongo_pid} --make-pidfile "\
     "--chuid #{user}:#{group} --exec #{mongo_daemon} -- --dbpath #{mongo_dbpath} "\
     "--logpath #{mongo_log} --config #{mongo_remote_config} run"
-#    "mongod --logpath=#{shared_path}/logs/mongo.log --dbpath=#{shared_path}/db/mongo/ --fork"
   end
   
   def mongodb_stop_cmd
@@ -41,6 +38,12 @@ Capistrano::Configuration.instance.load do
     
     
   namespace :db do    
+    
+    desc "|capistrano-recipes| setup the redis"
+    task :bootstrap, :roles => :app do
+      run "cd #{current_path} && /usr/bin/env RAILS_ENV=#{rails_env} bundle exec rake bootstrap"
+    end
+    
     namespace :redis do
       desc "|capistrano-recipes| setup the redis"
       task :setup, :roles => :app do
