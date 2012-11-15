@@ -60,13 +60,15 @@
     ~~~
 
 
-2. Deploy first time       
+2. Deploy first time   
+    ~~~{.ruby}
     cap production deploy:setup  
     cap production deploy:update
     cap production db:mongodb:start
     cap production deploy:start
+    ~~~
 
-3. When server is down, start the server
+3. When server is down, start the server    
     cap production deploy:start
     
 ## Quickly Redeploy     
