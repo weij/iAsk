@@ -30,7 +30,7 @@ Capistrano::Configuration.instance.load do
     task :parse, :roles => :web do
       puts parse_config(nginx_local_config)
     end
-
+    
     desc "|capistrano-recipes| Restart nginx"
     task :restart, :roles => :web do
       sudo "start-stop-daemon --stop --signal HUP --quiet --pidfile #{nginx_pid} --exec #{nginx_daemon}"

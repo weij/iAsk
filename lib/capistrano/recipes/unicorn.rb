@@ -55,6 +55,13 @@ Capistrano::Configuration.instance.load do
 
     desc "|capistrano-recipes| Restarts unicorn directly"
     task :restart, :roles => :app do
+      unicorn.stop
+      run 'sleep 6'
+      unicorn.start
+    end
+    
+    desc "|capistrano-recipes| Restarts unicorn directly"
+    task :reload, :roles => :app do
       run unicorn_restart_cmd
     end
 

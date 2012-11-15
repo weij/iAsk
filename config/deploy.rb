@@ -1,4 +1,4 @@
-set :application, "myask"
+set :application, "iask"
 set :asset_packager, "jammit"
 set :deploy_to, "/opt/var/deploy/myask"
 
@@ -11,7 +11,7 @@ default_run_options[:pty] = true
 
 set :group, "deploy"
 
-set :ruby_version, 'ruby-1.9.3-p327' 
+set :ruby_version, 'ruby-1.9.3-p286' 
 set :default_environment, {
   'GEM_HOME' => "/usr/local/rvm/gems/#{ruby_version}",
   'GEM_PATH' => "/usr/local/rvm/gems/#{ruby_version}:/usr/local/rvm/gems/#{ruby_version}@global",
@@ -21,7 +21,7 @@ set :default_environment, {
 
 task :production do |t|
   set :repository, "git@github.com:birdnest/iAsk.git"
-  set :branch, "master"
+#  set :branch, "master"
   set :rails_env, :production
   set :unicorn_workers, 6 
 
@@ -29,9 +29,9 @@ task :production do |t|
   
   set :assets_role, [:app]
   
-  role :web, "10.211.55.5", :no_release => true
-  role :app, "10.211.55.5"
-  role :db,  "10.211.55.11", :primary => true, :no_release => true
+  role :web, "172.18.6.86", :no_release => true
+  role :app, "172.18.6.86"
+  role :db,  "172.18.6.80", :primary => true, :no_release => true
 end
 
 namespace :deploy do
@@ -44,20 +44,18 @@ namespace :deploy do
   end
   
   task :stop do
+    db.redis.stop
+    unicorn.stop
+    xapit.stop
+    magent.stop
+    nginx.stop
   end
   
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "echo '#{`git describe`}' > #{current_path}/public/version.txt"
-#    run "cd #{current_path} && ln -sf #{shared_path}/config/auth_providers.yml #{current_path}/config/auth_providers.yml"
-
-#    assets.compass
-#    assets.package
-
-#    magent.restart
-#    bluepill.restart
-    
-#    xapit.restart
-
+    db.redis.restart
+    unicorn.restart
+    xapit.restart
+    magent.restart
     run "rm -rf #{current_path}/tmp/cache/*"
   end
 end

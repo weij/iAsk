@@ -6,13 +6,18 @@ Capistrano::Configuration.instance.load do
   set :assets_prefix, "assets"
   
   namespace :assets do
+    
+    task :precompile, :roles => assets_role, :except => { :no_release => true }   do
+      run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+    end
+    
     desc "Compile Assets with compass"
-    task :compass do
+    task :compass, :roles => assets_role, :except => { :no_release => true }  do
       run "cd #{latest_release} && bundle exec compass compile; true"
     end
 
     desc "Package assets"
-    task :package do
+    task :package, :roles => assets_role, :except => { :no_release => true }  do
       run "cd #{latest_release} && bundle exec #{asset_packager}; true"
     end
     

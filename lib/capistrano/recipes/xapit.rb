@@ -37,7 +37,9 @@ Capistrano::Configuration.instance.load do
 
     desc "|capistrano-recipes| Restarts xapit directly"
     task :restart, :roles => :app do
-      run xapit_restart_cmd
+#      run xapit_restart_cmd
+      xapit.stop
+      xapit.start
     end
     
     desc <<-EOF

@@ -38,6 +38,7 @@ Capistrano::Configuration.instance.load do
   after "deploy:update_code" do
     symlinks.make
     bundler.install
+    assets.precompile
   end
   
   
