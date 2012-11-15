@@ -8,7 +8,7 @@
 dbpath = <%= mongo_dbpath %>
 
 #where to log
-logpath = <%= mongo_logpath %>
+logpath = <%= mongo_log %>
 
 logappend = true
 
@@ -16,7 +16,7 @@ pidfilepath = <%= mongo_pid %>
 
 #port = 27017
 
-
+keyFile = <%= mongo_keyfile %>
 
 # Enables periodic logging of CPU utilization and I/O wait
 #cpu = true
@@ -83,11 +83,11 @@ pidfilepath = <%= mongo_pid %>
 # Slave only: specify a single database to replicate
 #only = master.example.com
 # or
-master = true
+#master = true
 #source = slave.example.com
 
 # in replica set configuration, specify the name of the replica set
-# replSet = setname 
+replSet = iask_01 
 
 fork = true
 

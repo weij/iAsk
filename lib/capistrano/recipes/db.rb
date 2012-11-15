@@ -6,7 +6,9 @@ Capistrano::Configuration.instance.load do
   _cset(:mongo_configpath) { "/opt/var/db/mongo" }
   _cset(:mongo_dbpath) { "/opt/var/db/mongo/master" } 
   _cset(:mongo_pidpath) { "/opt/var/run/mongo" }
-  _cset(:mongo_pid) { File.join(mongo_pidpath, "master.pid") }   
+  _cset(:mongo_pid) { File.join(mongo_pidpath, "master.pid") }
+  _cset(:mongo_keyfilepath) { "/opt/var/db/mongo/key" } 
+  _cset(:mongo_keyfile) { File.join(mongo_keyfilepath, "master") }  
   _cset(:mongo_logpath) { "/opt/var/log/mongo" }
   _cset(:mongo_log) { File.join(mongo_logpath, "master.log") }
   _cset(:mongo_local_config) { File.join(templates_path, "mongodb.conf.erb") }  
@@ -28,8 +30,7 @@ Capistrano::Configuration.instance.load do
   
   def mongodb_start_cmd
     "start-stop-daemon --background --start --quiet --pidfile #{mongo_pid} --make-pidfile "\
-    "--chuid #{user}:#{group} --exec #{mongo_daemon} -- --dbpath #{mongo_dbpath} "\
-    "--logpath #{mongo_log} --config #{mongo_remote_config} run"
+    "--chuid #{user}:#{group} --exec #{mongo_daemon} -- --config #{mongo_remote_config} run"
   end
   
   def mongodb_stop_cmd
@@ -113,10 +114,11 @@ production:
       end
       
       desc "|capistrano-recipes| setup mongo db path and mongo conf file"
-      task :setup, :roles => :db do
-        [mongo_logpath, mongo_dbpath, mongo_pidpath, mongo_configpath].each do |path|
+      task :setup, :roles => :db, :only => { :primary => true }  do
+        [mongo_logpath, mongo_dbpath, mongo_pidpath, mongo_configpath, mongo_keyfilepath].each do |path|
           run "if [ ! -d '#{path}' ]; then mkdir -p #{path}; fi;"
         end
+        run "echo 'This is master key file' > #{mongo_keyfile} && chmod 600 #{mongo_keyfile}"
         generate_config(mongo_local_config, mongo_remote_config, :db) 
       end
       
