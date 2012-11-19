@@ -75,16 +75,22 @@ Capistrano::Configuration.instance.load do
     namespace :mongodb do      
       desc "|capistrano-recipes| Create mongoid.yml in shared path with settings for current stage and test env"
       task :setup_mongoid, :roles => :app do
-        set(:db_host) { Capistrano::CLI.ui.ask("Enter #{environment} database host:") {|q|q.default = "localhost"} }
-        set(:db_port) { Capistrano::CLI.ui.ask("Enter #{environment} database port:", Integer){|q| q.default = 27017 } }
+        connections = []
+        while Capistrano::CLI.ui.agree("Do you want to added more host? [Yn]") do
+          host = Capistrano::CLI.ui.ask("Enter #{environment} database host:") {|q|q.default = "localhost"} 
+          port = Capistrano::CLI.ui.ask("Enter #{environment} database port:", Integer){|q| q.default = 27017 } 
+          connections << [host, port]
+        end
         set(:db_user) { Capistrano::CLI.ui.ask "Enter #{environment} database username:" }
         set(:db_pass) { Capistrano::CLI.password_prompt "Enter #{environment} database password:" }
         set(:db_safe_mode) { Capistrano::CLI.ui.agree "Enable safe mode on #{environment} database? [Yn]:" }
         
         db_config = ERB.new <<-EOF
 defaults: &defaults
-  host: #{db_host}
-  port: #{db_port}
+  hosts: <% connections.each do|conn| %>
+    - 
+      - <%= conn[0] %>
+      - <%= conn[1] %><% end %>
   <% if db_user && !db_user.empty? %>
   username: #{db_user}
   password: #{db_pass}
