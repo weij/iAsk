@@ -3,7 +3,7 @@ require 'erb'
 Capistrano::Configuration.instance.load do
   
   _cset(:mongo_daemon) { "/usr/bin/env mongod" } 
-  _cset(:mongo_configpath) { "/opt/var/db/mongo" }
+  _cset(:mongo_configpath) { "/opt/etc" }
   _cset(:mongo_dbpath) { "/opt/var/db/mongo/master" } 
   _cset(:mongo_pidpath) { "/opt/var/run/mongo" }
   _cset(:mongo_pid) { File.join(mongo_pidpath, "master.pid") }

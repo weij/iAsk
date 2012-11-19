@@ -64,11 +64,11 @@ Shapado::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :domain => "gmail.com",
-    :user_name => "notifications.ask",
-    :password => "vanceinfo123456",
+    :address => "smtp.163.com",
+    :port => 25,
+    :domain => "163.com",
+    :user_name => "notifications_ask",
+    :password => "pactera123456",
     :authentication => "plain",
     :enable_starttle_auto => true
   }
