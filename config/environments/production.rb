@@ -68,7 +68,7 @@ Shapado::Application.configure do
     :port => 25,
     :domain => "163.com",
     :user_name => "notifications_ask",
-    :password => "pactera123456",
+    :password => "******",
     :authentication => "plain",
     :enable_starttle_auto => true
   }
